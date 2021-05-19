@@ -1,0 +1,2175 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09B9A9C8A4F1660DAA58BD8A /* libPods-macOS SwarmCloudSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AD80A7655A7875B6B641CD /* libPods-macOS SwarmCloudSDK.a */; };
+		7337400E34F409FB5F94E8D1 /* libPods-tvOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5186EC4A6972A0E91E7E7C /* libPods-tvOS Demo.a */; };
+		940C0678264543CC00836F73 /* SWCP2pConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFBE52641B038001C7C99 /* SWCP2pConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		940C0679264543D100836F73 /* SWCP2pEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC1C26429356001C7C99 /* SWCP2pEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		940C067A2645444F00836F73 /* SwarmCloudSDK.h in Sources */ = {isa = PBXBuildFile; fileRef = 947BFB7D2641ACE0001C7C99 /* SwarmCloudSDK.h */; };
+		940C067E264580D100836F73 /* SWCNetworkResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C067C264580D100836F73 /* SWCNetworkResponse.h */; };
+		940C067F264580D100836F73 /* SWCNetworkResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C067C264580D100836F73 /* SWCNetworkResponse.h */; };
+		940C0680264580D100836F73 /* SWCNetworkResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C067C264580D100836F73 /* SWCNetworkResponse.h */; };
+		940C0681264580D100836F73 /* SWCNetworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C067D264580D100836F73 /* SWCNetworkResponse.m */; };
+		940C0682264580D100836F73 /* SWCNetworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C067D264580D100836F73 /* SWCNetworkResponse.m */; };
+		940C0683264580D100836F73 /* SWCNetworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C067D264580D100836F73 /* SWCNetworkResponse.m */; };
+		940C06862645979900836F73 /* SWCPlaylistUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06842645979900836F73 /* SWCPlaylistUtils.h */; };
+		940C06872645979900836F73 /* SWCPlaylistUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06842645979900836F73 /* SWCPlaylistUtils.h */; };
+		940C06882645979900836F73 /* SWCPlaylistUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06842645979900836F73 /* SWCPlaylistUtils.h */; };
+		940C06892645979900836F73 /* SWCPlaylistUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06852645979900836F73 /* SWCPlaylistUtils.m */; };
+		940C068A2645979900836F73 /* SWCPlaylistUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06852645979900836F73 /* SWCPlaylistUtils.m */; };
+		940C068B2645979900836F73 /* SWCPlaylistUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06852645979900836F73 /* SWCPlaylistUtils.m */; };
+		940C068E2646846900836F73 /* SWCSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C068C2646846900836F73 /* SWCSegment.h */; };
+		940C068F2646846900836F73 /* SWCSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C068C2646846900836F73 /* SWCSegment.h */; };
+		940C06902646846900836F73 /* SWCSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C068C2646846900836F73 /* SWCSegment.h */; };
+		940C06912646846900836F73 /* SWCSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C068D2646846900836F73 /* SWCSegment.m */; };
+		940C06922646846900836F73 /* SWCSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C068D2646846900836F73 /* SWCSegment.m */; };
+		940C06932646846900836F73 /* SWCSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C068D2646846900836F73 /* SWCSegment.m */; };
+		940C06962646848D00836F73 /* SWCHlsSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06942646848D00836F73 /* SWCHlsSegment.h */; };
+		940C06972646848D00836F73 /* SWCHlsSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06942646848D00836F73 /* SWCHlsSegment.h */; };
+		940C06982646848D00836F73 /* SWCHlsSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06942646848D00836F73 /* SWCHlsSegment.h */; };
+		940C06992646848D00836F73 /* SWCHlsSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06952646848D00836F73 /* SWCHlsSegment.m */; };
+		940C069A2646848D00836F73 /* SWCHlsSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06952646848D00836F73 /* SWCHlsSegment.m */; };
+		940C069B2646848D00836F73 /* SWCHlsSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06952646848D00836F73 /* SWCHlsSegment.m */; };
+		940C069E26468A8300836F73 /* SWCPeer.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C069C26468A8300836F73 /* SWCPeer.h */; };
+		940C069F26468A8300836F73 /* SWCPeer.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C069C26468A8300836F73 /* SWCPeer.h */; };
+		940C06A026468A8300836F73 /* SWCPeer.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C069C26468A8300836F73 /* SWCPeer.h */; };
+		940C06A126468A8300836F73 /* SWCPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C069D26468A8300836F73 /* SWCPeer.m */; };
+		940C06A226468A8400836F73 /* SWCPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C069D26468A8300836F73 /* SWCPeer.m */; };
+		940C06A326468A8400836F73 /* SWCPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C069D26468A8300836F73 /* SWCPeer.m */; };
+		940C06A426468BB700836F73 /* SwarmCloudSDK.h in Sources */ = {isa = PBXBuildFile; fileRef = 947BFB7D2641ACE0001C7C99 /* SwarmCloudSDK.h */; };
+		940C06A726468E6B00836F73 /* SWCHlsPredictor.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06A526468E6B00836F73 /* SWCHlsPredictor.h */; };
+		940C06A826468E6B00836F73 /* SWCHlsPredictor.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06A526468E6B00836F73 /* SWCHlsPredictor.h */; };
+		940C06A926468E6B00836F73 /* SWCHlsPredictor.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06A526468E6B00836F73 /* SWCHlsPredictor.h */; };
+		940C06AA26468E6B00836F73 /* SWCHlsPredictor.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06A626468E6B00836F73 /* SWCHlsPredictor.m */; };
+		940C06AB26468E6B00836F73 /* SWCHlsPredictor.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06A626468E6B00836F73 /* SWCHlsPredictor.m */; };
+		940C06AC26468E6B00836F73 /* SWCHlsPredictor.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06A626468E6B00836F73 /* SWCHlsPredictor.m */; };
+		940C06AF2646905400836F73 /* SWCSignalClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06AD2646905400836F73 /* SWCSignalClient.h */; };
+		940C06B02646905400836F73 /* SWCSignalClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06AD2646905400836F73 /* SWCSignalClient.h */; };
+		940C06B12646905400836F73 /* SWCSignalClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06AD2646905400836F73 /* SWCSignalClient.h */; };
+		940C06B22646905400836F73 /* SWCSignalClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06AE2646905400836F73 /* SWCSignalClient.m */; };
+		940C06B32646905400836F73 /* SWCSignalClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06AE2646905400836F73 /* SWCSignalClient.m */; };
+		940C06B42646905400836F73 /* SWCSignalClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06AE2646905400836F73 /* SWCSignalClient.m */; };
+		940C06B726469BA100836F73 /* SWCHlsParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06B526469BA100836F73 /* SWCHlsParser.h */; };
+		940C06B826469BA100836F73 /* SWCHlsParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06B526469BA100836F73 /* SWCHlsParser.h */; };
+		940C06B926469BA100836F73 /* SWCHlsParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 940C06B526469BA100836F73 /* SWCHlsParser.h */; };
+		940C06BA26469BA100836F73 /* SWCHlsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06B626469BA100836F73 /* SWCHlsParser.m */; };
+		940C06BB26469BA100836F73 /* SWCHlsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06B626469BA100836F73 /* SWCHlsParser.m */; };
+		940C06BC26469BA100836F73 /* SWCHlsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 940C06B626469BA100836F73 /* SWCHlsParser.m */; };
+		940C06C72646F42700836F73 /* SwarmCloudSDK.h in Sources */ = {isa = PBXBuildFile; fileRef = 947BFB7D2641ACE0001C7C99 /* SwarmCloudSDK.h */; };
+		9429A6E6264CFA47008AD0AB /* SwarmCloudSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BFB7A2641ACE0001C7C99 /* SwarmCloudSDK.framework */; };
+		9429A6E7264CFA7E008AD0AB /* SwarmCloudSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BFB972641AD62001C7C99 /* SwarmCloudSDK.framework */; };
+		945FE2E6264D5BA700EDE4F5 /* SWCPlaylistInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */; };
+		945FE2E7264D5BA700EDE4F5 /* SWCPlaylistInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */; };
+		945FE2E8264D5BA700EDE4F5 /* SWCPlaylistInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */; };
+		945FE2E9264D5BA700EDE4F5 /* SWCPlaylistInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 945FE2E5264D5BA700EDE4F5 /* SWCPlaylistInfo.m */; };
+		945FE2EA264D5BA700EDE4F5 /* SWCPlaylistInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 945FE2E5264D5BA700EDE4F5 /* SWCPlaylistInfo.m */; };
+		945FE2EB264D5BA700EDE4F5 /* SWCPlaylistInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 945FE2E5264D5BA700EDE4F5 /* SWCPlaylistInfo.m */; };
+		9464500226496935006EDBD7 /* SWCByteRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 9464500026496935006EDBD7 /* SWCByteRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9464500326496935006EDBD7 /* SWCByteRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 9464500026496935006EDBD7 /* SWCByteRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9464500426496935006EDBD7 /* SWCByteRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 9464500026496935006EDBD7 /* SWCByteRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9464500526496935006EDBD7 /* SWCByteRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9464500126496935006EDBD7 /* SWCByteRange.m */; };
+		9464500626496935006EDBD7 /* SWCByteRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9464500126496935006EDBD7 /* SWCByteRange.m */; };
+		9464500726496935006EDBD7 /* SWCByteRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9464500126496935006EDBD7 /* SWCByteRange.m */; };
+		9464500A2649698A006EDBD7 /* SWCError.h in Headers */ = {isa = PBXBuildFile; fileRef = 946450082649698A006EDBD7 /* SWCError.h */; };
+		9464500B2649698A006EDBD7 /* SWCError.h in Headers */ = {isa = PBXBuildFile; fileRef = 946450082649698A006EDBD7 /* SWCError.h */; };
+		9464500C2649698A006EDBD7 /* SWCError.h in Headers */ = {isa = PBXBuildFile; fileRef = 946450082649698A006EDBD7 /* SWCError.h */; };
+		9464500D2649698A006EDBD7 /* SWCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 946450092649698A006EDBD7 /* SWCError.m */; };
+		9464500E2649698A006EDBD7 /* SWCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 946450092649698A006EDBD7 /* SWCError.m */; };
+		9464500F2649698A006EDBD7 /* SWCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 946450092649698A006EDBD7 /* SWCError.m */; };
+		94746E3E2647C79000245E7A /* SWCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E3C2647C79000245E7A /* SWCScheduler.h */; };
+		94746E3F2647C79000245E7A /* SWCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E3C2647C79000245E7A /* SWCScheduler.h */; };
+		94746E402647C79000245E7A /* SWCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E3C2647C79000245E7A /* SWCScheduler.h */; };
+		94746E412647C79000245E7A /* SWCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E3D2647C79000245E7A /* SWCScheduler.m */; };
+		94746E422647C79000245E7A /* SWCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E3D2647C79000245E7A /* SWCScheduler.m */; };
+		94746E432647C79000245E7A /* SWCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E3D2647C79000245E7A /* SWCScheduler.m */; };
+		94746E462647C7B300245E7A /* SWCHlsScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E442647C7B300245E7A /* SWCHlsScheduler.h */; };
+		94746E472647C7B300245E7A /* SWCHlsScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E442647C7B300245E7A /* SWCHlsScheduler.h */; };
+		94746E482647C7B300245E7A /* SWCHlsScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E442647C7B300245E7A /* SWCHlsScheduler.h */; };
+		94746E492647C7B300245E7A /* SWCHlsScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E452647C7B300245E7A /* SWCHlsScheduler.m */; };
+		94746E4A2647C7B300245E7A /* SWCHlsScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E452647C7B300245E7A /* SWCHlsScheduler.m */; };
+		94746E4B2647C7B300245E7A /* SWCHlsScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E452647C7B300245E7A /* SWCHlsScheduler.m */; };
+		94746E4E2647C7CC00245E7A /* SWCHlsSnScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E4C2647C7CC00245E7A /* SWCHlsSnScheduler.h */; };
+		94746E4F2647C7CC00245E7A /* SWCHlsSnScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E4C2647C7CC00245E7A /* SWCHlsSnScheduler.h */; };
+		94746E502647C7CC00245E7A /* SWCHlsSnScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E4C2647C7CC00245E7A /* SWCHlsSnScheduler.h */; };
+		94746E512647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E4D2647C7CC00245E7A /* SWCHlsSnScheduler.m */; };
+		94746E522647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E4D2647C7CC00245E7A /* SWCHlsSnScheduler.m */; };
+		94746E532647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E4D2647C7CC00245E7A /* SWCHlsSnScheduler.m */; };
+		94746E562647C7DE00245E7A /* SWCHlsIdScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E542647C7DE00245E7A /* SWCHlsIdScheduler.h */; };
+		94746E572647C7DE00245E7A /* SWCHlsIdScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E542647C7DE00245E7A /* SWCHlsIdScheduler.h */; };
+		94746E582647C7DE00245E7A /* SWCHlsIdScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E542647C7DE00245E7A /* SWCHlsIdScheduler.h */; };
+		94746E592647C7DE00245E7A /* SWCHlsIdScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E552647C7DE00245E7A /* SWCHlsIdScheduler.m */; };
+		94746E5A2647C7DE00245E7A /* SWCHlsIdScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E552647C7DE00245E7A /* SWCHlsIdScheduler.m */; };
+		94746E5B2647C7DE00245E7A /* SWCHlsIdScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E552647C7DE00245E7A /* SWCHlsIdScheduler.m */; };
+		94746E5E2647C9D900245E7A /* SWCTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E5C2647C9D900245E7A /* SWCTracker.h */; };
+		94746E5F2647C9D900245E7A /* SWCTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E5C2647C9D900245E7A /* SWCTracker.h */; };
+		94746E602647C9D900245E7A /* SWCTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E5C2647C9D900245E7A /* SWCTracker.h */; };
+		94746E612647C9D900245E7A /* SWCTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E5D2647C9D900245E7A /* SWCTracker.m */; };
+		94746E622647C9D900245E7A /* SWCTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E5D2647C9D900245E7A /* SWCTracker.m */; };
+		94746E632647C9D900245E7A /* SWCTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E5D2647C9D900245E7A /* SWCTracker.m */; };
+		94746E6626480F3600245E7A /* SWCDataChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E6426480F3600245E7A /* SWCDataChannel.h */; };
+		94746E6726480F3600245E7A /* SWCDataChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E6426480F3600245E7A /* SWCDataChannel.h */; };
+		94746E6826480F3600245E7A /* SWCDataChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E6426480F3600245E7A /* SWCDataChannel.h */; };
+		94746E6926480F3600245E7A /* SWCDataChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E6526480F3600245E7A /* SWCDataChannel.m */; };
+		94746E6A26480F3600245E7A /* SWCDataChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E6526480F3600245E7A /* SWCDataChannel.m */; };
+		94746E6B26480F3600245E7A /* SWCDataChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E6526480F3600245E7A /* SWCDataChannel.m */; };
+		94746E6E264819DD00245E7A /* CBPeerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E6C264819DD00245E7A /* CBPeerManager.h */; };
+		94746E6F264819DD00245E7A /* CBPeerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E6C264819DD00245E7A /* CBPeerManager.h */; };
+		94746E70264819DD00245E7A /* CBPeerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E6C264819DD00245E7A /* CBPeerManager.h */; };
+		94746E71264819DD00245E7A /* CBPeerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E6D264819DD00245E7A /* CBPeerManager.m */; };
+		94746E72264819DD00245E7A /* CBPeerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E6D264819DD00245E7A /* CBPeerManager.m */; };
+		94746E73264819DD00245E7A /* CBPeerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E6D264819DD00245E7A /* CBPeerManager.m */; };
+		94746E7726481B9800245E7A /* SWCSegmentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E7526481B9800245E7A /* SWCSegmentManager.h */; };
+		94746E7826481B9800245E7A /* SWCSegmentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E7526481B9800245E7A /* SWCSegmentManager.h */; };
+		94746E7926481B9800245E7A /* SWCSegmentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E7526481B9800245E7A /* SWCSegmentManager.h */; };
+		94746E7A26481B9800245E7A /* SWCSegmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E7626481B9800245E7A /* SWCSegmentManager.m */; };
+		94746E7B26481B9800245E7A /* SWCSegmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E7626481B9800245E7A /* SWCSegmentManager.m */; };
+		94746E7C26481B9800245E7A /* SWCSegmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E7626481B9800245E7A /* SWCSegmentManager.m */; };
+		94746E7F2648273A00245E7A /* SWCSchedulerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E7D2648273A00245E7A /* SWCSchedulerFactory.h */; };
+		94746E802648273A00245E7A /* SWCSchedulerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E7D2648273A00245E7A /* SWCSchedulerFactory.h */; };
+		94746E812648273A00245E7A /* SWCSchedulerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E7D2648273A00245E7A /* SWCSchedulerFactory.h */; };
+		94746E822648273A00245E7A /* SWCSchedulerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E7E2648273A00245E7A /* SWCSchedulerFactory.m */; };
+		94746E832648273A00245E7A /* SWCSchedulerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E7E2648273A00245E7A /* SWCSchedulerFactory.m */; };
+		94746E842648273A00245E7A /* SWCSchedulerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 94746E7E2648273A00245E7A /* SWCSchedulerFactory.m */; };
+		947BFB7F2641ACE0001C7C99 /* SwarmCloudSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFB7D2641ACE0001C7C99 /* SwarmCloudSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		947BFBB42641AF36001C7C99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFBB32641AF36001C7C99 /* AppDelegate.m */; };
+		947BFBBA2641AF36001C7C99 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFBB92641AF36001C7C99 /* ViewController.m */; };
+		947BFBBD2641AF36001C7C99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947BFBBB2641AF36001C7C99 /* Main.storyboard */; };
+		947BFBBF2641AF37001C7C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 947BFBBE2641AF37001C7C99 /* Assets.xcassets */; };
+		947BFBC22641AF37001C7C99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947BFBC02641AF37001C7C99 /* LaunchScreen.storyboard */; };
+		947BFBC52641AF37001C7C99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFBC42641AF37001C7C99 /* main.m */; };
+		947BFBD52641AFF6001C7C99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFBD42641AFF6001C7C99 /* AppDelegate.m */; };
+		947BFBD82641AFF6001C7C99 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFBD72641AFF6001C7C99 /* ViewController.m */; };
+		947BFBDA2641AFF7001C7C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 947BFBD92641AFF7001C7C99 /* Assets.xcassets */; };
+		947BFBE02641AFF7001C7C99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFBDF2641AFF7001C7C99 /* main.m */; };
+		947BFBE82641B038001C7C99 /* SWCP2pConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFBE52641B038001C7C99 /* SWCP2pConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		947BFBE92641B038001C7C99 /* SWCP2pConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFBE52641B038001C7C99 /* SWCP2pConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		947BFBEA2641B038001C7C99 /* SWCP2pConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFBE62641B038001C7C99 /* SWCP2pConfig.m */; };
+		947BFBEB2641B038001C7C99 /* SWCP2pConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFBE62641B038001C7C99 /* SWCP2pConfig.m */; };
+		947BFBEC2641B038001C7C99 /* SWCP2pConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFBE62641B038001C7C99 /* SWCP2pConfig.m */; };
+		947BFC082641B5DB001C7C99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC072641B5DB001C7C99 /* AppDelegate.m */; };
+		947BFC0B2641B5DB001C7C99 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC0A2641B5DB001C7C99 /* ViewController.m */; };
+		947BFC0E2641B5DB001C7C99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947BFC0C2641B5DB001C7C99 /* Main.storyboard */; };
+		947BFC102641B5DC001C7C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 947BFC0F2641B5DC001C7C99 /* Assets.xcassets */; };
+		947BFC132641B5DC001C7C99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947BFC112641B5DC001C7C99 /* LaunchScreen.storyboard */; };
+		947BFC162641B5DC001C7C99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC152641B5DC001C7C99 /* main.m */; };
+		947BFC1A26428C2D001C7C99 /* SwarmCloudSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFB7D2641ACE0001C7C99 /* SwarmCloudSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		947BFC1B26428C70001C7C99 /* SwarmCloudSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFB7D2641ACE0001C7C99 /* SwarmCloudSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		947BFC1F26429356001C7C99 /* SWCP2pEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC1C26429356001C7C99 /* SWCP2pEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		947BFC2026429356001C7C99 /* SWCP2pEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC1C26429356001C7C99 /* SWCP2pEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		947BFC2126429356001C7C99 /* SWCP2pEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC1D26429356001C7C99 /* SWCP2pEngine.m */; };
+		947BFC2226429356001C7C99 /* SWCP2pEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC1D26429356001C7C99 /* SWCP2pEngine.m */; };
+		947BFC2326429356001C7C99 /* SWCP2pEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC1D26429356001C7C99 /* SWCP2pEngine.m */; };
+		947BFC3526429BF6001C7C99 /* NATUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2526429BF5001C7C99 /* NATUtils.m */; };
+		947BFC3626429BF6001C7C99 /* NATUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2526429BF5001C7C99 /* NATUtils.m */; };
+		947BFC3726429BF6001C7C99 /* NATUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2526429BF5001C7C99 /* NATUtils.m */; };
+		947BFC3826429BF6001C7C99 /* StunChangeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2626429BF5001C7C99 /* StunChangeRequest.m */; };
+		947BFC3926429BF6001C7C99 /* StunChangeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2626429BF5001C7C99 /* StunChangeRequest.m */; };
+		947BFC3A26429BF6001C7C99 /* StunChangeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2626429BF5001C7C99 /* StunChangeRequest.m */; };
+		947BFC3B26429BF6001C7C99 /* StunClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2726429BF5001C7C99 /* StunClient.h */; };
+		947BFC3C26429BF6001C7C99 /* StunClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2726429BF5001C7C99 /* StunClient.h */; };
+		947BFC3D26429BF6001C7C99 /* StunClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2726429BF5001C7C99 /* StunClient.h */; };
+		947BFC3E26429BF6001C7C99 /* StunChangeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2826429BF5001C7C99 /* StunChangeRequest.h */; };
+		947BFC3F26429BF6001C7C99 /* StunChangeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2826429BF5001C7C99 /* StunChangeRequest.h */; };
+		947BFC4026429BF6001C7C99 /* StunChangeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2826429BF5001C7C99 /* StunChangeRequest.h */; };
+		947BFC4126429BF6001C7C99 /* StunResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2926429BF5001C7C99 /* StunResult.h */; };
+		947BFC4226429BF6001C7C99 /* StunResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2926429BF5001C7C99 /* StunResult.h */; };
+		947BFC4326429BF6001C7C99 /* StunResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2926429BF5001C7C99 /* StunResult.h */; };
+		947BFC4426429BF6001C7C99 /* SocketAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2A26429BF5001C7C99 /* SocketAddress.m */; };
+		947BFC4526429BF6001C7C99 /* SocketAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2A26429BF5001C7C99 /* SocketAddress.m */; };
+		947BFC4626429BF6001C7C99 /* SocketAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2A26429BF5001C7C99 /* SocketAddress.m */; };
+		947BFC4726429BF6001C7C99 /* NATUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2B26429BF5001C7C99 /* NATUtils.h */; };
+		947BFC4826429BF6001C7C99 /* NATUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2B26429BF5001C7C99 /* NATUtils.h */; };
+		947BFC4926429BF6001C7C99 /* NATUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2B26429BF5001C7C99 /* NATUtils.h */; };
+		947BFC4A26429BF6001C7C99 /* StunMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2C26429BF5001C7C99 /* StunMessage.m */; };
+		947BFC4B26429BF6001C7C99 /* StunMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2C26429BF5001C7C99 /* StunMessage.m */; };
+		947BFC4C26429BF6001C7C99 /* StunMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2C26429BF5001C7C99 /* StunMessage.m */; };
+		947BFC4D26429BF6001C7C99 /* CBSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2D26429BF5001C7C99 /* CBSocket.h */; };
+		947BFC4E26429BF6001C7C99 /* CBSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2D26429BF5001C7C99 /* CBSocket.h */; };
+		947BFC4F26429BF6001C7C99 /* CBSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2D26429BF5001C7C99 /* CBSocket.h */; };
+		947BFC5026429BF6001C7C99 /* SocketAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2E26429BF5001C7C99 /* SocketAddress.h */; };
+		947BFC5126429BF6001C7C99 /* SocketAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2E26429BF5001C7C99 /* SocketAddress.h */; };
+		947BFC5226429BF6001C7C99 /* SocketAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC2E26429BF5001C7C99 /* SocketAddress.h */; };
+		947BFC5326429BF6001C7C99 /* StunResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2F26429BF5001C7C99 /* StunResult.m */; };
+		947BFC5426429BF6001C7C99 /* StunResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2F26429BF5001C7C99 /* StunResult.m */; };
+		947BFC5526429BF6001C7C99 /* StunResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC2F26429BF5001C7C99 /* StunResult.m */; };
+		947BFC5626429BF6001C7C99 /* StunClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC3026429BF5001C7C99 /* StunClient.m */; };
+		947BFC5726429BF6001C7C99 /* StunClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC3026429BF5001C7C99 /* StunClient.m */; };
+		947BFC5826429BF6001C7C99 /* StunClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC3026429BF5001C7C99 /* StunClient.m */; };
+		947BFC5926429BF6001C7C99 /* StunErrorCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC3126429BF5001C7C99 /* StunErrorCode.m */; };
+		947BFC5A26429BF6001C7C99 /* StunErrorCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC3126429BF5001C7C99 /* StunErrorCode.m */; };
+		947BFC5B26429BF6001C7C99 /* StunErrorCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC3126429BF5001C7C99 /* StunErrorCode.m */; };
+		947BFC5C26429BF6001C7C99 /* StunMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC3226429BF5001C7C99 /* StunMessage.h */; };
+		947BFC5D26429BF6001C7C99 /* StunMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC3226429BF5001C7C99 /* StunMessage.h */; };
+		947BFC5E26429BF6001C7C99 /* StunMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC3226429BF5001C7C99 /* StunMessage.h */; };
+		947BFC5F26429BF6001C7C99 /* CBSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC3326429BF5001C7C99 /* CBSocket.m */; };
+		947BFC6026429BF6001C7C99 /* CBSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC3326429BF5001C7C99 /* CBSocket.m */; };
+		947BFC6126429BF6001C7C99 /* CBSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC3326429BF5001C7C99 /* CBSocket.m */; };
+		947BFC6226429BF6001C7C99 /* StunErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC3426429BF5001C7C99 /* StunErrorCode.h */; };
+		947BFC6326429BF6001C7C99 /* StunErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC3426429BF5001C7C99 /* StunErrorCode.h */; };
+		947BFC6426429BF6001C7C99 /* StunErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC3426429BF5001C7C99 /* StunErrorCode.h */; };
+		947BFC6A26429C88001C7C99 /* CBLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC6626429C88001C7C99 /* CBLogger.h */; };
+		947BFC6B26429C88001C7C99 /* CBLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC6626429C88001C7C99 /* CBLogger.h */; };
+		947BFC6C26429C88001C7C99 /* CBLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC6626429C88001C7C99 /* CBLogger.h */; };
+		947BFC6D26429C88001C7C99 /* CBLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC6726429C88001C7C99 /* CBLogFormatter.m */; };
+		947BFC6E26429C88001C7C99 /* CBLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC6726429C88001C7C99 /* CBLogFormatter.m */; };
+		947BFC6F26429C88001C7C99 /* CBLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC6726429C88001C7C99 /* CBLogFormatter.m */; };
+		947BFC7026429C88001C7C99 /* CBLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC6826429C88001C7C99 /* CBLogFormatter.h */; };
+		947BFC7126429C88001C7C99 /* CBLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC6826429C88001C7C99 /* CBLogFormatter.h */; };
+		947BFC7226429C88001C7C99 /* CBLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC6826429C88001C7C99 /* CBLogFormatter.h */; };
+		947BFC7326429C88001C7C99 /* CBLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC6926429C88001C7C99 /* CBLogger.m */; };
+		947BFC7426429C88001C7C99 /* CBLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC6926429C88001C7C99 /* CBLogger.m */; };
+		947BFC7526429C88001C7C99 /* CBLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC6926429C88001C7C99 /* CBLogger.m */; };
+		947BFC7826429F54001C7C99 /* CBTimerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC7626429F54001C7C99 /* CBTimerManager.h */; };
+		947BFC7926429F54001C7C99 /* CBTimerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC7626429F54001C7C99 /* CBTimerManager.h */; };
+		947BFC7A26429F54001C7C99 /* CBTimerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC7626429F54001C7C99 /* CBTimerManager.h */; };
+		947BFC7B26429F54001C7C99 /* CBTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC7726429F54001C7C99 /* CBTimerManager.m */; };
+		947BFC7C26429F54001C7C99 /* CBTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC7726429F54001C7C99 /* CBTimerManager.m */; };
+		947BFC7D26429F54001C7C99 /* CBTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC7726429F54001C7C99 /* CBTimerManager.m */; };
+		947BFC812642A16D001C7C99 /* LineReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC7F2642A16D001C7C99 /* LineReader.h */; };
+		947BFC822642A16D001C7C99 /* LineReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC7F2642A16D001C7C99 /* LineReader.h */; };
+		947BFC832642A16D001C7C99 /* LineReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC7F2642A16D001C7C99 /* LineReader.h */; };
+		947BFC842642A16D001C7C99 /* LineReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC802642A16D001C7C99 /* LineReader.m */; };
+		947BFC852642A16D001C7C99 /* LineReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC802642A16D001C7C99 /* LineReader.m */; };
+		947BFC862642A16D001C7C99 /* LineReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC802642A16D001C7C99 /* LineReader.m */; };
+		947BFC8A2642A284001C7C99 /* CBQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC882642A284001C7C99 /* CBQueue.h */; };
+		947BFC8B2642A284001C7C99 /* CBQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC882642A284001C7C99 /* CBQueue.h */; };
+		947BFC8C2642A284001C7C99 /* CBQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC882642A284001C7C99 /* CBQueue.h */; };
+		947BFC8D2642A284001C7C99 /* CBQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC892642A284001C7C99 /* CBQueue.m */; };
+		947BFC8E2642A284001C7C99 /* CBQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC892642A284001C7C99 /* CBQueue.m */; };
+		947BFC8F2642A284001C7C99 /* CBQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC892642A284001C7C99 /* CBQueue.m */; };
+		947BFC922642A2EA001C7C99 /* CBPeerChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC902642A2EA001C7C99 /* CBPeerChannel.h */; };
+		947BFC932642A2EA001C7C99 /* CBPeerChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC902642A2EA001C7C99 /* CBPeerChannel.h */; };
+		947BFC942642A2EA001C7C99 /* CBPeerChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC902642A2EA001C7C99 /* CBPeerChannel.h */; };
+		947BFC952642A2EA001C7C99 /* CBPeerChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC912642A2EA001C7C99 /* CBPeerChannel.m */; };
+		947BFC962642A2EA001C7C99 /* CBPeerChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC912642A2EA001C7C99 /* CBPeerChannel.m */; };
+		947BFC972642A2EA001C7C99 /* CBPeerChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC912642A2EA001C7C99 /* CBPeerChannel.m */; };
+		947BFC9D2642A410001C7C99 /* SWCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC9B2642A410001C7C99 /* SWCUtils.h */; };
+		947BFC9E2642A410001C7C99 /* SWCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC9B2642A410001C7C99 /* SWCUtils.h */; };
+		947BFC9F2642A410001C7C99 /* SWCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFC9B2642A410001C7C99 /* SWCUtils.h */; };
+		947BFCA02642A410001C7C99 /* SWCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC9C2642A410001C7C99 /* SWCUtils.m */; };
+		947BFCA12642A410001C7C99 /* SWCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC9C2642A410001C7C99 /* SWCUtils.m */; };
+		947BFCA22642A410001C7C99 /* SWCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFC9C2642A410001C7C99 /* SWCUtils.m */; };
+		947BFCA52642A5A0001C7C99 /* CBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFCA32642A5A0001C7C99 /* CBReachability.m */; };
+		947BFCA62642A5A0001C7C99 /* CBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFCA32642A5A0001C7C99 /* CBReachability.m */; };
+		947BFCA72642A5A0001C7C99 /* CBReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BFCA32642A5A0001C7C99 /* CBReachability.m */; };
+		947BFCA82642A5A0001C7C99 /* CBReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFCA42642A5A0001C7C99 /* CBReachability.h */; };
+		947BFCA92642A5A0001C7C99 /* CBReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFCA42642A5A0001C7C99 /* CBReachability.h */; };
+		947BFCAA2642A5A0001C7C99 /* CBReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 947BFCA42642A5A0001C7C99 /* CBReachability.h */; };
+		9492CD0F2643F40200B61AD3 /* SWCProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9492CD0D2643F40200B61AD3 /* SWCProxy.h */; };
+		9492CD102643F40200B61AD3 /* SWCProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9492CD0D2643F40200B61AD3 /* SWCProxy.h */; };
+		9492CD112643F40200B61AD3 /* SWCProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9492CD0D2643F40200B61AD3 /* SWCProxy.h */; };
+		9492CD122643F40200B61AD3 /* SWCProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD0E2643F40200B61AD3 /* SWCProxy.m */; };
+		9492CD132643F40200B61AD3 /* SWCProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD0E2643F40200B61AD3 /* SWCProxy.m */; };
+		9492CD142643F40200B61AD3 /* SWCProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD0E2643F40200B61AD3 /* SWCProxy.m */; };
+		9492CD172643F74300B61AD3 /* SWCM3u8Proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9492CD152643F74300B61AD3 /* SWCM3u8Proxy.h */; };
+		9492CD182643F74300B61AD3 /* SWCM3u8Proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9492CD152643F74300B61AD3 /* SWCM3u8Proxy.h */; };
+		9492CD192643F74300B61AD3 /* SWCM3u8Proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9492CD152643F74300B61AD3 /* SWCM3u8Proxy.h */; };
+		9492CD1A2643F74300B61AD3 /* SWCM3u8Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD162643F74300B61AD3 /* SWCM3u8Proxy.m */; };
+		9492CD1B2643F74300B61AD3 /* SWCM3u8Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD162643F74300B61AD3 /* SWCM3u8Proxy.m */; };
+		9492CD1C2643F74300B61AD3 /* SWCM3u8Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD162643F74300B61AD3 /* SWCM3u8Proxy.m */; };
+		9492CD1F2643F75D00B61AD3 /* SWCMp4Proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9492CD1D2643F75D00B61AD3 /* SWCMp4Proxy.h */; };
+		9492CD202643F75D00B61AD3 /* SWCMp4Proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9492CD1D2643F75D00B61AD3 /* SWCMp4Proxy.h */; };
+		9492CD212643F75D00B61AD3 /* SWCMp4Proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9492CD1D2643F75D00B61AD3 /* SWCMp4Proxy.h */; };
+		9492CD222643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */; };
+		9492CD232643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */; };
+		9492CD242643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */; };
+		94A179A92654C25300971FE6 /* SwarmCloudSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BFBA42641AD74001C7C99 /* SwarmCloudSDK.framework */; };
+		94E099712652A7CC00268FC5 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E099702652A7CC00268FC5 /* MainWindowController.m */; };
+		9BB7C9624F4673C2516F33FF /* libPods-iOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9461A112264C94C90090EF49 /* libPods-iOS Demo.a */; };
+		C5ED26B18C60FA701A90D408 /* libPods-macOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF4FF0B956C03D647660E26D /* libPods-macOS Demo.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		940C06C42646F38B00836F73 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBF82641B46C001C7C99 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBFC2641B4E0001C7C99 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		00AD80A7655A7875B6B641CD /* libPods-macOS SwarmCloudSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-macOS SwarmCloudSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		54EE5495214822E90ED38DB1 /* Pods-iOS SwarmCloudSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS SwarmCloudSDK.debug.xcconfig"; path = "Target Support Files/Pods-iOS SwarmCloudSDK/Pods-iOS SwarmCloudSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		5986C366EBC7DB39BE49CB0E /* Pods-macOS SwarmCloudSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS SwarmCloudSDK.release.xcconfig"; path = "Target Support Files/Pods-macOS SwarmCloudSDK/Pods-macOS SwarmCloudSDK.release.xcconfig"; sourceTree = "<group>"; };
+		5DB3A916DBF654E5556983C0 /* Pods-tvOS SwarmCloudSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS SwarmCloudSDK.debug.xcconfig"; path = "Target Support Files/Pods-tvOS SwarmCloudSDK/Pods-tvOS SwarmCloudSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		5E09B9925994F13AABC08D89 /* Pods-iOS SwarmCloudSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS SwarmCloudSDK.release.xcconfig"; path = "Target Support Files/Pods-iOS SwarmCloudSDK/Pods-iOS SwarmCloudSDK.release.xcconfig"; sourceTree = "<group>"; };
+		63203170BD543B562BEB5883 /* Pods-macOS Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS Demo.release.xcconfig"; path = "Target Support Files/Pods-macOS Demo/Pods-macOS Demo.release.xcconfig"; sourceTree = "<group>"; };
+		8B171A70147F2D31E93FAF43 /* Pods-macOS Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS Demo.debug.xcconfig"; path = "Target Support Files/Pods-macOS Demo/Pods-macOS Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		940C067C264580D100836F73 /* SWCNetworkResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCNetworkResponse.h; sourceTree = "<group>"; };
+		940C067D264580D100836F73 /* SWCNetworkResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCNetworkResponse.m; sourceTree = "<group>"; };
+		940C06842645979900836F73 /* SWCPlaylistUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCPlaylistUtils.h; sourceTree = "<group>"; };
+		940C06852645979900836F73 /* SWCPlaylistUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCPlaylistUtils.m; sourceTree = "<group>"; };
+		940C068C2646846900836F73 /* SWCSegment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCSegment.h; sourceTree = "<group>"; };
+		940C068D2646846900836F73 /* SWCSegment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCSegment.m; sourceTree = "<group>"; };
+		940C06942646848D00836F73 /* SWCHlsSegment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsSegment.h; sourceTree = "<group>"; };
+		940C06952646848D00836F73 /* SWCHlsSegment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCHlsSegment.m; sourceTree = "<group>"; };
+		940C069C26468A8300836F73 /* SWCPeer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCPeer.h; sourceTree = "<group>"; };
+		940C069D26468A8300836F73 /* SWCPeer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCPeer.m; sourceTree = "<group>"; };
+		940C06A526468E6B00836F73 /* SWCHlsPredictor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsPredictor.h; sourceTree = "<group>"; };
+		940C06A626468E6B00836F73 /* SWCHlsPredictor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCHlsPredictor.m; sourceTree = "<group>"; };
+		940C06AD2646905400836F73 /* SWCSignalClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCSignalClient.h; sourceTree = "<group>"; };
+		940C06AE2646905400836F73 /* SWCSignalClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCSignalClient.m; sourceTree = "<group>"; };
+		940C06B526469BA100836F73 /* SWCHlsParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsParser.h; sourceTree = "<group>"; };
+		940C06B626469BA100836F73 /* SWCHlsParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCHlsParser.m; sourceTree = "<group>"; };
+		940C06BD2646F1E900836F73 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = vendor/tvOS/WebRTC.xcframework; sourceTree = "<group>"; };
+		945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCPlaylistInfo.h; sourceTree = "<group>"; };
+		945FE2E5264D5BA700EDE4F5 /* SWCPlaylistInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCPlaylistInfo.m; sourceTree = "<group>"; };
+		9461A112264C94C90090EF49 /* libPods-iOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-iOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9461A114264C950F0090EF49 /* libCocoaAsyncSocket-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libCocoaAsyncSocket-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9461A116264C950F0090EF49 /* libCocoaLumberjack-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libCocoaLumberjack-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9461A118264C950F0090EF49 /* libGCDWebServer-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libGCDWebServer-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9461A11A264C950F0090EF49 /* libPINCache-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPINCache-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9461A11C264C950F0090EF49 /* libSocketRocket-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libSocketRocket-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94644FF026492A96006EDBD7 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = vendor/WebRTC.xcframework; sourceTree = "<group>"; };
+		9464500026496935006EDBD7 /* SWCByteRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCByteRange.h; sourceTree = "<group>"; };
+		9464500126496935006EDBD7 /* SWCByteRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCByteRange.m; sourceTree = "<group>"; };
+		946450082649698A006EDBD7 /* SWCError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCError.h; sourceTree = "<group>"; };
+		946450092649698A006EDBD7 /* SWCError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCError.m; sourceTree = "<group>"; };
+		94746E3C2647C79000245E7A /* SWCScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCScheduler.h; sourceTree = "<group>"; };
+		94746E3D2647C79000245E7A /* SWCScheduler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCScheduler.m; sourceTree = "<group>"; };
+		94746E442647C7B300245E7A /* SWCHlsScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsScheduler.h; sourceTree = "<group>"; };
+		94746E452647C7B300245E7A /* SWCHlsScheduler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCHlsScheduler.m; sourceTree = "<group>"; };
+		94746E4C2647C7CC00245E7A /* SWCHlsSnScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsSnScheduler.h; sourceTree = "<group>"; };
+		94746E4D2647C7CC00245E7A /* SWCHlsSnScheduler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCHlsSnScheduler.m; sourceTree = "<group>"; };
+		94746E542647C7DE00245E7A /* SWCHlsIdScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsIdScheduler.h; sourceTree = "<group>"; };
+		94746E552647C7DE00245E7A /* SWCHlsIdScheduler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCHlsIdScheduler.m; sourceTree = "<group>"; };
+		94746E5C2647C9D900245E7A /* SWCTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCTracker.h; sourceTree = "<group>"; };
+		94746E5D2647C9D900245E7A /* SWCTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCTracker.m; sourceTree = "<group>"; };
+		94746E6426480F3600245E7A /* SWCDataChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCDataChannel.h; sourceTree = "<group>"; };
+		94746E6526480F3600245E7A /* SWCDataChannel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCDataChannel.m; sourceTree = "<group>"; };
+		94746E6C264819DD00245E7A /* CBPeerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBPeerManager.h; sourceTree = "<group>"; };
+		94746E6D264819DD00245E7A /* CBPeerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CBPeerManager.m; sourceTree = "<group>"; };
+		94746E7526481B9800245E7A /* SWCSegmentManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCSegmentManager.h; sourceTree = "<group>"; };
+		94746E7626481B9800245E7A /* SWCSegmentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCSegmentManager.m; sourceTree = "<group>"; };
+		94746E7D2648273A00245E7A /* SWCSchedulerFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCSchedulerFactory.h; sourceTree = "<group>"; };
+		94746E7E2648273A00245E7A /* SWCSchedulerFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCSchedulerFactory.m; sourceTree = "<group>"; };
+		947BFB7A2641ACE0001C7C99 /* SwarmCloudSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwarmCloudSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		947BFB7D2641ACE0001C7C99 /* SwarmCloudSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwarmCloudSDK.h; sourceTree = "<group>"; };
+		947BFB7E2641ACE0001C7C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		947BFB972641AD62001C7C99 /* SwarmCloudSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwarmCloudSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		947BFBA42641AD74001C7C99 /* SwarmCloudSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwarmCloudSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		947BFBB02641AF36001C7C99 /* iOS Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		947BFBB22641AF36001C7C99 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		947BFBB32641AF36001C7C99 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		947BFBB82641AF36001C7C99 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		947BFBB92641AF36001C7C99 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		947BFBBC2641AF36001C7C99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		947BFBBE2641AF37001C7C99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		947BFBC12641AF37001C7C99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		947BFBC32641AF37001C7C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		947BFBC42641AF37001C7C99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		947BFBD12641AFF6001C7C99 /* macOS Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "macOS Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		947BFBD32641AFF6001C7C99 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		947BFBD42641AFF6001C7C99 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		947BFBD62641AFF6001C7C99 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		947BFBD72641AFF6001C7C99 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		947BFBD92641AFF7001C7C99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		947BFBDE2641AFF7001C7C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		947BFBDF2641AFF7001C7C99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		947BFBE12641AFF7001C7C99 /* macOS_Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS_Demo.entitlements; sourceTree = "<group>"; };
+		947BFBE52641B038001C7C99 /* SWCP2pConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCP2pConfig.h; sourceTree = "<group>"; };
+		947BFBE62641B038001C7C99 /* SWCP2pConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCP2pConfig.m; sourceTree = "<group>"; };
+		947BFBF02641B275001C7C99 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = vendor/iOS/WebRTC.framework; sourceTree = "<group>"; };
+		947BFBF42641B284001C7C99 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = vendor/macOS/WebRTC.xcframework; sourceTree = "<group>"; };
+		947BFC042641B5DB001C7C99 /* tvOS Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tvOS Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		947BFC062641B5DB001C7C99 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		947BFC072641B5DB001C7C99 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		947BFC092641B5DB001C7C99 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		947BFC0A2641B5DB001C7C99 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		947BFC0D2641B5DB001C7C99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		947BFC0F2641B5DC001C7C99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		947BFC122641B5DC001C7C99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		947BFC142641B5DC001C7C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		947BFC152641B5DC001C7C99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		947BFC1C26429356001C7C99 /* SWCP2pEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCP2pEngine.h; sourceTree = "<group>"; };
+		947BFC1D26429356001C7C99 /* SWCP2pEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCP2pEngine.m; sourceTree = "<group>"; };
+		947BFC2526429BF5001C7C99 /* NATUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NATUtils.m; sourceTree = "<group>"; };
+		947BFC2626429BF5001C7C99 /* StunChangeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StunChangeRequest.m; sourceTree = "<group>"; };
+		947BFC2726429BF5001C7C99 /* StunClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StunClient.h; sourceTree = "<group>"; };
+		947BFC2826429BF5001C7C99 /* StunChangeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StunChangeRequest.h; sourceTree = "<group>"; };
+		947BFC2926429BF5001C7C99 /* StunResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StunResult.h; sourceTree = "<group>"; };
+		947BFC2A26429BF5001C7C99 /* SocketAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketAddress.m; sourceTree = "<group>"; };
+		947BFC2B26429BF5001C7C99 /* NATUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NATUtils.h; sourceTree = "<group>"; };
+		947BFC2C26429BF5001C7C99 /* StunMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StunMessage.m; sourceTree = "<group>"; };
+		947BFC2D26429BF5001C7C99 /* CBSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSocket.h; sourceTree = "<group>"; };
+		947BFC2E26429BF5001C7C99 /* SocketAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketAddress.h; sourceTree = "<group>"; };
+		947BFC2F26429BF5001C7C99 /* StunResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StunResult.m; sourceTree = "<group>"; };
+		947BFC3026429BF5001C7C99 /* StunClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StunClient.m; sourceTree = "<group>"; };
+		947BFC3126429BF5001C7C99 /* StunErrorCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StunErrorCode.m; sourceTree = "<group>"; };
+		947BFC3226429BF5001C7C99 /* StunMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StunMessage.h; sourceTree = "<group>"; };
+		947BFC3326429BF5001C7C99 /* CBSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSocket.m; sourceTree = "<group>"; };
+		947BFC3426429BF5001C7C99 /* StunErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StunErrorCode.h; sourceTree = "<group>"; };
+		947BFC6626429C88001C7C99 /* CBLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBLogger.h; sourceTree = "<group>"; };
+		947BFC6726429C88001C7C99 /* CBLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBLogFormatter.m; sourceTree = "<group>"; };
+		947BFC6826429C88001C7C99 /* CBLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBLogFormatter.h; sourceTree = "<group>"; };
+		947BFC6926429C88001C7C99 /* CBLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBLogger.m; sourceTree = "<group>"; };
+		947BFC7626429F54001C7C99 /* CBTimerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBTimerManager.h; sourceTree = "<group>"; };
+		947BFC7726429F54001C7C99 /* CBTimerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CBTimerManager.m; sourceTree = "<group>"; };
+		947BFC7F2642A16D001C7C99 /* LineReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineReader.h; sourceTree = "<group>"; };
+		947BFC802642A16D001C7C99 /* LineReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineReader.m; sourceTree = "<group>"; };
+		947BFC882642A284001C7C99 /* CBQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBQueue.h; sourceTree = "<group>"; };
+		947BFC892642A284001C7C99 /* CBQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBQueue.m; sourceTree = "<group>"; };
+		947BFC902642A2EA001C7C99 /* CBPeerChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPeerChannel.h; sourceTree = "<group>"; };
+		947BFC912642A2EA001C7C99 /* CBPeerChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPeerChannel.m; sourceTree = "<group>"; };
+		947BFC9B2642A410001C7C99 /* SWCUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCUtils.h; sourceTree = "<group>"; };
+		947BFC9C2642A410001C7C99 /* SWCUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCUtils.m; sourceTree = "<group>"; };
+		947BFCA32642A5A0001C7C99 /* CBReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBReachability.m; sourceTree = "<group>"; };
+		947BFCA42642A5A0001C7C99 /* CBReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBReachability.h; sourceTree = "<group>"; };
+		9492CD0D2643F40200B61AD3 /* SWCProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCProxy.h; sourceTree = "<group>"; };
+		9492CD0E2643F40200B61AD3 /* SWCProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCProxy.m; sourceTree = "<group>"; };
+		9492CD152643F74300B61AD3 /* SWCM3u8Proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCM3u8Proxy.h; sourceTree = "<group>"; };
+		9492CD162643F74300B61AD3 /* SWCM3u8Proxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCM3u8Proxy.m; sourceTree = "<group>"; };
+		9492CD1D2643F75D00B61AD3 /* SWCMp4Proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCMp4Proxy.h; sourceTree = "<group>"; };
+		9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCMp4Proxy.m; sourceTree = "<group>"; };
+		94E0996F2652A7CC00268FC5 /* MainWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
+		94E099702652A7CC00268FC5 /* MainWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
+		94EC2942264CFBEA00752F88 /* SwarmCloudSDK */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SwarmCloudSDK; sourceTree = "<group>"; };
+		963BA598512BDA94A7441A1B /* libPods-iOS SwarmCloudSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS SwarmCloudSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D0A49486945DD15B38ED2F5 /* Pods-tvOS Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS Demo.debug.xcconfig"; path = "Target Support Files/Pods-tvOS Demo/Pods-tvOS Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		B759A186F66F69990905B5CC /* libPods-iOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9CC15FC2CF04D376C3A2F52 /* Pods-macOS SwarmCloudSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macOS SwarmCloudSDK.debug.xcconfig"; path = "Target Support Files/Pods-macOS SwarmCloudSDK/Pods-macOS SwarmCloudSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		C0BEE9C288AE0849D981F382 /* libPods-tvOS SwarmCloudSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tvOS SwarmCloudSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1072EE4BCDA3D547CAE4C0D /* Pods-iOS Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS Demo.release.xcconfig"; path = "Target Support Files/Pods-iOS Demo/Pods-iOS Demo.release.xcconfig"; sourceTree = "<group>"; };
+		CF4FF0B956C03D647660E26D /* libPods-macOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-macOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDEE9C4ADD71F21A2496A7EC /* Pods-tvOS Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS Demo.release.xcconfig"; path = "Target Support Files/Pods-tvOS Demo/Pods-tvOS Demo.release.xcconfig"; sourceTree = "<group>"; };
+		E814B5181608253D2BBB0A24 /* Pods-iOS Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS Demo.debug.xcconfig"; path = "Target Support Files/Pods-iOS Demo/Pods-iOS Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		EAF766AAC79DFD01E337A8DA /* Pods-tvOS SwarmCloudSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS SwarmCloudSDK.release.xcconfig"; path = "Target Support Files/Pods-tvOS SwarmCloudSDK/Pods-tvOS SwarmCloudSDK.release.xcconfig"; sourceTree = "<group>"; };
+		FB5186EC4A6972A0E91E7E7C /* libPods-tvOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tvOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		947BFB772641ACE0001C7C99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFB942641AD62001C7C99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBA12641AD74001C7C99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09B9A9C8A4F1660DAA58BD8A /* libPods-macOS SwarmCloudSDK.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBAD2641AF36001C7C99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9429A6E6264CFA47008AD0AB /* SwarmCloudSDK.framework in Frameworks */,
+				9BB7C9624F4673C2516F33FF /* libPods-iOS Demo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBCE2641AFF6001C7C99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94A179A92654C25300971FE6 /* SwarmCloudSDK.framework in Frameworks */,
+				C5ED26B18C60FA701A90D408 /* libPods-macOS Demo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFC012641B5DB001C7C99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9429A6E7264CFA7E008AD0AB /* SwarmCloudSDK.framework in Frameworks */,
+				7337400E34F409FB5F94E8D1 /* libPods-tvOS Demo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		940C067B2645804D00836F73 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				940C067C264580D100836F73 /* SWCNetworkResponse.h */,
+				940C067D264580D100836F73 /* SWCNetworkResponse.m */,
+				940C068C2646846900836F73 /* SWCSegment.h */,
+				940C068D2646846900836F73 /* SWCSegment.m */,
+				940C06942646848D00836F73 /* SWCHlsSegment.h */,
+				940C06952646848D00836F73 /* SWCHlsSegment.m */,
+				940C069C26468A8300836F73 /* SWCPeer.h */,
+				940C069D26468A8300836F73 /* SWCPeer.m */,
+				945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */,
+				945FE2E5264D5BA700EDE4F5 /* SWCPlaylistInfo.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		94746E7426481B5D00245E7A /* cache */ = {
+			isa = PBXGroup;
+			children = (
+				94746E7526481B9800245E7A /* SWCSegmentManager.h */,
+				94746E7626481B9800245E7A /* SWCSegmentManager.m */,
+			);
+			path = cache;
+			sourceTree = "<group>";
+		};
+		947BFB702641ACE0001C7C99 = {
+			isa = PBXGroup;
+			children = (
+				947BFB7C2641ACE0001C7C99 /* SwarmCloudSDK */,
+				947BFBB12641AF36001C7C99 /* iOS Demo */,
+				947BFBD22641AFF6001C7C99 /* macOS Demo */,
+				947BFC052641B5DB001C7C99 /* tvOS Demo */,
+				947BFB7B2641ACE0001C7C99 /* Products */,
+				947BFBEF2641B275001C7C99 /* Frameworks */,
+				DDC7B6D0653C87EEEA2CAD36 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		947BFB7B2641ACE0001C7C99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				947BFB7A2641ACE0001C7C99 /* SwarmCloudSDK.framework */,
+				947BFB972641AD62001C7C99 /* SwarmCloudSDK.framework */,
+				947BFBA42641AD74001C7C99 /* SwarmCloudSDK.framework */,
+				947BFBB02641AF36001C7C99 /* iOS Demo.app */,
+				947BFBD12641AFF6001C7C99 /* macOS Demo.app */,
+				947BFC042641B5DB001C7C99 /* tvOS Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		947BFB7C2641ACE0001C7C99 /* SwarmCloudSDK */ = {
+			isa = PBXGroup;
+			children = (
+				94746E7426481B5D00245E7A /* cache */,
+				940C067B2645804D00836F73 /* model */,
+				947BFC9A2642A3C5001C7C99 /* hls */,
+				947BFC992642A38E001C7C99 /* tracking */,
+				947BFC982642A384001C7C99 /* signaling */,
+				947BFC872642A1B1001C7C99 /* p2p */,
+				947BFC7E2642A13A001C7C99 /* utils */,
+				947BFC6526429C50001C7C99 /* logger */,
+				947BFC2426429BB3001C7C99 /* nat */,
+				947BFB7D2641ACE0001C7C99 /* SwarmCloudSDK.h */,
+				947BFB7E2641ACE0001C7C99 /* Info.plist */,
+				947BFBE52641B038001C7C99 /* SWCP2pConfig.h */,
+				947BFBE62641B038001C7C99 /* SWCP2pConfig.m */,
+				947BFC1C26429356001C7C99 /* SWCP2pEngine.h */,
+				947BFC1D26429356001C7C99 /* SWCP2pEngine.m */,
+				9492CD0D2643F40200B61AD3 /* SWCProxy.h */,
+				9492CD0E2643F40200B61AD3 /* SWCProxy.m */,
+				9492CD152643F74300B61AD3 /* SWCM3u8Proxy.h */,
+				9492CD162643F74300B61AD3 /* SWCM3u8Proxy.m */,
+				9492CD1D2643F75D00B61AD3 /* SWCMp4Proxy.h */,
+				9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */,
+			);
+			path = SwarmCloudSDK;
+			sourceTree = "<group>";
+		};
+		947BFBB12641AF36001C7C99 /* iOS Demo */ = {
+			isa = PBXGroup;
+			children = (
+				947BFBB22641AF36001C7C99 /* AppDelegate.h */,
+				947BFBB32641AF36001C7C99 /* AppDelegate.m */,
+				947BFBB82641AF36001C7C99 /* ViewController.h */,
+				947BFBB92641AF36001C7C99 /* ViewController.m */,
+				947BFBBB2641AF36001C7C99 /* Main.storyboard */,
+				947BFBBE2641AF37001C7C99 /* Assets.xcassets */,
+				947BFBC02641AF37001C7C99 /* LaunchScreen.storyboard */,
+				947BFBC32641AF37001C7C99 /* Info.plist */,
+				947BFBC42641AF37001C7C99 /* main.m */,
+			);
+			path = "iOS Demo";
+			sourceTree = "<group>";
+		};
+		947BFBD22641AFF6001C7C99 /* macOS Demo */ = {
+			isa = PBXGroup;
+			children = (
+				947BFBD32641AFF6001C7C99 /* AppDelegate.h */,
+				947BFBD42641AFF6001C7C99 /* AppDelegate.m */,
+				947BFBD62641AFF6001C7C99 /* ViewController.h */,
+				947BFBD72641AFF6001C7C99 /* ViewController.m */,
+				947BFBD92641AFF7001C7C99 /* Assets.xcassets */,
+				947BFBDE2641AFF7001C7C99 /* Info.plist */,
+				947BFBDF2641AFF7001C7C99 /* main.m */,
+				947BFBE12641AFF7001C7C99 /* macOS_Demo.entitlements */,
+				94E0996F2652A7CC00268FC5 /* MainWindowController.h */,
+				94E099702652A7CC00268FC5 /* MainWindowController.m */,
+			);
+			path = "macOS Demo";
+			sourceTree = "<group>";
+		};
+		947BFBEF2641B275001C7C99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94EC2942264CFBEA00752F88 /* SwarmCloudSDK */,
+				9461A114264C950F0090EF49 /* libCocoaAsyncSocket-iOS.a */,
+				9461A116264C950F0090EF49 /* libCocoaLumberjack-iOS.a */,
+				9461A118264C950F0090EF49 /* libGCDWebServer-iOS.a */,
+				9461A11A264C950F0090EF49 /* libPINCache-iOS.a */,
+				9461A11C264C950F0090EF49 /* libSocketRocket-iOS.a */,
+				9461A112264C94C90090EF49 /* libPods-iOS Demo.a */,
+				947BFBF42641B284001C7C99 /* WebRTC.xcframework */,
+				940C06BD2646F1E900836F73 /* WebRTC.xcframework */,
+				94644FF026492A96006EDBD7 /* WebRTC.xcframework */,
+				947BFBF02641B275001C7C99 /* WebRTC.framework */,
+				963BA598512BDA94A7441A1B /* libPods-iOS SwarmCloudSDK.a */,
+				00AD80A7655A7875B6B641CD /* libPods-macOS SwarmCloudSDK.a */,
+				B759A186F66F69990905B5CC /* libPods-iOS Demo.a */,
+				CF4FF0B956C03D647660E26D /* libPods-macOS Demo.a */,
+				FB5186EC4A6972A0E91E7E7C /* libPods-tvOS Demo.a */,
+				C0BEE9C288AE0849D981F382 /* libPods-tvOS SwarmCloudSDK.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		947BFC052641B5DB001C7C99 /* tvOS Demo */ = {
+			isa = PBXGroup;
+			children = (
+				947BFC062641B5DB001C7C99 /* AppDelegate.h */,
+				947BFC072641B5DB001C7C99 /* AppDelegate.m */,
+				947BFC092641B5DB001C7C99 /* ViewController.h */,
+				947BFC0A2641B5DB001C7C99 /* ViewController.m */,
+				947BFC0C2641B5DB001C7C99 /* Main.storyboard */,
+				947BFC0F2641B5DC001C7C99 /* Assets.xcassets */,
+				947BFC112641B5DC001C7C99 /* LaunchScreen.storyboard */,
+				947BFC142641B5DC001C7C99 /* Info.plist */,
+				947BFC152641B5DC001C7C99 /* main.m */,
+			);
+			path = "tvOS Demo";
+			sourceTree = "<group>";
+		};
+		947BFC2426429BB3001C7C99 /* nat */ = {
+			isa = PBXGroup;
+			children = (
+				947BFC2D26429BF5001C7C99 /* CBSocket.h */,
+				947BFC3326429BF5001C7C99 /* CBSocket.m */,
+				947BFC2B26429BF5001C7C99 /* NATUtils.h */,
+				947BFC2526429BF5001C7C99 /* NATUtils.m */,
+				947BFC2E26429BF5001C7C99 /* SocketAddress.h */,
+				947BFC2A26429BF5001C7C99 /* SocketAddress.m */,
+				947BFC2826429BF5001C7C99 /* StunChangeRequest.h */,
+				947BFC2626429BF5001C7C99 /* StunChangeRequest.m */,
+				947BFC2726429BF5001C7C99 /* StunClient.h */,
+				947BFC3026429BF5001C7C99 /* StunClient.m */,
+				947BFC3426429BF5001C7C99 /* StunErrorCode.h */,
+				947BFC3126429BF5001C7C99 /* StunErrorCode.m */,
+				947BFC3226429BF5001C7C99 /* StunMessage.h */,
+				947BFC2C26429BF5001C7C99 /* StunMessage.m */,
+				947BFC2926429BF5001C7C99 /* StunResult.h */,
+				947BFC2F26429BF5001C7C99 /* StunResult.m */,
+			);
+			path = nat;
+			sourceTree = "<group>";
+		};
+		947BFC6526429C50001C7C99 /* logger */ = {
+			isa = PBXGroup;
+			children = (
+				947BFC6826429C88001C7C99 /* CBLogFormatter.h */,
+				947BFC6726429C88001C7C99 /* CBLogFormatter.m */,
+				947BFC6626429C88001C7C99 /* CBLogger.h */,
+				947BFC6926429C88001C7C99 /* CBLogger.m */,
+			);
+			path = logger;
+			sourceTree = "<group>";
+		};
+		947BFC7E2642A13A001C7C99 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				947BFCA42642A5A0001C7C99 /* CBReachability.h */,
+				947BFCA32642A5A0001C7C99 /* CBReachability.m */,
+				947BFC882642A284001C7C99 /* CBQueue.h */,
+				947BFC892642A284001C7C99 /* CBQueue.m */,
+				947BFC7626429F54001C7C99 /* CBTimerManager.h */,
+				947BFC7726429F54001C7C99 /* CBTimerManager.m */,
+				947BFC7F2642A16D001C7C99 /* LineReader.h */,
+				947BFC802642A16D001C7C99 /* LineReader.m */,
+				947BFC9B2642A410001C7C99 /* SWCUtils.h */,
+				947BFC9C2642A410001C7C99 /* SWCUtils.m */,
+				9464500026496935006EDBD7 /* SWCByteRange.h */,
+				9464500126496935006EDBD7 /* SWCByteRange.m */,
+				946450082649698A006EDBD7 /* SWCError.h */,
+				946450092649698A006EDBD7 /* SWCError.m */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		947BFC872642A1B1001C7C99 /* p2p */ = {
+			isa = PBXGroup;
+			children = (
+				947BFC902642A2EA001C7C99 /* CBPeerChannel.h */,
+				947BFC912642A2EA001C7C99 /* CBPeerChannel.m */,
+				94746E3C2647C79000245E7A /* SWCScheduler.h */,
+				94746E3D2647C79000245E7A /* SWCScheduler.m */,
+				94746E6426480F3600245E7A /* SWCDataChannel.h */,
+				94746E6526480F3600245E7A /* SWCDataChannel.m */,
+				94746E6C264819DD00245E7A /* CBPeerManager.h */,
+				94746E6D264819DD00245E7A /* CBPeerManager.m */,
+				94746E7D2648273A00245E7A /* SWCSchedulerFactory.h */,
+				94746E7E2648273A00245E7A /* SWCSchedulerFactory.m */,
+			);
+			path = p2p;
+			sourceTree = "<group>";
+		};
+		947BFC982642A384001C7C99 /* signaling */ = {
+			isa = PBXGroup;
+			children = (
+				940C06AD2646905400836F73 /* SWCSignalClient.h */,
+				940C06AE2646905400836F73 /* SWCSignalClient.m */,
+			);
+			path = signaling;
+			sourceTree = "<group>";
+		};
+		947BFC992642A38E001C7C99 /* tracking */ = {
+			isa = PBXGroup;
+			children = (
+				94746E5C2647C9D900245E7A /* SWCTracker.h */,
+				94746E5D2647C9D900245E7A /* SWCTracker.m */,
+			);
+			path = tracking;
+			sourceTree = "<group>";
+		};
+		947BFC9A2642A3C5001C7C99 /* hls */ = {
+			isa = PBXGroup;
+			children = (
+				940C06842645979900836F73 /* SWCPlaylistUtils.h */,
+				940C06852645979900836F73 /* SWCPlaylistUtils.m */,
+				940C06A526468E6B00836F73 /* SWCHlsPredictor.h */,
+				940C06A626468E6B00836F73 /* SWCHlsPredictor.m */,
+				940C06B526469BA100836F73 /* SWCHlsParser.h */,
+				940C06B626469BA100836F73 /* SWCHlsParser.m */,
+				94746E442647C7B300245E7A /* SWCHlsScheduler.h */,
+				94746E452647C7B300245E7A /* SWCHlsScheduler.m */,
+				94746E4C2647C7CC00245E7A /* SWCHlsSnScheduler.h */,
+				94746E4D2647C7CC00245E7A /* SWCHlsSnScheduler.m */,
+				94746E542647C7DE00245E7A /* SWCHlsIdScheduler.h */,
+				94746E552647C7DE00245E7A /* SWCHlsIdScheduler.m */,
+			);
+			path = hls;
+			sourceTree = "<group>";
+		};
+		DDC7B6D0653C87EEEA2CAD36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54EE5495214822E90ED38DB1 /* Pods-iOS SwarmCloudSDK.debug.xcconfig */,
+				5E09B9925994F13AABC08D89 /* Pods-iOS SwarmCloudSDK.release.xcconfig */,
+				B9CC15FC2CF04D376C3A2F52 /* Pods-macOS SwarmCloudSDK.debug.xcconfig */,
+				5986C366EBC7DB39BE49CB0E /* Pods-macOS SwarmCloudSDK.release.xcconfig */,
+				E814B5181608253D2BBB0A24 /* Pods-iOS Demo.debug.xcconfig */,
+				C1072EE4BCDA3D547CAE4C0D /* Pods-iOS Demo.release.xcconfig */,
+				8B171A70147F2D31E93FAF43 /* Pods-macOS Demo.debug.xcconfig */,
+				63203170BD543B562BEB5883 /* Pods-macOS Demo.release.xcconfig */,
+				9D0A49486945DD15B38ED2F5 /* Pods-tvOS Demo.debug.xcconfig */,
+				DDEE9C4ADD71F21A2496A7EC /* Pods-tvOS Demo.release.xcconfig */,
+				5DB3A916DBF654E5556983C0 /* Pods-tvOS SwarmCloudSDK.debug.xcconfig */,
+				EAF766AAC79DFD01E337A8DA /* Pods-tvOS SwarmCloudSDK.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		947BFB752641ACE0001C7C99 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94746E3E2647C79000245E7A /* SWCScheduler.h in Headers */,
+				947BFB7F2641ACE0001C7C99 /* SwarmCloudSDK.h in Headers */,
+				94746E6626480F3600245E7A /* SWCDataChannel.h in Headers */,
+				94746E6E264819DD00245E7A /* CBPeerManager.h in Headers */,
+				940C06AF2646905400836F73 /* SWCSignalClient.h in Headers */,
+				940C0679264543D100836F73 /* SWCP2pEngine.h in Headers */,
+				940C0678264543CC00836F73 /* SWCP2pConfig.h in Headers */,
+				947BFC922642A2EA001C7C99 /* CBPeerChannel.h in Headers */,
+				9492CD172643F74300B61AD3 /* SWCM3u8Proxy.h in Headers */,
+				947BFC6A26429C88001C7C99 /* CBLogger.h in Headers */,
+				940C069E26468A8300836F73 /* SWCPeer.h in Headers */,
+				947BFC4726429BF6001C7C99 /* NATUtils.h in Headers */,
+				9464500A2649698A006EDBD7 /* SWCError.h in Headers */,
+				940C067E264580D100836F73 /* SWCNetworkResponse.h in Headers */,
+				940C06962646848D00836F73 /* SWCHlsSegment.h in Headers */,
+				94746E4E2647C7CC00245E7A /* SWCHlsSnScheduler.h in Headers */,
+				945FE2E6264D5BA700EDE4F5 /* SWCPlaylistInfo.h in Headers */,
+				940C06862645979900836F73 /* SWCPlaylistUtils.h in Headers */,
+				94746E7726481B9800245E7A /* SWCSegmentManager.h in Headers */,
+				947BFC5C26429BF6001C7C99 /* StunMessage.h in Headers */,
+				9464500226496935006EDBD7 /* SWCByteRange.h in Headers */,
+				940C06B726469BA100836F73 /* SWCHlsParser.h in Headers */,
+				947BFC812642A16D001C7C99 /* LineReader.h in Headers */,
+				947BFC7026429C88001C7C99 /* CBLogFormatter.h in Headers */,
+				94746E7F2648273A00245E7A /* SWCSchedulerFactory.h in Headers */,
+				947BFCA82642A5A0001C7C99 /* CBReachability.h in Headers */,
+				94746E562647C7DE00245E7A /* SWCHlsIdScheduler.h in Headers */,
+				947BFC5026429BF6001C7C99 /* SocketAddress.h in Headers */,
+				947BFC8A2642A284001C7C99 /* CBQueue.h in Headers */,
+				947BFC3E26429BF6001C7C99 /* StunChangeRequest.h in Headers */,
+				94746E5E2647C9D900245E7A /* SWCTracker.h in Headers */,
+				947BFC6226429BF6001C7C99 /* StunErrorCode.h in Headers */,
+				940C06A726468E6B00836F73 /* SWCHlsPredictor.h in Headers */,
+				9492CD1F2643F75D00B61AD3 /* SWCMp4Proxy.h in Headers */,
+				947BFC3B26429BF6001C7C99 /* StunClient.h in Headers */,
+				947BFC9D2642A410001C7C99 /* SWCUtils.h in Headers */,
+				94746E462647C7B300245E7A /* SWCHlsScheduler.h in Headers */,
+				947BFC7826429F54001C7C99 /* CBTimerManager.h in Headers */,
+				947BFC4D26429BF6001C7C99 /* CBSocket.h in Headers */,
+				940C068E2646846900836F73 /* SWCSegment.h in Headers */,
+				947BFC4126429BF6001C7C99 /* StunResult.h in Headers */,
+				9492CD0F2643F40200B61AD3 /* SWCProxy.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFB922641AD62001C7C99 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94746E3F2647C79000245E7A /* SWCScheduler.h in Headers */,
+				947BFBE82641B038001C7C99 /* SWCP2pConfig.h in Headers */,
+				94746E6726480F3600245E7A /* SWCDataChannel.h in Headers */,
+				94746E6F264819DD00245E7A /* CBPeerManager.h in Headers */,
+				940C06B02646905400836F73 /* SWCSignalClient.h in Headers */,
+				947BFC932642A2EA001C7C99 /* CBPeerChannel.h in Headers */,
+				9492CD182643F74300B61AD3 /* SWCM3u8Proxy.h in Headers */,
+				947BFC6B26429C88001C7C99 /* CBLogger.h in Headers */,
+				947BFC4826429BF6001C7C99 /* NATUtils.h in Headers */,
+				947BFC5D26429BF6001C7C99 /* StunMessage.h in Headers */,
+				940C069F26468A8300836F73 /* SWCPeer.h in Headers */,
+				947BFC822642A16D001C7C99 /* LineReader.h in Headers */,
+				9464500B2649698A006EDBD7 /* SWCError.h in Headers */,
+				940C067F264580D100836F73 /* SWCNetworkResponse.h in Headers */,
+				940C06972646848D00836F73 /* SWCHlsSegment.h in Headers */,
+				94746E4F2647C7CC00245E7A /* SWCHlsSnScheduler.h in Headers */,
+				945FE2E7264D5BA700EDE4F5 /* SWCPlaylistInfo.h in Headers */,
+				940C06872645979900836F73 /* SWCPlaylistUtils.h in Headers */,
+				94746E7826481B9800245E7A /* SWCSegmentManager.h in Headers */,
+				947BFC1A26428C2D001C7C99 /* SwarmCloudSDK.h in Headers */,
+				9464500326496935006EDBD7 /* SWCByteRange.h in Headers */,
+				940C06B826469BA100836F73 /* SWCHlsParser.h in Headers */,
+				947BFC7126429C88001C7C99 /* CBLogFormatter.h in Headers */,
+				947BFCA92642A5A0001C7C99 /* CBReachability.h in Headers */,
+				94746E802648273A00245E7A /* SWCSchedulerFactory.h in Headers */,
+				947BFC1F26429356001C7C99 /* SWCP2pEngine.h in Headers */,
+				94746E572647C7DE00245E7A /* SWCHlsIdScheduler.h in Headers */,
+				947BFC5126429BF6001C7C99 /* SocketAddress.h in Headers */,
+				947BFC8B2642A284001C7C99 /* CBQueue.h in Headers */,
+				947BFC3F26429BF6001C7C99 /* StunChangeRequest.h in Headers */,
+				94746E5F2647C9D900245E7A /* SWCTracker.h in Headers */,
+				947BFC6326429BF6001C7C99 /* StunErrorCode.h in Headers */,
+				940C06A826468E6B00836F73 /* SWCHlsPredictor.h in Headers */,
+				9492CD202643F75D00B61AD3 /* SWCMp4Proxy.h in Headers */,
+				947BFC3C26429BF6001C7C99 /* StunClient.h in Headers */,
+				947BFC9E2642A410001C7C99 /* SWCUtils.h in Headers */,
+				94746E472647C7B300245E7A /* SWCHlsScheduler.h in Headers */,
+				947BFC7926429F54001C7C99 /* CBTimerManager.h in Headers */,
+				947BFC4E26429BF6001C7C99 /* CBSocket.h in Headers */,
+				940C068F2646846900836F73 /* SWCSegment.h in Headers */,
+				947BFC4226429BF6001C7C99 /* StunResult.h in Headers */,
+				9492CD102643F40200B61AD3 /* SWCProxy.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFB9F2641AD74001C7C99 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94746E402647C79000245E7A /* SWCScheduler.h in Headers */,
+				947BFC1B26428C70001C7C99 /* SwarmCloudSDK.h in Headers */,
+				94746E6826480F3600245E7A /* SWCDataChannel.h in Headers */,
+				94746E70264819DD00245E7A /* CBPeerManager.h in Headers */,
+				940C06B12646905400836F73 /* SWCSignalClient.h in Headers */,
+				947BFC942642A2EA001C7C99 /* CBPeerChannel.h in Headers */,
+				9492CD192643F74300B61AD3 /* SWCM3u8Proxy.h in Headers */,
+				947BFC6C26429C88001C7C99 /* CBLogger.h in Headers */,
+				947BFC4926429BF6001C7C99 /* NATUtils.h in Headers */,
+				947BFC5E26429BF6001C7C99 /* StunMessage.h in Headers */,
+				940C06A026468A8300836F73 /* SWCPeer.h in Headers */,
+				947BFC832642A16D001C7C99 /* LineReader.h in Headers */,
+				9464500C2649698A006EDBD7 /* SWCError.h in Headers */,
+				940C0680264580D100836F73 /* SWCNetworkResponse.h in Headers */,
+				940C06982646848D00836F73 /* SWCHlsSegment.h in Headers */,
+				94746E502647C7CC00245E7A /* SWCHlsSnScheduler.h in Headers */,
+				945FE2E8264D5BA700EDE4F5 /* SWCPlaylistInfo.h in Headers */,
+				940C06882645979900836F73 /* SWCPlaylistUtils.h in Headers */,
+				94746E7926481B9800245E7A /* SWCSegmentManager.h in Headers */,
+				947BFBE92641B038001C7C99 /* SWCP2pConfig.h in Headers */,
+				9464500426496935006EDBD7 /* SWCByteRange.h in Headers */,
+				940C06B926469BA100836F73 /* SWCHlsParser.h in Headers */,
+				947BFC7226429C88001C7C99 /* CBLogFormatter.h in Headers */,
+				947BFCAA2642A5A0001C7C99 /* CBReachability.h in Headers */,
+				94746E812648273A00245E7A /* SWCSchedulerFactory.h in Headers */,
+				947BFC2026429356001C7C99 /* SWCP2pEngine.h in Headers */,
+				94746E582647C7DE00245E7A /* SWCHlsIdScheduler.h in Headers */,
+				947BFC5226429BF6001C7C99 /* SocketAddress.h in Headers */,
+				947BFC8C2642A284001C7C99 /* CBQueue.h in Headers */,
+				947BFC4026429BF6001C7C99 /* StunChangeRequest.h in Headers */,
+				94746E602647C9D900245E7A /* SWCTracker.h in Headers */,
+				947BFC6426429BF6001C7C99 /* StunErrorCode.h in Headers */,
+				940C06A926468E6B00836F73 /* SWCHlsPredictor.h in Headers */,
+				9492CD212643F75D00B61AD3 /* SWCMp4Proxy.h in Headers */,
+				947BFC3D26429BF6001C7C99 /* StunClient.h in Headers */,
+				947BFC9F2642A410001C7C99 /* SWCUtils.h in Headers */,
+				94746E482647C7B300245E7A /* SWCHlsScheduler.h in Headers */,
+				947BFC7A26429F54001C7C99 /* CBTimerManager.h in Headers */,
+				947BFC4F26429BF6001C7C99 /* CBSocket.h in Headers */,
+				940C06902646846900836F73 /* SWCSegment.h in Headers */,
+				947BFC4326429BF6001C7C99 /* StunResult.h in Headers */,
+				9492CD112643F40200B61AD3 /* SWCProxy.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		947BFB792641ACE0001C7C99 /* iOS SwarmCloudSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 947BFB822641ACE1001C7C99 /* Build configuration list for PBXNativeTarget "iOS SwarmCloudSDK" */;
+			buildPhases = (
+				D588D9F03BE5765FD49E2B38 /* [CP] Check Pods Manifest.lock */,
+				947BFB752641ACE0001C7C99 /* Headers */,
+				947BFB762641ACE0001C7C99 /* Sources */,
+				947BFB772641ACE0001C7C99 /* Frameworks */,
+				947BFB782641ACE0001C7C99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iOS SwarmCloudSDK";
+			productName = SwarmCloudSDK;
+			productReference = 947BFB7A2641ACE0001C7C99 /* SwarmCloudSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		947BFB962641AD62001C7C99 /* tvOS SwarmCloudSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 947BFB9C2641AD62001C7C99 /* Build configuration list for PBXNativeTarget "tvOS SwarmCloudSDK" */;
+			buildPhases = (
+				7FA361FC4BCA62F370F735FB /* [CP] Check Pods Manifest.lock */,
+				947BFB922641AD62001C7C99 /* Headers */,
+				947BFB932641AD62001C7C99 /* Sources */,
+				947BFB942641AD62001C7C99 /* Frameworks */,
+				947BFB952641AD62001C7C99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "tvOS SwarmCloudSDK";
+			productName = tvOS;
+			productReference = 947BFB972641AD62001C7C99 /* SwarmCloudSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		947BFBA32641AD74001C7C99 /* macOS SwarmCloudSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 947BFBA92641AD74001C7C99 /* Build configuration list for PBXNativeTarget "macOS SwarmCloudSDK" */;
+			buildPhases = (
+				B0C1B9B984759CC8CB17783E /* [CP] Check Pods Manifest.lock */,
+				947BFB9F2641AD74001C7C99 /* Headers */,
+				947BFBA02641AD74001C7C99 /* Sources */,
+				947BFBA12641AD74001C7C99 /* Frameworks */,
+				947BFBA22641AD74001C7C99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "macOS SwarmCloudSDK";
+			productName = "macOS SwarmCloudSDK";
+			productReference = 947BFBA42641AD74001C7C99 /* SwarmCloudSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		947BFBAF2641AF36001C7C99 /* iOS Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 947BFBC62641AF37001C7C99 /* Build configuration list for PBXNativeTarget "iOS Demo" */;
+			buildPhases = (
+				ABC535EECD6C567F3B26794D /* [CP] Check Pods Manifest.lock */,
+				AE6C92DE01D3A122006CFF85 /* [CP] Prepare Artifacts */,
+				947BFBAC2641AF36001C7C99 /* Sources */,
+				947BFBAD2641AF36001C7C99 /* Frameworks */,
+				947BFBAE2641AF36001C7C99 /* Resources */,
+				947BFBF82641B46C001C7C99 /* CopyFiles */,
+				F386BE4DD990AEE5564BC275 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iOS Demo";
+			productName = "iOS Demo";
+			productReference = 947BFBB02641AF36001C7C99 /* iOS Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		947BFBD02641AFF6001C7C99 /* macOS Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 947BFBE22641AFF7001C7C99 /* Build configuration list for PBXNativeTarget "macOS Demo" */;
+			buildPhases = (
+				A96CD926B336309CC785A524 /* [CP] Check Pods Manifest.lock */,
+				8CD674DD560A5AC6B7363AAF /* [CP] Prepare Artifacts */,
+				947BFBCD2641AFF6001C7C99 /* Sources */,
+				947BFBCE2641AFF6001C7C99 /* Frameworks */,
+				947BFBCF2641AFF6001C7C99 /* Resources */,
+				947BFBFC2641B4E0001C7C99 /* CopyFiles */,
+				1B73038625645BC563EC80DB /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "macOS Demo";
+			productName = "macOS Demo";
+			productReference = 947BFBD12641AFF6001C7C99 /* macOS Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		947BFC032641B5DB001C7C99 /* tvOS Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 947BFC172641B5DC001C7C99 /* Build configuration list for PBXNativeTarget "tvOS Demo" */;
+			buildPhases = (
+				3AAB0862AD1450F73ABE2B5B /* [CP] Check Pods Manifest.lock */,
+				A5ECE9CD1C0C673FE5AAB111 /* [CP] Prepare Artifacts */,
+				947BFC002641B5DB001C7C99 /* Sources */,
+				947BFC012641B5DB001C7C99 /* Frameworks */,
+				947BFC022641B5DB001C7C99 /* Resources */,
+				940C06C42646F38B00836F73 /* CopyFiles */,
+				08732AC426762123B0C71EDB /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "tvOS Demo";
+			productName = "tvOS Demo";
+			productReference = 947BFC042641B5DB001C7C99 /* tvOS Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		947BFB712641ACE0001C7C99 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = cdnbye;
+				TargetAttributes = {
+					947BFB792641ACE0001C7C99 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					947BFB962641AD62001C7C99 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					947BFBA32641AD74001C7C99 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					947BFBAF2641AF36001C7C99 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					947BFBD02641AFF6001C7C99 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					947BFC032641B5DB001C7C99 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+				};
+			};
+			buildConfigurationList = 947BFB742641ACE0001C7C99 /* Build configuration list for PBXProject "SwarmCloudSDK" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 947BFB702641ACE0001C7C99;
+			productRefGroup = 947BFB7B2641ACE0001C7C99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				947BFB792641ACE0001C7C99 /* iOS SwarmCloudSDK */,
+				947BFB962641AD62001C7C99 /* tvOS SwarmCloudSDK */,
+				947BFBA32641AD74001C7C99 /* macOS SwarmCloudSDK */,
+				947BFBAF2641AF36001C7C99 /* iOS Demo */,
+				947BFBD02641AFF6001C7C99 /* macOS Demo */,
+				947BFC032641B5DB001C7C99 /* tvOS Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		947BFB782641ACE0001C7C99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFB952641AD62001C7C99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBA22641AD74001C7C99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBAE2641AF36001C7C99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947BFBC22641AF37001C7C99 /* LaunchScreen.storyboard in Resources */,
+				947BFBBF2641AF37001C7C99 /* Assets.xcassets in Resources */,
+				947BFBBD2641AF36001C7C99 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBCF2641AFF6001C7C99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947BFBDA2641AFF7001C7C99 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFC022641B5DB001C7C99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947BFC132641B5DC001C7C99 /* LaunchScreen.storyboard in Resources */,
+				947BFC102641B5DC001C7C99 /* Assets.xcassets in Resources */,
+				947BFC0E2641B5DB001C7C99 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08732AC426762123B0C71EDB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tvOS Demo/Pods-tvOS Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tvOS Demo/Pods-tvOS Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tvOS Demo/Pods-tvOS Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1B73038625645BC563EC80DB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-macOS Demo/Pods-macOS Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-macOS Demo/Pods-macOS Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-macOS Demo/Pods-macOS Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3AAB0862AD1450F73ABE2B5B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-tvOS Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7FA361FC4BCA62F370F735FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-tvOS SwarmCloudSDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CD674DD560A5AC6B7363AAF /* [CP] Prepare Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-macOS Demo/Pods-macOS Demo-artifacts-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Prepare Artifacts";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-macOS Demo/Pods-macOS Demo-artifacts-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-macOS Demo/Pods-macOS Demo-artifacts.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5ECE9CD1C0C673FE5AAB111 /* [CP] Prepare Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tvOS Demo/Pods-tvOS Demo-artifacts-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Prepare Artifacts";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tvOS Demo/Pods-tvOS Demo-artifacts-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tvOS Demo/Pods-tvOS Demo-artifacts.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A96CD926B336309CC785A524 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-macOS Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ABC535EECD6C567F3B26794D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE6C92DE01D3A122006CFF85 /* [CP] Prepare Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS Demo/Pods-iOS Demo-artifacts-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Prepare Artifacts";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS Demo/Pods-iOS Demo-artifacts-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS Demo/Pods-iOS Demo-artifacts.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0C1B9B984759CC8CB17783E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-macOS SwarmCloudSDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D588D9F03BE5765FD49E2B38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS SwarmCloudSDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F386BE4DD990AEE5564BC275 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS Demo/Pods-iOS Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS Demo/Pods-iOS Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS Demo/Pods-iOS Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		947BFB762641ACE0001C7C99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947BFC5626429BF6001C7C99 /* StunClient.m in Sources */,
+				9492CD222643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */,
+				94746E512647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */,
+				947BFC5F26429BF6001C7C99 /* CBSocket.m in Sources */,
+				9464500D2649698A006EDBD7 /* SWCError.m in Sources */,
+				94746E492647C7B300245E7A /* SWCHlsScheduler.m in Sources */,
+				947BFC7326429C88001C7C99 /* CBLogger.m in Sources */,
+				94746E822648273A00245E7A /* SWCSchedulerFactory.m in Sources */,
+				947BFC8D2642A284001C7C99 /* CBQueue.m in Sources */,
+				940C0681264580D100836F73 /* SWCNetworkResponse.m in Sources */,
+				94746E612647C9D900245E7A /* SWCTracker.m in Sources */,
+				940C06B22646905400836F73 /* SWCSignalClient.m in Sources */,
+				94746E412647C79000245E7A /* SWCScheduler.m in Sources */,
+				947BFC952642A2EA001C7C99 /* CBPeerChannel.m in Sources */,
+				947BFCA02642A410001C7C99 /* SWCUtils.m in Sources */,
+				947BFC5926429BF6001C7C99 /* StunErrorCode.m in Sources */,
+				9464500526496935006EDBD7 /* SWCByteRange.m in Sources */,
+				940C06892645979900836F73 /* SWCPlaylistUtils.m in Sources */,
+				940C06AA26468E6B00836F73 /* SWCHlsPredictor.m in Sources */,
+				94746E6926480F3600245E7A /* SWCDataChannel.m in Sources */,
+				94746E7A26481B9800245E7A /* SWCSegmentManager.m in Sources */,
+				947BFC6D26429C88001C7C99 /* CBLogFormatter.m in Sources */,
+				94746E71264819DD00245E7A /* CBPeerManager.m in Sources */,
+				94746E592647C7DE00245E7A /* SWCHlsIdScheduler.m in Sources */,
+				947BFC2126429356001C7C99 /* SWCP2pEngine.m in Sources */,
+				947BFC842642A16D001C7C99 /* LineReader.m in Sources */,
+				947BFC5326429BF6001C7C99 /* StunResult.m in Sources */,
+				947BFC4A26429BF6001C7C99 /* StunMessage.m in Sources */,
+				945FE2E9264D5BA700EDE4F5 /* SWCPlaylistInfo.m in Sources */,
+				940C06912646846900836F73 /* SWCSegment.m in Sources */,
+				947BFC7B26429F54001C7C99 /* CBTimerManager.m in Sources */,
+				9492CD122643F40200B61AD3 /* SWCProxy.m in Sources */,
+				947BFCA52642A5A0001C7C99 /* CBReachability.m in Sources */,
+				947BFC4426429BF6001C7C99 /* SocketAddress.m in Sources */,
+				947BFC3526429BF6001C7C99 /* NATUtils.m in Sources */,
+				9492CD1A2643F74300B61AD3 /* SWCM3u8Proxy.m in Sources */,
+				947BFBEA2641B038001C7C99 /* SWCP2pConfig.m in Sources */,
+				940C06BA26469BA100836F73 /* SWCHlsParser.m in Sources */,
+				947BFC3826429BF6001C7C99 /* StunChangeRequest.m in Sources */,
+				940C06992646848D00836F73 /* SWCHlsSegment.m in Sources */,
+				940C06A126468A8300836F73 /* SWCPeer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFB932641AD62001C7C99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947BFC5726429BF6001C7C99 /* StunClient.m in Sources */,
+				9492CD232643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */,
+				94746E522647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */,
+				947BFC6026429BF6001C7C99 /* CBSocket.m in Sources */,
+				9464500E2649698A006EDBD7 /* SWCError.m in Sources */,
+				94746E4A2647C7B300245E7A /* SWCHlsScheduler.m in Sources */,
+				947BFC7426429C88001C7C99 /* CBLogger.m in Sources */,
+				94746E832648273A00245E7A /* SWCSchedulerFactory.m in Sources */,
+				947BFC8E2642A284001C7C99 /* CBQueue.m in Sources */,
+				940C0682264580D100836F73 /* SWCNetworkResponse.m in Sources */,
+				94746E622647C9D900245E7A /* SWCTracker.m in Sources */,
+				940C06B32646905400836F73 /* SWCSignalClient.m in Sources */,
+				94746E422647C79000245E7A /* SWCScheduler.m in Sources */,
+				947BFC962642A2EA001C7C99 /* CBPeerChannel.m in Sources */,
+				947BFCA12642A410001C7C99 /* SWCUtils.m in Sources */,
+				947BFC5A26429BF6001C7C99 /* StunErrorCode.m in Sources */,
+				9464500626496935006EDBD7 /* SWCByteRange.m in Sources */,
+				940C068A2645979900836F73 /* SWCPlaylistUtils.m in Sources */,
+				940C06AB26468E6B00836F73 /* SWCHlsPredictor.m in Sources */,
+				94746E6A26480F3600245E7A /* SWCDataChannel.m in Sources */,
+				94746E7B26481B9800245E7A /* SWCSegmentManager.m in Sources */,
+				947BFC6E26429C88001C7C99 /* CBLogFormatter.m in Sources */,
+				94746E72264819DD00245E7A /* CBPeerManager.m in Sources */,
+				94746E5A2647C7DE00245E7A /* SWCHlsIdScheduler.m in Sources */,
+				947BFC2226429356001C7C99 /* SWCP2pEngine.m in Sources */,
+				947BFC852642A16D001C7C99 /* LineReader.m in Sources */,
+				947BFC5426429BF6001C7C99 /* StunResult.m in Sources */,
+				947BFC4B26429BF6001C7C99 /* StunMessage.m in Sources */,
+				945FE2EA264D5BA700EDE4F5 /* SWCPlaylistInfo.m in Sources */,
+				940C06922646846900836F73 /* SWCSegment.m in Sources */,
+				947BFC7C26429F54001C7C99 /* CBTimerManager.m in Sources */,
+				9492CD132643F40200B61AD3 /* SWCProxy.m in Sources */,
+				947BFCA62642A5A0001C7C99 /* CBReachability.m in Sources */,
+				947BFC4526429BF6001C7C99 /* SocketAddress.m in Sources */,
+				947BFC3626429BF6001C7C99 /* NATUtils.m in Sources */,
+				9492CD1B2643F74300B61AD3 /* SWCM3u8Proxy.m in Sources */,
+				947BFBEB2641B038001C7C99 /* SWCP2pConfig.m in Sources */,
+				940C06BB26469BA100836F73 /* SWCHlsParser.m in Sources */,
+				947BFC3926429BF6001C7C99 /* StunChangeRequest.m in Sources */,
+				940C069A2646848D00836F73 /* SWCHlsSegment.m in Sources */,
+				940C06A226468A8400836F73 /* SWCPeer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBA02641AD74001C7C99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947BFC5826429BF6001C7C99 /* StunClient.m in Sources */,
+				9492CD242643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */,
+				94746E532647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */,
+				947BFC6126429BF6001C7C99 /* CBSocket.m in Sources */,
+				9464500F2649698A006EDBD7 /* SWCError.m in Sources */,
+				94746E4B2647C7B300245E7A /* SWCHlsScheduler.m in Sources */,
+				947BFC7526429C88001C7C99 /* CBLogger.m in Sources */,
+				94746E842648273A00245E7A /* SWCSchedulerFactory.m in Sources */,
+				947BFC8F2642A284001C7C99 /* CBQueue.m in Sources */,
+				940C0683264580D100836F73 /* SWCNetworkResponse.m in Sources */,
+				94746E632647C9D900245E7A /* SWCTracker.m in Sources */,
+				940C06B42646905400836F73 /* SWCSignalClient.m in Sources */,
+				94746E432647C79000245E7A /* SWCScheduler.m in Sources */,
+				947BFC972642A2EA001C7C99 /* CBPeerChannel.m in Sources */,
+				947BFCA22642A410001C7C99 /* SWCUtils.m in Sources */,
+				947BFC5B26429BF6001C7C99 /* StunErrorCode.m in Sources */,
+				9464500726496935006EDBD7 /* SWCByteRange.m in Sources */,
+				940C068B2645979900836F73 /* SWCPlaylistUtils.m in Sources */,
+				940C06AC26468E6B00836F73 /* SWCHlsPredictor.m in Sources */,
+				94746E6B26480F3600245E7A /* SWCDataChannel.m in Sources */,
+				94746E7C26481B9800245E7A /* SWCSegmentManager.m in Sources */,
+				947BFC6F26429C88001C7C99 /* CBLogFormatter.m in Sources */,
+				94746E73264819DD00245E7A /* CBPeerManager.m in Sources */,
+				94746E5B2647C7DE00245E7A /* SWCHlsIdScheduler.m in Sources */,
+				947BFC2326429356001C7C99 /* SWCP2pEngine.m in Sources */,
+				947BFC862642A16D001C7C99 /* LineReader.m in Sources */,
+				947BFC5526429BF6001C7C99 /* StunResult.m in Sources */,
+				947BFC4C26429BF6001C7C99 /* StunMessage.m in Sources */,
+				945FE2EB264D5BA700EDE4F5 /* SWCPlaylistInfo.m in Sources */,
+				940C06932646846900836F73 /* SWCSegment.m in Sources */,
+				947BFC7D26429F54001C7C99 /* CBTimerManager.m in Sources */,
+				9492CD142643F40200B61AD3 /* SWCProxy.m in Sources */,
+				947BFCA72642A5A0001C7C99 /* CBReachability.m in Sources */,
+				947BFC4626429BF6001C7C99 /* SocketAddress.m in Sources */,
+				947BFC3726429BF6001C7C99 /* NATUtils.m in Sources */,
+				9492CD1C2643F74300B61AD3 /* SWCM3u8Proxy.m in Sources */,
+				947BFBEC2641B038001C7C99 /* SWCP2pConfig.m in Sources */,
+				940C06BC26469BA100836F73 /* SWCHlsParser.m in Sources */,
+				947BFC3A26429BF6001C7C99 /* StunChangeRequest.m in Sources */,
+				940C069B2646848D00836F73 /* SWCHlsSegment.m in Sources */,
+				940C06A326468A8400836F73 /* SWCPeer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBAC2641AF36001C7C99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				940C067A2645444F00836F73 /* SwarmCloudSDK.h in Sources */,
+				947BFBBA2641AF36001C7C99 /* ViewController.m in Sources */,
+				947BFBB42641AF36001C7C99 /* AppDelegate.m in Sources */,
+				947BFBC52641AF37001C7C99 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFBCD2641AFF6001C7C99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94E099712652A7CC00268FC5 /* MainWindowController.m in Sources */,
+				940C06A426468BB700836F73 /* SwarmCloudSDK.h in Sources */,
+				947BFBD82641AFF6001C7C99 /* ViewController.m in Sources */,
+				947BFBE02641AFF7001C7C99 /* main.m in Sources */,
+				947BFBD52641AFF6001C7C99 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947BFC002641B5DB001C7C99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				940C06C72646F42700836F73 /* SwarmCloudSDK.h in Sources */,
+				947BFC0B2641B5DB001C7C99 /* ViewController.m in Sources */,
+				947BFC162641B5DC001C7C99 /* main.m in Sources */,
+				947BFC082641B5DB001C7C99 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		947BFBBB2641AF36001C7C99 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				947BFBBC2641AF36001C7C99 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		947BFBC02641AF37001C7C99 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				947BFBC12641AF37001C7C99 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		947BFC0C2641B5DB001C7C99 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				947BFC0D2641B5DB001C7C99 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		947BFC112641B5DC001C7C99 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				947BFC122641B5DC001C7C99 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		947BFB802641ACE0001C7C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		947BFB812641ACE0001C7C99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		947BFB832641ACE1001C7C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54EE5495214822E90ED38DB1 /* Pods-iOS SwarmCloudSDK.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendor/iOS",
+				);
+				INFOPLIST_FILE = SwarmCloudSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = SwarmCloudSDK;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		947BFB842641ACE1001C7C99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E09B9925994F13AABC08D89 /* Pods-iOS SwarmCloudSDK.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendor/iOS",
+				);
+				INFOPLIST_FILE = SwarmCloudSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = SwarmCloudSDK;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		947BFB9D2641AD62001C7C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DB3A916DBF654E5556983C0 /* Pods-tvOS SwarmCloudSDK.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FKPFDM8FHV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwarmCloudSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = SwarmCloudSDK;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.4;
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Debug;
+		};
+		947BFB9E2641AD62001C7C99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAF766AAC79DFD01E337A8DA /* Pods-tvOS SwarmCloudSDK.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FKPFDM8FHV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwarmCloudSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = SwarmCloudSDK;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.4;
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Release;
+		};
+		947BFBAA2641AD74001C7C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9CC15FC2CF04D376C3A2F52 /* Pods-macOS SwarmCloudSDK.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwarmCloudSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = SwarmCloudSDK;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		947BFBAB2641AD74001C7C99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5986C366EBC7DB39BE49CB0E /* Pods-macOS SwarmCloudSDK.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwarmCloudSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = SwarmCloudSDK;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		947BFBC72641AF37001C7C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E814B5181608253D2BBB0A24 /* Pods-iOS Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FKPFDM8FHV;
+				ENABLE_BITCODE = YES;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendor/iOS",
+				);
+				INFOPLIST_FILE = "iOS Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Debug;
+		};
+		947BFBC82641AF37001C7C99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1072EE4BCDA3D547CAE4C0D /* Pods-iOS Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FKPFDM8FHV;
+				ENABLE_BITCODE = YES;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendor/iOS",
+				);
+				INFOPLIST_FILE = "iOS Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Release;
+		};
+		947BFBE32641AFF7001C7C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B171A70147F2D31E93FAF43 /* Pods-macOS Demo.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS Demo/macOS_Demo.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
+				INFOPLIST_FILE = "macOS Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				VALIDATE_PRODUCT = YES;
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Debug;
+		};
+		947BFBE42641AFF7001C7C99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 63203170BD543B562BEB5883 /* Pods-macOS Demo.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS Demo/macOS_Demo.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
+				INFOPLIST_FILE = "macOS Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Release;
+		};
+		947BFC182641B5DC001C7C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D0A49486945DD15B38ED2F5 /* Pods-tvOS Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FKPFDM8FHV;
+				INFOPLIST_FILE = "tvOS Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.4;
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Debug;
+		};
+		947BFC192641B5DC001C7C99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDEE9C4ADD71F21A2496A7EC /* Pods-tvOS Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FKPFDM8FHV;
+				INFOPLIST_FILE = "tvOS Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdnbye.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.4;
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		947BFB742641ACE0001C7C99 /* Build configuration list for PBXProject "SwarmCloudSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947BFB802641ACE0001C7C99 /* Debug */,
+				947BFB812641ACE0001C7C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		947BFB822641ACE1001C7C99 /* Build configuration list for PBXNativeTarget "iOS SwarmCloudSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947BFB832641ACE1001C7C99 /* Debug */,
+				947BFB842641ACE1001C7C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		947BFB9C2641AD62001C7C99 /* Build configuration list for PBXNativeTarget "tvOS SwarmCloudSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947BFB9D2641AD62001C7C99 /* Debug */,
+				947BFB9E2641AD62001C7C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		947BFBA92641AD74001C7C99 /* Build configuration list for PBXNativeTarget "macOS SwarmCloudSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947BFBAA2641AD74001C7C99 /* Debug */,
+				947BFBAB2641AD74001C7C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		947BFBC62641AF37001C7C99 /* Build configuration list for PBXNativeTarget "iOS Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947BFBC72641AF37001C7C99 /* Debug */,
+				947BFBC82641AF37001C7C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		947BFBE22641AFF7001C7C99 /* Build configuration list for PBXNativeTarget "macOS Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947BFBE32641AFF7001C7C99 /* Debug */,
+				947BFBE42641AFF7001C7C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		947BFC172641B5DC001C7C99 /* Build configuration list for PBXNativeTarget "tvOS Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947BFC182641B5DC001C7C99 /* Debug */,
+				947BFC192641B5DC001C7C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 947BFB712641ACE0001C7C99 /* Project object */;
+}
