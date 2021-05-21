@@ -21,10 +21,9 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
 
 @interface SWCHlsSnScheduler()<SWCDataChannelDelegate, SWCSegmentManagerDelegate>
 {
-    NSMutableSet *_bitmap;                      // 记录缓存的sn
+    NSMutableSet<NSNumber *> *_bitmap;                      // 记录缓存的sn
     NSMutableDictionary<NSNumber *, NSNumber *> *_bitCounts;    // 记录peers的每个buffer的总和   SNindex -> count
     NSUInteger _loadingSN;                      // 正在下载的SN
-    NSString *_loadingSegId;                   // 正在下载的SegId
     NSMutableDictionary<NSNumber *, NSString *> *_requestingMap;               // 保存正在p2p下载的SN  sn -> remotePeerId
     dispatch_semaphore_t _latch;
     NSUInteger _currentLoadedSN;                // 当前已加载的最新SN(播放器请求的)
@@ -41,6 +40,8 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
     dispatch_semaphore_t _liveLatch;
     NSUInteger _requestingSN;
     BOOL isSubscribeMode;
+    
+//    NSCountedSet *a;
 }
 @end
 
@@ -55,17 +56,15 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
         _prefetchOffset = VOD_PREFETCH_OFFSET;
         _endSN = sn;
         
-        _bitmap = [NSMutableSet set];
-        _bitCounts  = [NSMutableDictionary dictionary];
-        
-        _sn2IdMap = [[NSMutableDictionary alloc] init];
-        _requestingMap = [NSMutableDictionary dictionary];
-        _currLostSN = -1;
-        _loadingSegId = @"";
-        
         // 点播模式下开启定时器
         [self checkPeersRecursively];        // TODO 打开
     }
+    _bitmap = [NSMutableSet set];
+    _bitCounts  = [NSMutableDictionary dictionary];
+    
+    _sn2IdMap = [[NSMutableDictionary alloc] init];
+    _requestingMap = [NSMutableDictionary dictionary];
+    _currLostSN = 0;
     return [super initWithIsLive:live endSN:sn andConfig:config];
 }
 
@@ -88,7 +87,6 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
     }
     CBInfo(@"bufferTime %@", @(bufferTime));
     _loadingSN = [segHls.SN unsignedIntValue];
-    _loadingSegId = segment.segId;
     
     // 检查缓存中是否有
     if ([_cacheManager containsSegmentForId:segId]) {
@@ -136,6 +134,7 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
                     target = [_peerManager getPeerWithId:remotePeerId];
                 }
                 if (target) p2pPayload = [target getLoadedBuffer];
+                
                 if (target
                     && self.isHttpRangeSupported
                     && target.currentBufSN == [segHls.SN unsignedIntValue]
@@ -235,13 +234,6 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
                 return peer;
             }
         }
-//        for (NSString *peerId in  [_peerManager getPeerMap]) {
-//            CBDataChannel *peer = [_peerManager getPeerWithId:peerId];
-//            if (peer.isAvailable && [peer bitFieldHasSN:sn]) {
-//                CBInfo(@"found sn %@ from peer %@", sn, peer.remotePeerId);
-//                return peer;
-//            }
-//        }
     }
     // 直播一定概率阻塞loadtimeout等待 msg have
 //    CBDebug(@"_isLive %@ _liveLatch %@ shouldWaitForNextSeg %@", @(_isLive), _liveLatch, @(shouldWaitForNextSeg(_isReceiver, _isUploader)));
@@ -339,8 +331,6 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
 //    NSData *p2pPayload = [target getLoadedBuffer];
     CBInfo(@"continue download from %@  range: %@-", segment.urlString, @(p2pPayload.length));
     // 发起http请求
-    
-    
     return [SWCUtils httpLoadSegment:segment rangeFrom:p2pPayload.length timeout:self->_p2pConfig.downloadTimeout headers:_p2pConfig.httpHeadersForHls withBlock:^(NSHTTPURLResponse * _Nonnull response, NSData * _Nullable httpPayload) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (!strongSelf) return ;
@@ -406,8 +396,6 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
 }
 
 - (void)checkPeers {
-    CBDebug(@"checkPeers isMainThread %d", [NSThread isMainThread]);
-    
     // 清理连接断开的peer
     [self clearDisconnectedPeers];
     
@@ -415,14 +403,6 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
     if (!_isLive && _currentLoadedSN == _endSN) return;
     if (_currLostSN > 0 && _loadingSN - _currLostSN <= 30) return;       // TODO 验证
     if (![self hasIdlePeers]) return;
-//    NSMutableArray *availablePeers = [NSMutableArray array];
-//    for (NSString *peerId in  [_peerManager getPeerMap]) {
-//        CBDataChannel *peer = [_peerManager getPeerWithId:peerId];
-//        if (peer.isAvailable) {
-//            [availablePeers addObject:peer];
-//        }
-//    }
-//    NSArray *availablePeers = [_peerManager getAvailablePeers];
     NSArray *availablePeers = [_peerManager getPeersOrderByWeight];
     NSUInteger prefetchCount = 0;
     NSUInteger offset = _loadingSN + _prefetchOffset;
@@ -487,6 +467,7 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
 
 - (void)breakOffPeer:(SWCDataChannel *)peer {
     if (peer) {
+        [super breakOffPeer:peer];
         for (NSNumber *sn in peer.getBitMap) {
             [self decreBitCounts:sn];
         }
@@ -531,7 +512,7 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
 #pragma mark - **************** SWCDataChannelDelegate
 
 /** have */
-- (void)dataChannel:(SWCDataChannel *)peer didReceiveHaveSN:(NSNumber *)sn {
+- (void)dataChannel:(SWCDataChannel *)peer didReceiveHaveSN:(NSNumber *)sn andSegId:(NSString *)segId {
     CBDebug(@"dc %@ have %@", peer.remotePeerId, sn);
     [peer bitFieldAddSN:sn];
     //        [self increBitCounts:sn];
@@ -548,7 +529,7 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
 }
 
 /** lost */
-- (void)dataChannel:(SWCDataChannel *)peer didReceiveLostSN:(NSNumber *)sn {
+- (void)dataChannel:(SWCDataChannel *)peer didReceiveLostSN:(NSNumber *)sn andSegId:(NSString *)segId {
     CBInfo(@"dc %@ lost %@", peer.remotePeerId, sn);
     [peer bitFieldRemoveSN:sn];
     [self decreBitCounts:sn];
@@ -590,7 +571,6 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
 - (void)dataChannel:(SWCDataChannel *)peer didReceiveResponseWithSN:(nonnull NSNumber *)sn segId:(nonnull NSString *)segId andData:(nonnull NSData *)data {
     // 下载数据后成为receiver
     _isReceiver = YES;
-    
     // 进行缓存
     if (![_cacheManager containsSegmentForId:segId] && data.length > 0) {
         SWCHlsSegment *segment = [SWCHlsSegment.alloc initWithBuffer:data sn:sn segId:segId];
@@ -659,9 +639,9 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
         [_bitCounts removeObjectForKey:sn];
         [_sn2IdMap removeObjectForKey:sn];
         // 广播lost
-        [[_peerManager getPeerMap] enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, SWCDataChannel * _Nonnull obj, BOOL * _Nonnull stop) {
-            if (obj && obj.connected) {
-//                [obj sendMsgLost:SN segId:];
+        [[_peerManager getPeerMap] enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, SWCDataChannel * _Nonnull peer, BOOL * _Nonnull stop) {
+            if (peer && peer.connected) {
+                [peer sendMsgLost:sn segId:segHls.segId];
             }
         }];
     }

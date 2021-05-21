@@ -108,7 +108,7 @@ static SWCM3u8Proxy *_instance = nil;
             if (!strongSelf->_tracker && strongSelf->_config.p2pEnabled) {
                 [strongSelf->_locker lock];
                 @try {
-                    [strongSelf initTrackerClient:strongSelf->_isLive endSN:1 scheduledBySegId:NO];    // TODO
+                    [strongSelf initTrackerClient:strongSelf->_isLive endSN:100 scheduledBySegId:YES];    // TODO
                 } @catch (NSException *exception) {
                     CBError(@"NSException caught, reason: %@", exception.reason);
                     strongSelf->_config.p2pEnabled = NO;
@@ -221,6 +221,8 @@ static SWCM3u8Proxy *_instance = nil;
     if (_tracker) {
         [_tracker stopP2p];
     }
+    _rangeTested = NO;
+    _isLive = NO;
 }
 
 - (void)restartP2p {

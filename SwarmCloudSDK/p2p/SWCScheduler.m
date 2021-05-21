@@ -187,7 +187,23 @@ static NSString *const SCHEDULER_CHECK_CONNS = @"SCHEDULER_CHECK_CONNS";
        }];
 }
 
-// TODO 验证
+- (void)notifyAllPeersWithSegId:(NSString *)segId {
+    CBInfo(@"notifyAllPeers %@", segId);
+    [[_peerManager getPeerMap] enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, SWCDataChannel * _Nonnull peer, BOOL * _Nonnull stop) {
+           // 对方没有时才发送
+           if (peer && peer.connected && ![peer bitFieldHasSegId:segId]) {
+               // 直播模式下bitset没有并且比peer最新的SN大才发送，防止无效广播
+               if (_isLive) {
+                   [peer sendMsgHave:@(-1) segId:segId];
+                   [peer bitFieldAddSegId:segId];
+               } else if (!_isLive) {
+                   [peer sendMsgHave:@(-1) segId:segId];
+               }
+              
+           }
+       }];
+}
+
 - (NSArray<SWCDataChannel *> *)getNonactivePeers {
     CFAbsoluteTime currentTs = CFAbsoluteTimeGetCurrent();
     NSMutableArray<SWCDataChannel *> *candidates = [NSMutableArray array];

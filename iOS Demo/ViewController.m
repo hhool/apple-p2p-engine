@@ -53,24 +53,11 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
     
     self.playerVC = [[AVPlayerViewController alloc] init];
         
-    //    CBP2pConfig *config = [CBP2pConfig defaultConfiguration];
-    //    config.logLevel =  CBLogLevelDebug;
-        //    config.wsSignalerAddr = @"wss://opensignal.cdnbye.com";
-        //    CBP2pConfig *config = [CBP2pConfig defaultConfiguration];
-        //    config.logLevel =  CBLogLevelDebug;
-    //        config.p2pEnabled = NO;
-    //    config.announce = @"https://tracker.cdnbye.com:8090/v1";
-    //    NSString *token = @"U3LnNgNWg";
-    //    NSString *token = @"free";
-    //    [[CBP2pEngine sharedInstance] startWithToken:token andP2pConfig:nil];
-    //    self.engine = [CBP2pEngine sharedInstance];
+//    [SWCP2pEngine sharedInstance].segmentIdForHls = ^NSString * _Nonnull(NSNumber * _Nonnull sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
+//        return [NSString stringWithFormat:@"%@", sn];
+//    };
         
-    //    [CBP2pEngine sharedInstance].segmentId = ^NSString * _Nonnull(NSUInteger level, NSUInteger sn, NSString * _Nonnull urlString) {
-    //        return [NSString stringWithFormat:@"%@---%@", @(level), @(sn)];
-    //    };
-        
-    //    self.urlString = @"https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8";
-        self.urlString = LIVE_URL;
+    self.urlString = LIVE_URL;
 //        self.urlString = VOD_URL;
         
 
@@ -88,19 +75,12 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
         NSURL *url = [[SWCP2pEngine sharedInstance] parseStreamURL:originalUrl];
         NSLog(@"parsed url %@", url.absoluteString);
         
-        
-    //    NSURL *url = [NSURL URLWithString:@"http://vod.lemmovie.com/vod/2b9f4056-fc0a-973f-b03c-7806229a8381.m3u8"];
-    //    NSURL *url = [self.engine parseStreamURL:@"http://hefeng.live.tempsource.cjyun.org/videotmp/s10100-hftv.m3u8"];
-    //    NSURL *url = [NSURL URLWithString:LIVE_URL];
-        
         // AVPlayer
         AVPlayerItem *playerItem =[[AVPlayerItem alloc] initWithURL: url];
         self.playerVC.player = [[AVPlayer alloc] initWithPlayerItem: playerItem];
     //    self.playerVC.player = [[AVPlayer alloc] initWithURL:url];
         self.playerVC.view.frame = CGRectMake(0, 40, SCREEN_WIDTH, 300);
         [self.view addSubview:self.playerVC.view];
-        
-        
         
     //    self.playerVC.player.currentItem.preferredForwardBufferDuration = 10.0f;
         

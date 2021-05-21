@@ -73,7 +73,7 @@ static NSString * const SIGNAL_RECONNECT = @"SIGNAL_RECONNECT";
     self.socket = [[SRWebSocket alloc] initWithURLRequest:
                    [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
     
-    CBVerbose(@"websocket url：%@",self.socket.url.absoluteString);
+    CBInfo(@"open websocket url：%@",self.socket.url.absoluteString);
     
     //SRWebSocketDelegate 协议
     self.socket.delegate = self;
@@ -84,13 +84,14 @@ static NSString * const SIGNAL_RECONNECT = @"SIGNAL_RECONNECT";
 
 - (void)reconnectImmediately {
     if (!self.urlString || self.socketReadyState == SR_OPEN) return;
+    CBInfo(@"reconnect websocket");
     [self openWithUrl:self.urlString reset:NO];
 }
 
 // 关闭
 - (void)close {
     if (self.socket){
-//        CBInfo(@"test before close signaler");
+        CBInfo(@"close websocket");
         [self.socket close];
 //        CBInfo(@"close signaler");
         self.socket = nil;

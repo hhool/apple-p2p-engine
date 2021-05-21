@@ -605,16 +605,18 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     [[CBTimerManager sharedInstance] cancelTimerWithName:TRACKER_HEARTBEAT];
 }
 
-// TODO 验证
 - (void)doSignalFusing:(NSInteger)conns {
     if (_fuseRate <= 0 || _signaler == nil) return;
+    // test
+//    _fuseRate = 2;
+//    CBDebug(@"_signaler.socketReadyState %@ conns %@", @(_signaler.socketReadyState), @(conns));
     if (_signaler.socketReadyState == SR_OPEN && conns >= _fuseRate+2) {
         // 上报stats
         CBInfo(@"reach fuseRate, report stats close signaler");
         if (self.scheduler.conns > 0) [self report];
         // 断开信令
         [_signaler close];
-    } else if (_signaler.socketReadyState == SR_CLOSED && conns < _fuseRate) {
+    } else if (_signaler.socketReadyState != SR_OPEN && conns < _fuseRate) {
         // 重连信令
         CBInfo(@"low conns, reconnect signaler");
         [_signaler reconnectImmediately];
@@ -690,7 +692,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
         // 收到节点连接请求
         CBInfo(@"receive node %@ connection request", remoteId);
         // 限制最大连接数
-        if (self.scheduler && self.scheduler.peersNum > _p2pConfig.maxPeerConnections) {
+        if (self.scheduler && self.scheduler.peersNum >= _p2pConfig.maxPeerConnections) {
             NSArray<SWCDataChannel *> *candidates = [_scheduler getNonactivePeers];
             if (candidates.count > 0) {
                 SWCDataChannel *peerToClose = [candidates firstObject];
@@ -805,9 +807,6 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 
 /** 产生了信令信息，通过ws或者peer发送出去 */
 - (void)dataChannel:(SWCDataChannel *)dc didHaveSignal:(NSDictionary *)dict {
-    if ([(NSString *)dict[@"type"] isEqualToString:@"offer"]) {
-        CBDebug(@"%@ didHaveSignal %@", dc.remotePeerId, dict);
-    }
     // webrtc产生的sdp
     if (dc.intermediator) {
         // 通过中间peer中转
@@ -832,7 +831,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     self.scheduler.conns ++;
     _peersIncrement ++;
     [self getMorePeers];
-    [self doSignalFusing:self.scheduler.conns];
+    [self doSignalFusing:self.scheduler.peersNum + 1];
 }
 
 /** datachannel关闭 */
@@ -844,7 +843,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     CBInfo(@"_datachannelDic removeObjectForKey %@ remain %@", dc.remotePeerId, @(_datachannelDic.count));
     self.scheduler.conns --;
     [self getMorePeers];
-    [self doSignalFusing:self.scheduler.conns];
+    [self doSignalFusing:self.scheduler.peersNum];
     [_scheduler clearDisconnectedPeers];
 }
 
@@ -861,11 +860,10 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
         if (_failedDCSet && fatal) [_failedDCSet addObject:dc.remotePeerId];
         self.scheduler.failConns ++;
     }
-    dc.connected = NO;
     [_datachannelDic removeObjectForKey:dc.remotePeerId];
     CBInfo(@"_datachannelDic removeObjectForKey %@ remain %@", dc.remotePeerId, @(_datachannelDic.count));
     [self getMorePeers];
-    [self doSignalFusing:self.scheduler.conns];
+    [self doSignalFusing:self.scheduler.peersNum];
     [_scheduler clearDisconnectedPeers];
 }
 
@@ -892,7 +890,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
             [peersToSent addObject:peerModel];
         }
         CBInfo(@"send %@  peers to %@", @(peersToSent.count), dc.remotePeerId);
-        [dc sendMsgPeers:peers];
+        [dc sendMsgPeers:peersToSent];
     }
 }
 
@@ -951,14 +949,14 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 
 - (void)SRWebSocketDidClose {
     CBInfo(@"ws connection closed");
-    //在成功后需要做的操作。。。
-//    self.connected = NO;
+    NSDictionary *message = @{@"serverConnected": @(NO)};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kP2pEngineDidReceiveStatistics object:message];
 }
 
 - (void)SRWebSocketDidFail {
     CBWarn(@"ws connection failed");
-//    self.connected = NO;
-    //在成功后需要做的操作。。。
+    NSDictionary *message = @{@"serverConnected": @(NO)};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kP2pEngineDidReceiveStatistics object:message];
     
 }
 

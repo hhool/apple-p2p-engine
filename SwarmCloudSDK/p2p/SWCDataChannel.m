@@ -25,8 +25,6 @@ const NSUInteger DEFAULT_PACKET_SIZE = 64*1000;     // 默认每次通过datacha
 const NSUInteger DC_TOLERANCE = 3;                   // 请求超时或错误多少次阻塞该peer
 
 // 事件映射
-//static NSString *const DC_PING = @"PING";
-//static NSString *const DC_PONG = @"PONG";
 static NSString *const DC_REQUEST = @"REQUEST";
 static NSString *const DC_PIECE_NOT_FOUND = @"PIECE_NOT_FOUND";
 static NSString *const DC_PIECE = @"PIECE";
@@ -64,10 +62,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 {
     CBPeerChannel* _simpleChannel;
     SWCP2pConfig *_p2pConfig;
-    NSMutableSet *_bitmap;
-//    NSTimer *_uploadTimer;
-//    NSTimer *_connTimer;
-    
+    NSMutableOrderedSet *_bitmap;
     
     CBQueue *_rcvdReqQueue;             // 上传等待队列
     
@@ -154,7 +149,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 // 初始化成员变量
 - (void)initData{
     _platform = @"unknown";
-    _bitmap = [NSMutableSet set];
+    _bitmap = [NSMutableOrderedSet orderedSet];
     _rcvdReqQueue = [CBQueue queue];
     _bufArr = [NSMutableArray array];
     
@@ -180,7 +175,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     _choked = YES;
 }
 
-- (NSMutableSet *)getBitMap {
+- (NSMutableOrderedSet *)getBitMap {
     return _bitmap;
 }
 
@@ -210,7 +205,6 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 }
 
-
 - (BOOL)isAvailable {
     return self.connected && self.downloading == NO && self.choked == NO;
 }
@@ -218,6 +212,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 - (void)close {
 //    [self sendMsgClose];
 //    CBInfo(@"test before cancelTimerWithName %@", _timerID);
+    self.connected = NO;
     [[CBTimerManager sharedInstance] cancelTimerWithName:_timerID];
 //    if (_simpleChannel && self.connected) {
     if (_simpleChannel) {
@@ -228,7 +223,6 @@ dispatch_async(dispatch_get_main_queue(), block);\
 //            __strong typeof(weakSelf) strongSelf = weakSelf;
 //            [strongSelf->_simpleChannel close];
 //        });
-        self.connected = NO;
     }
 //    CBInfo(@"test after _simpleChannel close");
 }
@@ -250,10 +244,25 @@ dispatch_async(dispatch_get_main_queue(), block);\
     [_bitmap addObject:sn];
     // 直播淘汰最旧的SN
     if (_isLive) {
-        NSUInteger oldest = [sn unsignedIntegerValue] - LIVE_SN_LIMIT;
-        if (oldest > 0) {
-            [_bitmap removeObject:@(oldest)];
-            CBDebug(@"datachannel bitmap remove %@", @(oldest));
+        if (_bitmap.count >= LIVE_SN_LIMIT) {
+            CBInfo(@"%@ bitmap removed %@", self.remotePeerId, _bitmap[0]);
+            [_bitmap removeObjectAtIndex:0];
+        }
+//        NSUInteger oldest = [sn unsignedIntegerValue] - LIVE_SN_LIMIT;
+//        if (oldest > 0) {
+//            [_bitmap removeObject:@(oldest)];
+//            CBDebug(@"datachannel bitmap remove %@", @(oldest));
+//        }
+    }
+}
+
+- (void)bitFieldAddSegId:(NSString *)segId {
+    [_bitmap addObject:segId];
+    // 直播淘汰最旧的SN
+    if (_isLive) {
+        if (_bitmap.count >= LIVE_SN_LIMIT) {
+            CBInfo(@"%@ bitmap removed %@", self.remotePeerId, _bitmap[0]);
+            [_bitmap removeObjectAtIndex:0];
         }
     }
 }
@@ -262,8 +271,16 @@ dispatch_async(dispatch_get_main_queue(), block);\
     [_bitmap removeObject:sn];
 }
 
+- (void)bitFieldRemoveSegId:(NSString *)segId {
+    [_bitmap removeObject:segId];
+}
+
 - (BOOL)bitFieldHasSN:(NSNumber *)sn {
     return [_bitmap containsObject:sn];
+}
+
+- (BOOL)bitFieldHasSegId:(NSString *)segId {
+    return [_bitmap containsObject:segId];
 }
 
 - (void)sendMetaData:(NSMutableSet *)field sequential:(BOOL)sequential peersNum:(NSUInteger)num {
@@ -293,6 +310,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 - (void)sendMsgPeers:(NSArray *)peers {
     NSDictionary *dict = @{@"event":DC_PEERS, @"peers":peers};
+//    NSLog(@"sendMsgPeers %@", dict);
     dispatch_async(_concurrentQueue, ^{
         [self->_simpleChannel sendJSONMessage:dict];
     });
@@ -513,6 +531,10 @@ dispatch_async(dispatch_get_main_queue(), block);\
     return _bufSN.unsignedIntegerValue;
 }
 
+- (NSString *)currentBufSegId {
+    return _segId;
+}
+
 -(NSUInteger)currentBufArrSize {
     return _bufArr.count;
 }
@@ -601,6 +623,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 - (void)handleBinaryData {
+//    CBDebug(@"handleBinaryData for %@", _segId);
     NSMutableData *buffer = [[NSMutableData alloc] initWithCapacity:[_expectedSize unsignedIntegerValue]];
     NSUInteger totalSize = 0;
     for (NSData *data in _bufArr) {
@@ -821,19 +844,21 @@ didReceiveJSONMessage:(NSDictionary *)dict {
     else if ([event isEqualToString:DC_HAVE]) {
         CBVerbose(@"Receive DC_HAVE %@", dict);
         NSNumber *SN = (NSNumber *)dict[@"sn"];
+        NSString *segId = (NSString *)dict[@"seg_id"];
         if (_isLive) self->_liveEdgeSN = [SN unsignedIntValue];
-        if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceiveHaveSN:)])
+        if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceiveHaveSN:andSegId:)])
         {
-            [self->_msgDelegate dataChannel:self didReceiveHaveSN:SN];
+            [self->_msgDelegate dataChannel:self didReceiveHaveSN:SN andSegId:segId];
         }
     }
     
     else if ([event isEqualToString:DC_LOST]) {
         CBDebug(@"Receive DC_LOST %@", dict);
         NSNumber *SN = (NSNumber *)dict[@"sn"];
-        if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceiveLostSN:)])
+        NSString *segId = (NSString *)dict[@"seg_id"];
+        if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceiveLostSN:andSegId:)])
         {
-            [self->_msgDelegate dataChannel:self didReceiveLostSN:SN];
+            [self->_msgDelegate dataChannel:self didReceiveLostSN:SN andSegId:segId];
         }
     }
     

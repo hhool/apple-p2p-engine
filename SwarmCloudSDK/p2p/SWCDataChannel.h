@@ -38,10 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dataChannel:(SWCDataChannel *)peer didReceiveRequestWithSegId:(nullable NSString *)segId SN:(nullable NSNumber *)sn andUrgent:(BOOL)urgent;
 
 /** have */
-- (void)dataChannel:(SWCDataChannel *)peer didReceiveHaveSN:(NSNumber *)sn;
+- (void)dataChannel:(SWCDataChannel *)peer didReceiveHaveSN:(NSNumber *)sn andSegId:(NSString *)segId;
 
 /** lost */
-- (void)dataChannel:(SWCDataChannel *)peer didReceiveLostSN:(NSNumber *)sn;
+- (void)dataChannel:(SWCDataChannel *)peer didReceiveLostSN:(NSNumber *)sn andSegId:(NSString *)segId;
 
 /** piece_ack */
 - (void)dataChannel:(SWCDataChannel *)peer didReceivePieceAckWithSegId:(NSString *)segId SN:(NSNumber *)sn andSize:(NSNumber *)size;
@@ -99,6 +99,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) NSUInteger currentBufSN;
 
+@property (nonatomic, copy, readonly) NSString *currentBufSegId;
+
 @property (nonatomic, assign, readonly) NSUInteger currentBufArrSize;
 
 @property (nonatomic, assign, readonly) long weight;
@@ -134,8 +136,14 @@ NS_ASSUME_NONNULL_BEGIN
 // add sn
 - (void)bitFieldAddSN:(NSNumber *)sn;
 
+- (void)bitFieldAddSegId:(NSString *)segId;
+
+- (BOOL)bitFieldHasSegId:(NSString *)segId;
+
 // remove sn
 - (void)bitFieldRemoveSN:(NSNumber *)sn;
+
+- (void)bitFieldRemoveSegId:(NSString *)segId;
 
 // has sn
 - (BOOL)bitFieldHasSN:(NSNumber *)sn;

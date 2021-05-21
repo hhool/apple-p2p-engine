@@ -26,6 +26,7 @@
     config.isSharePlaylist = YES;
     config.announce = @"http://tracker.p2pengine.net:7066/v1";
 //    config.trickleICE = NO;
+//    config.channelIdPrefix = @"abffff";
     [[SWCP2pEngine sharedInstance] startWithToken:@"U8qIyZDZg" andP2pConfig:config];
     
     return YES;

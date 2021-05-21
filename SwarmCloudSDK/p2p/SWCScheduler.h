@@ -87,6 +87,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)notifyAllPeersWithSN:(NSNumber *)SN segId:(NSString *)segId;
 
+- (void)notifyAllPeersWithSegId:(NSString *)segId;
+
 - (void)postPeersStatistics;
 
 - (BOOL)isPlayListMapContainsUrl:(NSString *)url;

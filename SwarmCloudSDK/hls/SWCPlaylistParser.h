@@ -1,8 +1,8 @@
 //
-//  SWCHlsParser.h
+//  SWCPlaylistParser.h
 //  SwarmCloudSDK
 //
-//  Created by Timmy on 2021/5/8.
+//  Created by Timmy on 2021/5/21.
 //  Copyright © 2021 cdnbye. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SWCHlsParser : NSObject
+@interface SWCPlaylistParser : NSObject
 
 @end
 

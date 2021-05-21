@@ -180,8 +180,14 @@
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeout];
     
     // 处理range请求
-    NSString *range = [NSString stringWithFormat:@"bytes=%@-", @(offset)];
-    CBInfo(@"request ts from http %@ segId %@ range: %@-", url, segId, @(offset));
+    NSString *range;
+    if (segment.hasByteRange) {
+        range = [NSString stringWithFormat:@"bytes=%@-%@", @(offset), @(segment.byteRange.end)];
+    } else {
+        range = [NSString stringWithFormat:@"bytes=%@-", @(offset)];
+    }
+    CBInfo(@"request ts from http %@ segId %@ range: %@", url, segId, range);
+    
     [req setValue:range  forHTTPHeaderField:@"Range"];
     
     if (httpHeaders) {
