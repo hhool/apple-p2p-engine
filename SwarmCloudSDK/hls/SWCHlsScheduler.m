@@ -51,6 +51,7 @@
         SWCPlaylistInfo *playlist = [peer getLatestPlaylistWithUrl:url lastTs:ts];
         if (playlist) {
             NSString *curHash = [SWCUtils MD5:playlist.data];
+            CBDebug(@"lastHash %@ curHash %@", lastHash, curHash);
             if (![lastHash isEqualToString:curHash]) {
                 [_playlistInfoMap setObject:[SWCPlaylistInfo.alloc initWithMd5:curHash ts:playlist.ts] forKey:url];
                 return playlist;

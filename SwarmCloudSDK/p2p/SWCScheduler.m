@@ -128,7 +128,18 @@ static NSString *const SCHEDULER_CHECK_CONNS = @"SCHEDULER_CHECK_CONNS";
 }
 
 - (void)addPeer:(SWCDataChannel *)peer andBitfield:(NSArray *)field{
-    SWCSchedulerThrowException
+    peer.msgDelegate = self;
+    [_peerManager addPeer:peer withId:peer.remotePeerId];
+    if (self.shareOnly) {
+        [peer shareOnly];
+    }
+    [self postPeersStatistics];
+    CBInfo(@"add peer %@, now has %@ peers", peer.remotePeerId, @(_peerManager.size));
+    if (peer.isInitiator && _peerManager.size <= 5 && peer.peersConnected > 1) {
+        // 立即请求节点
+        CBDebug(@"get peers from %@", peer.remotePeerId);
+        [peer sendMsgGetPeers];
+    }
 }
 
 - (BOOL)hasPeers {
@@ -192,6 +203,10 @@ static NSString *const SCHEDULER_CHECK_CONNS = @"SCHEDULER_CHECK_CONNS";
         return  [[NSNumber numberWithLong:peer1.dataExchangeTs] compare:[NSNumber numberWithLong:peer2.dataExchangeTs]];
     }];
     return candidates;
+}
+
+- (NSArray<SWCDataChannel *> *)getPeers {
+    return [_peerManager.getPeerMap allValues];
 }
 
 - (void)requestPeers {

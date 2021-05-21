@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SWCTracker : NSObject
 
-@property (nonatomic, copy) NSString *peerId;
+@property (nonatomic, copy, readonly) NSString *peerId;
 
 @property (nonatomic, assign) NSTimeInterval reportInterval;
 

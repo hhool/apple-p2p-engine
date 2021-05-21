@@ -64,13 +64,16 @@ NS_ASSUME_NONNULL_BEGIN
 /** 收到节点 */
 - (void)dataChannel:(SWCDataChannel *)peer didReceivePeers:(NSArray *)peers;
 
+/** 收到信令 */
+- (void)dataChannel:(SWCDataChannel *)peer didReceivePeerSignalWithAction:(NSString *)action toPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId data:(NSDictionary *)data reason:(NSString *)reason;
+
 @end
 
 @interface SWCDataChannel : NSObject
 
 @property(nonatomic, copy, readonly, class) NSString *dcVersion;
 
-@property (nonatomic,weak) id<SWCDataChannelDelegate> delegate;           // 打开、关闭、失败的代理
+@property (nonatomic,weak) id<SWCDataChannelDelegate> delegate;           // 打开、关闭、失败、peer_signal、peers、getpeers的代理
 
 @property (nonatomic,weak) id<SWCDataChannelDelegate> msgDelegate;        // 接收消息的代理
 
@@ -80,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (copy, nonatomic, readonly) NSString *remotePeerId;
 
-@property (assign, nonatomic, readonly) BOOL isInitiator;
+@property (assign, nonatomic) BOOL isInitiator;
 
 @property (copy, nonatomic, readonly) NSString *platform;
 
@@ -191,7 +194,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)sendMsgSubscribeLevel:(int)level;
 
 // 发送信令信息
-- (BOOL)sendMsgSignalToPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId data:(NSDictionary *)data;
+- (BOOL)sendMsgSignalToPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId data:(NSDictionary *_Nullable)data;
 
 // 发送拒绝信令
 - (BOOL)sendMsgSignalRejectToPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId reason:(NSString *)reason;

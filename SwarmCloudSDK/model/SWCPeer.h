@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, readonly) NSString *peerId;
 
-@property (nonatomic, copy, readonly) NSString *intermediator;
+@property (nonatomic, copy) NSString *intermediator;
 
 - (instancetype)initWithId:(NSString *)peerId intermediator:(NSString *)intermediator;
 

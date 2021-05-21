@@ -25,6 +25,7 @@
     config.logLevel =  SWCLogLevelDebug;
     config.isSharePlaylist = YES;
     config.announce = @"http://tracker.p2pengine.net:7066/v1";
+//    config.trickleICE = NO;
     [[SWCP2pEngine sharedInstance] startWithToken:@"U8qIyZDZg" andP2pConfig:config];
     
     return YES;

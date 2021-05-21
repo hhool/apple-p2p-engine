@@ -11,7 +11,6 @@
 
 static NSString *const RTCSTUNServerURL1 = @"stun:stun.l.google.com:19302";
 static NSString *const RTCSTUNServerURL2 = @"stun:global.stun.twilio.com:3478?transport=udp";
-static NSString *const RTCSTUNServerURL3 = @"stun:stun.cdnbye.com";
 
 static NSString *const ANNOUNCE = @"https://tracker.cdnbye.com/v1";
 
@@ -80,7 +79,7 @@ static NSString *const ANNOUNCE = @"https://tracker.cdnbye.com/v1";
 // 初始化STUN Server （ICE Server）
 - (NSMutableArray *)defaultSTUNServer{
     NSMutableArray *ICEServers = [NSMutableArray array];
-    RTCIceServer *servers = [[RTCIceServer alloc] initWithURLStrings:@[RTCSTUNServerURL1, RTCSTUNServerURL2, RTCSTUNServerURL3]];
+    RTCIceServer *servers = [[RTCIceServer alloc] initWithURLStrings:@[RTCSTUNServerURL1, RTCSTUNServerURL2]];
      [ICEServers addObject:servers];
     return ICEServers;
     

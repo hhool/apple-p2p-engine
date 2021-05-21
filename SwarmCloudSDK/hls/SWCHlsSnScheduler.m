@@ -471,18 +471,12 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
 }
 
 - (void)addPeer:(SWCDataChannel *)peer andBitfield:(NSArray *)field {
-    peer.msgDelegate = self;
-//    [_datachannelDic setObject:peer forKey:peer.remotePeerId];
-    [_peerManager addPeer:peer withId:peer.remotePeerId];
-    if (self.shareOnly) {
-        [peer shareOnly];
-    }
+    [super addPeer:peer andBitfield:field];
     for (NSNumber *sn in field) {
         if (![_bitmap containsObject:sn]) {                    //防止重复下载
             [self increBitCounts:sn];
         }
     }
-    [self postPeersStatistics];
 }
 
 - (void)handshakePeer:(SWCDataChannel *)peer {

@@ -169,7 +169,7 @@ static NSString * const PEERCHANNEL_ICE_TIMMER = @"PEERCHANNEL_ICE_TIMMER";
 #pragma mark - **************** private mothodes
 
 - (RTCPeerConnection *)createPeerConnection {
-    
+//    CBDebug(@"webRTCConfig %@", _configuration.webRTCConfig);
     RTCPeerConnection *connection = [_factory peerConnectionWithConfiguration:_configuration.webRTCConfig constraints:[self creatPeerConnectionConstraint] delegate:self];
     
 //    RTCPeerConnection *connection = [[[RTCPeerConnectionFactory alloc] init] peerConnectionWithConfiguration:_configuration.webRTCConfig constraints:[self creatPeerConnectionConstraint] delegate:self];
@@ -205,7 +205,7 @@ static NSString * const PEERCHANNEL_ICE_TIMMER = @"PEERCHANNEL_ICE_TIMMER";
                 NSString *filteredDesc = [self filterSdp:sdp.sdp];
                 filteredSdp = [[RTCSessionDescription alloc] initWithType:sdp.type sdp:filteredDesc];
             }
-            CBDebug(@"create sdp success type %@ \n %@", @(filteredSdp.type), filteredSdp.sdp);
+//            CBDebug(@"create sdp success type %@ \n %@", @(filteredSdp.type), filteredSdp.sdp);
             __weak RTCPeerConnection * weakPeerConnction = self->_peerConnection;
             [weakPeerConnction setLocalDescription:filteredSdp completionHandler:^(NSError * _Nullable error) {
                 if (error == nil) {
@@ -349,7 +349,7 @@ static NSString * const PEERCHANNEL_ICE_TIMMER = @"PEERCHANNEL_ICE_TIMMER";
 
 - (void)handleIceComplete {
     if (!_peerConnection) return;
-    if (!_iceComplete) {
+    if (!_iceComplete && !_configuration.trickleICE) {
         _iceComplete = YES;
         // 发送给对等端
         RTCSessionDescription *sdp = _peerConnection.localDescription;
@@ -367,11 +367,12 @@ static NSString * const PEERCHANNEL_ICE_TIMMER = @"PEERCHANNEL_ICE_TIMMER";
 
 // 去掉 a=ice-options:trickle
 - (NSString *)filterSdp:(NSString *)sdp {
-    NSString *sdpBuilder;
+    NSString *sdpBuilder = @"";
     LineReader* lines = [[LineReader alloc] initWithText:sdp];
     NSString* line = [lines next];
     do {
         if ([line hasPrefix:@"a=ice-options:trickle"]) {
+            line = [lines next];
             continue;
         }
         sdpBuilder = [sdpBuilder stringByAppendingFormat:@"%@\n", line];

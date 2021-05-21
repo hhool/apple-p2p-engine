@@ -461,13 +461,19 @@ dispatch_async(dispatch_get_main_queue(), block);\
     });
 }
 
-- (BOOL)sendMsgSignalToPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId data:(NSDictionary *)data {
-    NSDictionary *dict = @{
-        @"event":DC_PEER_SIGNAL,
-        @"action":@"signal",
-        @"to_peer_id":toPeerId,
+- (BOOL)sendMsgSignalToPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId data:(NSDictionary *_Nullable)data {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{
+        @"event": DC_PEER_SIGNAL,
+        @"action": @"signal",
+        @"to_peer_id": toPeerId,
         @"from_peer_id": fromPeerId,
-    };
+    }];
+//    NSDictionary *dict = @{
+//        @"event":DC_PEER_SIGNAL,
+//        @"action":@"signal",
+//        @"to_peer_id":toPeerId,
+//        @"from_peer_id": fromPeerId,
+//    };
     if (data) {
         [dict setValue:data forKey:@"data"];
     }
@@ -790,6 +796,18 @@ didReceiveJSONMessage:(NSDictionary *)dict {
         }
     }
     
+    else if ([event isEqualToString:DC_PEER_SIGNAL]) {
+        CBDebug(@"Receive DC_PEER_SIGNAL %@", dict);
+        NSString *action = (NSString *)dict[@"action"];
+        NSString *toPeerId = (NSString *)dict[@"to_peer_id"];
+        NSString *fromPeerId = (NSString *)dict[@"from_peer_id"];
+        NSString *reason = (NSString *)dict[@"reason"];
+        NSDictionary *data = (NSDictionary *)dict[@"data"];
+        if ([self->_delegate respondsToSelector:@selector(dataChannel:didReceivePeerSignalWithAction:toPeerId:fromPeerId:data:reason:)]) {
+            [self->_delegate dataChannel:self didReceivePeerSignalWithAction:action toPeerId:toPeerId fromPeerId:fromPeerId data:data reason:reason];
+        }
+    }
+    
     else if ([event isEqualToString:DC_CHOKE]) {
         CBInfo(@"choke peer %@", self.remotePeerId);
         _choked = YES;
@@ -842,18 +860,18 @@ didReceiveJSONMessage:(NSDictionary *)dict {
     
     else if ([event isEqualToString:DC_GET_PEERS]) {
         CBDebug(@"Receive DC_GET_PEERS");
-        if ([self->_msgDelegate respondsToSelector:@selector(dataChannelDidReceiveGetPeersRequest:)])
+        if ([self->_delegate respondsToSelector:@selector(dataChannelDidReceiveGetPeersRequest:)])
         {
-            [self->_msgDelegate dataChannelDidReceiveGetPeersRequest:self];
+            [self->_delegate dataChannelDidReceiveGetPeersRequest:self];
         }
     }
     
     else if ([event isEqualToString:DC_PEERS]) {
         CBDebug(@"Receive DC_PEERS");
         NSArray *peers = (NSArray *)dict[@"peers"];
-        if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceivePeers:)])
+        if ([self->_delegate respondsToSelector:@selector(dataChannel:didReceivePeers:)])
         {
-            [self->_msgDelegate dataChannel:self didReceivePeers:peers];
+            [self->_delegate dataChannel:self didReceivePeers:peers];
         }
     }
     
@@ -876,7 +894,6 @@ didReceiveJSONMessage:(NSDictionary *)dict {
 //        CBDebug(@"weight %@ times %@", @(_weight), @(_times));
         
         [self handleBinaryData];
-        // TODO 验证
         NSDictionary *dict = @{@"event":DC_PIECE_ACK, @"sn":_bufSN, @"seg_id":_segId, @"size":_expectedSize, @"speed":@(downloadSpeed)};
 //        [_simpleChannel sendJSONMessage:dict];
         dispatch_async(_concurrentQueue, ^{

@@ -81,6 +81,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)broadcastPlaylist;
 
+- (NSArray<SWCDataChannel *> *)getPeers;
+
 - (void)requestPeers;
 
 - (void)notifyAllPeersWithSN:(NSNumber *)SN segId:(NSString *)segId;

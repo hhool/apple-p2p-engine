@@ -59,6 +59,8 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     NSString *_statsUrl;
     NSString *_peersUrl;
     
+    BOOL _gotPeersFromTracker;
+    NSUInteger _peersIncrement;                 // 每个getPeers周期获取的可连接节点数量
 //    NSTimer *_heartBeat;   // 心跳上报
     
     int _minConns;
@@ -221,6 +223,21 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 }
 
 - (void)peersRequest {
+    if (_datachannelDic.count >= _minConns) return;   // 连接达到上限
+    if (_scheduler.peersNum == 0 || (_peersIncrement <= 3 && !_gotPeersFromTracker)) {
+        // 如果上次获取的节点过少并且不是向tracker请求，则这次向tracker请求
+        [self sendPeersReqToServer];
+        _gotPeersFromTracker = YES;
+    } else {
+        // 从邻居获取节点 留一部分空间给tracker调度给其他节点
+        if (_scheduler.peersNum < _p2pConfig.maxPeerConnections - MIN_PEERS_FOR_TRACKER) {
+            [_scheduler requestPeers];
+            _gotPeersFromTracker = NO;
+        }
+    }
+}
+
+- (void)sendPeersReqToServer {
     NSURL *url=[NSURL URLWithString:_peersUrl];
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -245,10 +262,6 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
         }
     }];
     [dataTask resume];
-    
-//    if (_getPeersTimer) {
-//        _getPeersTimer = nil;
-//    }
 }
 
 - (void)stopP2p {
@@ -339,7 +352,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
             NSLog(@"CDNBye info: %@", info);
         }
         
-        self.peerId = (NSString *)data[@"id"];
+        _peerId = (NSString *)data[@"id"];
         self.vcode = (NSString *)data[@"v"];
         self.reportInterval = [data[@"report_interval"] doubleValue];
         if (self.reportInterval < 10) {
@@ -387,7 +400,9 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 //                Peer *peer = [[Peer alloc] initWithId:_id andPlatform:platform];
 //                [_peers addObject:peer];
 //            }
-            [self makePeersFromArray:peers];
+            _peersReceived = [self makePeersFromArray:peers];
+            // test
+//            _peersReceived = [NSMutableArray arrayWithArray:@[_peersReceived[1]]];
         } else {
             [self getMorePeers];
         }
@@ -412,7 +427,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
         _signaler = [SWCSignalClient sharedInstance];
         [_signaler openWithUrl:signalUrl reset:YES];
         
-        // 优先使用下发的stun  TODO 验证
+        // 优先使用下发的stun
         NSArray<NSString *> *stunArr = (NSArray<NSString *> *)data[@"stun"];
         if (stunArr && stunArr.count > 0) {
             NSMutableArray *ICEServers = [NSMutableArray array];
@@ -443,18 +458,14 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     }
 }
 
-- (void)makePeersFromArray:(NSArray *)peerIds {
-    NSMutableArray *peers = [NSMutableArray array];
+- (NSMutableArray<SWCPeer *> *)makePeersFromArray:(NSArray *)peerIds {
+    NSMutableArray<SWCPeer *> *peers = [NSMutableArray array];
     for(NSDictionary *dict in peerIds) {
         NSString *_id = dict[@"id"];
         SWCPeer *peer = [[SWCPeer alloc] initWithId:_id];
         [peers addObject:peer];
-//        if (peers.count >= _p2pConfig.maxPeerConnections) {
-//            CBInfo(@"peers size exceed maxPeerConnections");
-//            break;
-//        }
     }
-    _peersReceived = [self filterPeers:peers];
+    return [self filterPeers:peers];
 }
 
 - (void)handlePeersMsg:(NSDictionary *)dict {
@@ -464,7 +475,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
         // 正常响应 开始连接
         [_peersReceived removeAllObjects];
 //        [_peers addObjectsFromArray:(NSArray *)data[@"peers"]];
-        [self makePeersFromArray:(NSArray *)data[@"peers"]];
+        _peersReceived = [self makePeersFromArray:(NSArray *)data[@"peers"]];
         [self tryConnectToAllPeers];
         
     } else {
@@ -483,10 +494,6 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     NSArray *copyArr = [NSArray arrayWithArray:_peersReceived];
     for (SWCPeer *peer in copyArr) {
         NSString *peerId = peer.peerId;
-        //过滤掉已经连接的节点和连接失败的节点
-        if ([_datachannelDic objectForKey:peerId] || [_failedDCSet containsObject:peerId]) {
-            continue;
-        }
         
         // 限制最大连接数
         if (self.scheduler && self.scheduler.peersNum > _p2pConfig.maxPeerConnections) {
@@ -499,11 +506,8 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
             break;
         }
         
-        SWCDataChannel *dataChannel = [self createDatachannelWithRemoteId:peerId isInitiator:YES intermediator:peer.intermediator];
-        // 设置代理
-        dataChannel.delegate = self;
-        [_datachannelDic setObject:dataChannel forKey:peerId];
-        CBInfo(@"_datachannelDic setObject forKey %@ remain %@", peerId, @(_datachannelDic.count));
+        [self createDatachannelWithRemoteId:peerId isInitiator:YES intermediator:peer.intermediator];
+//        CBInfo(@"_datachannelDic setObject forKey %@ remain %@", peerId, @(_datachannelDic.count));
     }
     // 清空peers
     [_peersReceived removeAllObjects];
@@ -586,12 +590,6 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 
 // 心跳统计
 - (void)statsPeriodically {
-//    dispatch_main_async_safe(^{
-//        [self destoryStats];
-//        self->_heartBeat = [NSTimer timerWithTimeInterval:self.reportInterval target:self selector:@selector(report) userInfo:nil repeats:YES];
-//        [[NSRunLoop currentRunLoop] addTimer:self->_heartBeat forMode:NSRunLoopCommonModes];
-//    })
-    
     __weak typeof(self) weakSelf = self;
     [[CBTimerManager sharedInstance] scheduledDispatchTimerWithName:TRACKER_HEARTBEAT
                                                        timeInterval:self.reportInterval
@@ -604,11 +602,6 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 }
 
 - (void)destoryStats {
-//    dispatch_main_async_safe(^{
-//        [CBUtils destroyTimer:self->_heartBeat];
-        
-        
-//    })
     [[CBTimerManager sharedInstance] cancelTimerWithName:TRACKER_HEARTBEAT];
 }
 
@@ -634,6 +627,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     if (_datachannelDic.count >= _minConns) return;   // 连接达到上限
     __weak typeof(self) weakSelf = self;
     [[CBTimerManager sharedInstance] checkExistTimer:TRACKER_GET_PEERS completion:^(BOOL doExist) {
+        // 如果没有存在定时器
         if (!doExist) {
             if (self->_getPeersDelay == 0) {
                 self->_getPeersDelay = BASE_INTERVAL;
@@ -641,12 +635,6 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
                 self->_getPeersDelay *= FACTOR;
             }
             CBInfo(@"get more peers, delay %f", self->_getPeersDelay);
-            //            dispatch_main_async_safe(^{
-            //                self->_getPeersTimer = [NSTimer timerWithTimeInterval:self->_getPeersDelay target:self selector:@selector(peersRequest) userInfo:nil repeats:NO];
-            //                [[NSRunLoop currentRunLoop] addTimer:self->_getPeersTimer forMode:NSRunLoopCommonModes];
-            //                //        CBInfo(@"peersRequest");
-            //            })
-            
             [[CBTimerManager sharedInstance] scheduledDispatchTimerWithName:TRACKER_GET_PEERS
                                                                timeInterval:self->_getPeersDelay
                                                                       queue:nil
@@ -668,43 +656,63 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     [[CBTimerManager sharedInstance] cancelTimerWithName:TRACKER_GET_PEERS];
 }
 
-- (void)handleSignal:(NSDictionary *)data fromPeerId:(NSString *)peerId intermediator:(NSString *)intermediator {
-    SWCDataChannel *dc = [_datachannelDic objectForKey:peerId];
-    if (dc && dc.connected) {
-        CBInfo(@"datachannel had connected, signal ignored");
-        return;
-    }
-    if (!dc) {
-//        if ([_failedDCSet containsObject:peerId]) {
-//            return;
-//        }
-        CBInfo(@"receive node %@ connection request", peerId);
-        
+- (void)realHandleSignal:(NSDictionary *)data fromPeerId:(NSString *)remoteId intermediator:(NSString *)intermediator {
+    SWCDataChannel *dc = [_datachannelDic objectForKey:remoteId];
+    NSString *sdpType = (NSString *)data[@"type"];
+    if (dc) {
+        if (dc.connected) {
+            CBInfo(@"datachannel had connected, signal ignored");
+            return;
+        }
+        if (sdpType && [sdpType isEqualToString:@"offer"]) {
+            // 收到的一定是answer或candidate  可能产生碰撞
+            if ([self.peerId compare:remoteId] == NSOrderedDescending) {
+                // peerId大的转成被动方
+                [self destroyAndDeletePeer:remoteId];
+                CBWarn(@"signal type wrong %@ , convert to non initiator", sdpType);
+                dc = [self createDatachannelWithRemoteId:remoteId isInitiator:NO intermediator:intermediator];
+            } else {
+                // peerId小的忽略信令
+                CBWarn(@"signal type wrong %@ , ignored", sdpType);
+                return;
+            }
+        }
+    } else {
+        // 收到的一定是offer
+        if (sdpType && [sdpType isEqualToString:@"answer"]) {
+            NSString *errMsg = [NSString stringWithFormat:@"signal type wrong %@", sdpType];
+            CBWarn(@"signal type wrong %@", sdpType);
+            // 拒绝对方连接请求
+            [self sendSignalRejectWithRemoteId:remoteId reason:errMsg intermediator:intermediator];
+            [self destroyAndDeletePeer:remoteId];
+            return;
+        }
+        // 收到节点连接请求
+        CBInfo(@"receive node %@ connection request", remoteId);
         // 限制最大连接数
         if (self.scheduler && self.scheduler.peersNum > _p2pConfig.maxPeerConnections) {
-            CBInfo(@"p2p connections reach MAX_CONNS, signal rejected");
+            NSArray<SWCDataChannel *> *candidates = [_scheduler getNonactivePeers];
+            if (candidates.count > 0) {
+                SWCDataChannel *peerToClose = [candidates firstObject];
+                peerToClose.connected = NO;
+                [peerToClose sendMsgClose];
+            } else {
+                CBInfo(@"p2p connections reach limit %@", @(_p2pConfig.maxPeerConnections));
+                // 拒绝对方连接请求
+                [_signaler sendRejectToRemotePeerId:remoteId reason:[NSString stringWithFormat:@"p2p connections reach %@", @(_p2pConfig.maxPeerConnections)]];
+                return;
+            }
+        }
+        // 留一部分空间给tracker调度给其他节点
+        if (intermediator && (_p2pConfig.maxPeerConnections-[_scheduler peersNum] < MIN_PEERS_FOR_TRACKER)) {
+            CBInfo(@"too many peers from peer");
             // 拒绝对方连接请求
-            [_signaler sendRejectToRemotePeerId:peerId reason:[NSString stringWithFormat:@"p2p connections reach %@", @(_p2pConfig.maxPeerConnections)]];
+            [_signaler sendRejectToRemotePeerId:remoteId reason:[NSString stringWithFormat:@"p2p connections reach %@", @(_p2pConfig.maxPeerConnections)]];
             return;
         }
-        
-        // 不能超过12个，否则卡住 TODO 验证
-        if (_datachannelDic.count >= 12) {
-            // 拒绝对方连接请求
-            [_signaler sendRejectToRemotePeerId:peerId reason:@"p2p connections reach 12"];
-            return;
-        }
-        dc = [self createDatachannelWithRemoteId:peerId isInitiator:NO intermediator:intermediator];
-        // 设置代理
-        dc.delegate = self;
-        [_datachannelDic setObject:dc forKey:peerId];
-        CBInfo(@"_datachannelDic setObject forKey %@ remain %@", peerId, @(_datachannelDic.count));
+        dc = [self createDatachannelWithRemoteId:remoteId isInitiator:NO intermediator:intermediator];
     }
-    if (dc) {
-        [dc receiveSignal:data];
-    } else {
-        CBWarn(@"dc is nil!");
-    }
+    [dc receiveSignal:data];
 }
 
 - (SWCDataChannel *)createDatachannelWithRemoteId:(NSString *)remoteId isInitiator:(BOOL)isInitiator intermediator:(NSString *)intermediator {
@@ -714,7 +722,10 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     } else {
         dc = [[SWCDataChannel alloc] initWithPeerId:self.peerId remotePeerId:remoteId isInitiator:isInitiator factory:_factory andConfig:_p2pConfig isLive:_isLive sequential:NO channal:_channel intermediator:intermediator];
     }
+    // 设置代理
+    dc.delegate = self;
     [_datachannelDic setObject:dc forKey:remoteId];
+    CBInfo(@"create datachannel for %@", remoteId);
     return dc;
 }
 
@@ -742,7 +753,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
             [self sendSignalRejectWithRemoteId:fromPeerId reason:@"peer in blocked list" intermediator:intermediator];
             return;
         }
-        [self handleSignal:data fromPeerId:fromPeerId intermediator:intermediator];
+        [self realHandleSignal:data fromPeerId:fromPeerId intermediator:intermediator];
     }
 }
 
@@ -757,7 +768,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 }
 
 - (void)handSignalRejectedFromPeerId:(NSString *)fromPeerId reason:(NSString *)reason {
-    CBWarn(@"peer %@ signal rejected", fromPeerId);
+    CBWarn(@"peer %@ signal rejected reason %@", fromPeerId, reason);
     SWCDataChannel *dc = [_datachannelDic objectForKey:fromPeerId];
     if (dc && !dc.connected) {
         [dc close];
@@ -770,7 +781,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     NSMutableArray<SWCPeer *> *ret = [NSMutableArray array];
     for (SWCPeer *peer in peers) {
         NSString *remotePeerId = peer.peerId;
-        if ([_datachannelDic objectForKey:remotePeerId] || [_failedDCSet containsObject:remotePeerId] || [remotePeerId isEqualToString:_peerId]) {
+        if ([_datachannelDic objectForKey:remotePeerId] || [_failedDCSet containsObject:remotePeerId] || [remotePeerId isEqualToString:self.peerId]) {
             CBDebug(@"peer %@ ignored", remotePeerId);
             continue;
         }
@@ -784,7 +795,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
         SWCDataChannel *interPeer = [_datachannelDic objectForKey:intermediator];
         if (interPeer) {
             // 通过中间peer中转
-            if ([interPeer sendMsgSignalRejectToPeerId:remoteId fromPeerId:_peerId reason:reason]) return;
+            if ([interPeer sendMsgSignalRejectToPeerId:remoteId fromPeerId:self.peerId reason:reason]) return;
         }
     }
     [_signaler sendRejectToRemotePeerId:remoteId reason:reason];
@@ -792,33 +803,45 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 
 #pragma mark - **************** CBDataChannelDelegate
 
-/** 产生了信令信息，通过ws发送出去 */
-- (void)dataChannel:(SWCDataChannel *)peer didHaveSignal:(NSDictionary *)dict {
-    
+/** 产生了信令信息，通过ws或者peer发送出去 */
+- (void)dataChannel:(SWCDataChannel *)dc didHaveSignal:(NSDictionary *)dict {
+    if ([(NSString *)dict[@"type"] isEqualToString:@"offer"]) {
+        CBDebug(@"%@ didHaveSignal %@", dc.remotePeerId, dict);
+    }
+    // webrtc产生的sdp
+    if (dc.intermediator) {
+        // 通过中间peer中转
+        SWCDataChannel *interPeer = [_datachannelDic objectForKey:dc.intermediator];
+        if (interPeer) {
+            // 通过中间peer中转
+            if ([interPeer sendMsgSignalToPeerId:dc.remotePeerId fromPeerId:self.peerId data:dict]) return;
+        }
+    }
     if (_signaler) {
 //        CBDebug(@"signaler send %@ to %@", dict, remotePeerId);
-         [_signaler sendSignal:dict remotePeerId:peer.remotePeerId];
+         [_signaler sendSignal:dict remotePeerId:dc.remotePeerId];
     }
 }
 
 /** datachannel开启 */
-- (void)dataChannelDidOpen:(SWCDataChannel *)peer {
-    CBDebug(@"datachannel open %@", peer.remotePeerId);
+- (void)dataChannelDidOpen:(SWCDataChannel *)dc {
+    CBDebug(@"datachannel open %@", dc.remotePeerId);
     
     // 发送bitfield
-    [self.scheduler handshakePeer:peer];
+    [self.scheduler handshakePeer:dc];
     self.scheduler.conns ++;
+    _peersIncrement ++;
     [self getMorePeers];
     [self doSignalFusing:self.scheduler.conns];
 }
 
 /** datachannel关闭 */
-- (void)dataChannelDidClose:(SWCDataChannel *)peer {
-    CBInfo(@"datachannel close %@", peer.remotePeerId);
-    [_failedDCSet addObject:peer.remotePeerId];
-    [self.scheduler breakOffPeer:peer];
-    [self destroyAndDeletePeer:peer.remotePeerId];
-    CBInfo(@"_datachannelDic removeObjectForKey %@ remain %@", peer.remotePeerId, @(_datachannelDic.count));
+- (void)dataChannelDidClose:(SWCDataChannel *)dc {
+    CBInfo(@"datachannel close %@", dc.remotePeerId);
+    [_failedDCSet addObject:dc.remotePeerId];
+    [self.scheduler breakOffPeer:dc];
+    [self destroyAndDeletePeer:dc.remotePeerId];
+    CBInfo(@"_datachannelDic removeObjectForKey %@ remain %@", dc.remotePeerId, @(_datachannelDic.count));
     self.scheduler.conns --;
     [self getMorePeers];
     [self doSignalFusing:self.scheduler.conns];
@@ -826,45 +849,92 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 }
 
 /** datachannel连接失败 */
-- (void)dataChannelDidFail:(SWCDataChannel *)peer fatal:(BOOL)fatal {
-    CBInfo(@"datachannel failed %@", peer.remotePeerId);
-    [self.scheduler breakOffPeer:peer];
-    [peer close];
-    peer.delegate = nil;
-    if (peer.connected) {
+- (void)dataChannelDidFail:(SWCDataChannel *)dc fatal:(BOOL)fatal {
+    CBInfo(@"datachannel failed %@", dc.remotePeerId);
+    [self.scheduler breakOffPeer:dc];
+    [dc close];
+    dc.delegate = nil;
+    if (dc.connected) {
         //            CBInfo(@"opened dc failed %@", remotePeerId);
         self.scheduler.conns --;
     } else {
-        if (_failedDCSet && fatal) [_failedDCSet addObject:peer.remotePeerId];
+        if (_failedDCSet && fatal) [_failedDCSet addObject:dc.remotePeerId];
         self.scheduler.failConns ++;
     }
-    peer.connected = NO;
-    [_datachannelDic removeObjectForKey:peer.remotePeerId];
-    CBInfo(@"_datachannelDic removeObjectForKey %@ remain %@", peer.remotePeerId, @(_datachannelDic.count));
+    dc.connected = NO;
+    [_datachannelDic removeObjectForKey:dc.remotePeerId];
+    CBInfo(@"_datachannelDic removeObjectForKey %@ remain %@", dc.remotePeerId, @(_datachannelDic.count));
     [self getMorePeers];
     [self doSignalFusing:self.scheduler.conns];
     [_scheduler clearDisconnectedPeers];
 }
 
 /** bitfield 用于加入peer */
-- (void)dataChannel:(SWCDataChannel *)peer didReceiveBitField:(NSArray *)field {
+- (void)dataChannel:(SWCDataChannel *)dc didReceiveBitField:(NSArray *)field {
 //    CBInfo(@"didReceiveBitField %@ from %@", field, remotePeerId);
-    [peer initBitField:field];
-    [self.scheduler addPeer:peer andBitfield:field];
+    [dc initBitField:field];
+    [self.scheduler addPeer:dc andBitfield:field];
     
     if (_downloadOnly) {
-        [peer sendMsgChoke];           // 不分享
+        [dc sendMsgChoke];           // 不分享
     }
 }
 
-// TODO
-- (void)dataChannelDidReceiveGetPeersRequest:(SWCDataChannel *)peer {
-    
+- (void)dataChannelDidReceiveGetPeersRequest:(SWCDataChannel *)dc {
+    NSArray<SWCDataChannel *> *peers = _scheduler.getPeers;
+    if (peers.count > 0) {
+        NSMutableArray *peersToSent = [NSMutableArray array];
+        for (SWCDataChannel *peer in peers) {
+            if ([peer.remotePeerId isEqualToString:dc.remotePeerId]
+                || [peer.remotePeerId isEqualToString:self.peerId]
+                || peer.peersConnected >= (peer.mobile?15:25)-MIN_PEERS_FOR_TRACKER) continue;    // 排除连接满的节点
+            NSDictionary *peerModel = @{@"id": peer.remotePeerId};
+            [peersToSent addObject:peerModel];
+        }
+        CBInfo(@"send %@  peers to %@", @(peersToSent.count), dc.remotePeerId);
+        [dc sendMsgPeers:peers];
+    }
 }
 
-// TODO
-- (void)dataChannel:(SWCDataChannel *)peer didReceivePeers:(NSArray *)peers {
-    
+- (void)dataChannel:(SWCDataChannel *)dc didReceivePeers:(NSArray *)peers {
+    if (peers.count > 0) {
+        CBInfo(@"receive %@ peers from %@", @(peers.count), dc.remotePeerId);
+        NSArray<SWCPeer *> *peerArr = [self makePeersFromArray:peers];
+        for (SWCPeer *peer in peerArr) {
+            peer.intermediator = dc.remotePeerId;
+        }
+        if (peerArr.count > MAX_TRY_CONNS) {
+            peerArr = [peerArr subarrayWithRange:NSMakeRange(0, MAX_TRY_CONNS)];
+        }
+        [_peersReceived addObjectsFromArray:peerArr];
+        [self tryConnectToAllPeers];
+    }
+}
+
+- (void)dataChannel:(SWCDataChannel *)dc didReceivePeerSignalWithAction:(NSString *)action toPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId data:(NSDictionary *)data reason:(NSString *)reason {
+    // 接收到peer传来的信令
+    if (![toPeerId isEqualToString:self.peerId]) {
+        // 本节点是中转者
+        CBInfo(@"relay signal for %@", fromPeerId);
+        SWCDataChannel *targetPeer = [_datachannelDic objectForKey:toPeerId];
+        if (targetPeer) {
+            if ([action isEqualToString:@"signal"]) {
+                if ([targetPeer sendMsgSignalToPeerId:toPeerId fromPeerId:fromPeerId data:data]) return;
+            } else if ([action isEqualToString:@"reject"]) {
+                if ([targetPeer sendMsgSignalRejectToPeerId:toPeerId fromPeerId:fromPeerId reason:reason]) return;
+            }
+        }
+        // peer not found
+        [dc sendMsgSignalToPeerId:fromPeerId fromPeerId:toPeerId data:nil];
+    } else {
+        // 本节点是目标节点
+        CBInfo(@"receive signal from %@", fromPeerId);
+        if ([action isEqualToString:@"signal"]) {
+            [self handleSignalMsg:data fromPeerId:fromPeerId intermediator:dc.remotePeerId];
+        } else if ([action isEqualToString:@"reject"]) {
+            [self handSignalRejectedFromPeerId:fromPeerId reason:reason];
+        }
+    }
 }
 
 #pragma mark - **************** SRWebSocket
@@ -897,7 +967,6 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     NSDictionary * dict = note.object;
     [self onSignalMessage:dict];
 }
-
 
 
 - (void)dealloc {
