@@ -1804,6 +1804,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54EE5495214822E90ED38DB1 /* Pods-iOS SwarmCloudSDK.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1833,6 +1834,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5E09B9925994F13AABC08D89 /* Pods-iOS SwarmCloudSDK.release.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1862,6 +1864,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DB3A916DBF654E5556983C0 /* Pods-tvOS SwarmCloudSDK.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1891,6 +1894,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EAF766AAC79DFD01E337A8DA /* Pods-tvOS SwarmCloudSDK.release.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1920,6 +1924,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B9CC15FC2CF04D376C3A2F52 /* Pods-macOS SwarmCloudSDK.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1948,6 +1953,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5986C366EBC7DB39BE49CB0E /* Pods-macOS SwarmCloudSDK.release.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

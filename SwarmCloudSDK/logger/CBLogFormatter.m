@@ -7,6 +7,7 @@
 //
 
 #import "CBLogFormatter.h"
+//#import "DDLog.h"
 
 /*
  DDLogMessage中返回信息
@@ -30,7 +31,7 @@
 @implementation CBLogFormatter
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage{
-    NSString *loglevel = nil;
+    NSString *loglevel = @"[P2P Log]";
     switch (logMessage.flag){
         case LOG_FLAG_ERROR:
             loglevel = @"[CDNBye ERROR]-->";

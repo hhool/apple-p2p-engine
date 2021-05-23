@@ -136,5 +136,6 @@ Pod::Spec.new do |spec|
     spec.dependency 'PINCache', '~> 2.3'
     spec.dependency 'GCDWebServer', '~> 3.5'
     spec.dependency 'CocoaAsyncSocket', '~> 7.6'
+    spec.dependency 'WebRTCDatachannel', '~> 0.1'
 
 end

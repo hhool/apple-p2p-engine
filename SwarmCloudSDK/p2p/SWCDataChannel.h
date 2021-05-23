@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <WebRTC/RTCPeerConnectionFactory.h>
+#import "CBPeerChannel.h"
 #import "SWCP2pConfig.h"
 #import "SWCNetworkResponse.h"
 #import "SWCPlaylistInfo.h"

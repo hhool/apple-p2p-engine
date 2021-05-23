@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <WebRTC/RTCConfiguration.h>
+#import "WebRTC/RTCConfiguration.h"
 
 typedef NS_ENUM(NSInteger, SWCLogLevel) {
     SWCLogLevelNone,

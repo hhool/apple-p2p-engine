@@ -7,7 +7,7 @@
 //
 
 #import "SWCP2pConfig.h"
-#import <WebRTC/RTCIceServer.h>
+#import "WebRTC/RTCIceServer.h"
 
 static NSString *const RTCSTUNServerURL1 = @"stun:stun.l.google.com:19302";
 static NSString *const RTCSTUNServerURL2 = @"stun:global.stun.twilio.com:3478?transport=udp";

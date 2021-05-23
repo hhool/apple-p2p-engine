@@ -10,9 +10,9 @@
 #import "SWCSignalClient.h"
 #import "SWCDataChannel.h"
 #import "SWCPeer.h"
-#import <WebRTC/RTCPeerConnectionFactory.h>
+#import "WebRTC/RTCPeerConnectionFactory.h"
 #import "CBTimerManager.h"
-#import <WebRTC/RTCIceServer.h>
+#import "WebRTC/RTCIceServer.h"
 #import "SWCScheduler.h"
 #import "SWCUtils.h"
 #import "SWCP2pEngine.h"

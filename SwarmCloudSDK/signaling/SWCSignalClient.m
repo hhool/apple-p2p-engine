@@ -7,7 +7,6 @@
 //
 
 #import "SWCSignalClient.h"
-#import <SocketRocket.h>
 #import "SWCUtils.h"
 #import "CBLogger.h"
 #import "CBTimerManager.h"

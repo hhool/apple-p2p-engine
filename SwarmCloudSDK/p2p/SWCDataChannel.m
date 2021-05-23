@@ -7,7 +7,6 @@
 //
 
 #import "SWCDataChannel.h"
-#import "CBPeerChannel.h"
 #import "CBQueue.h"
 #import "CBLogger.h"
 #import "CBTimerManager.h"

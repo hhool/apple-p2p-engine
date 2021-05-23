@@ -8,8 +8,8 @@
 
 #import "SWCM3u8Proxy.h"
 #import "SWCP2pConfig.h"
-#import <GCDWebServer.h>
-#import <GCDWebServerDataResponse.h>
+#import "GCDWebServer.h"
+#import "GCDWebServerDataResponse.h"
 #import "CBLogger.h"
 #import "SWCUtils.h"
 #import "SWCPlaylistUtils.h"

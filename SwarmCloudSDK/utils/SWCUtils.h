@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SWCSegment.h"
-#import <GCDWebServer/GCDWebServerRequest.h>
+#import "GCDWebServer/GCDWebServerRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

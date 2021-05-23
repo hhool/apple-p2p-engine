@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PINDiskCache.h>
-#import <PINMemoryCache.h>
+#import "PINDiskCache.h"
+#import "PINMemoryCache.h"
 #import "SWCSegment.h"
 
 @class SWCSegmentManager;

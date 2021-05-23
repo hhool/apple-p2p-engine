@@ -10,7 +10,7 @@
 #import "SWCDataChannel.h"
 #import "SWCP2pConfig.h"
 #import "SWCSegment.h"
-#import <GCDWebServerRequest.h>
+#import "GCDWebServerRequest.h"
 #import "CBPeerManager.h"
 #import "SWCPlaylistInfo.h"
 #import "SWCSegmentManager.h"
