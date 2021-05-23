@@ -41,11 +41,13 @@ static SWCMp4Proxy *_instance = nil;
 - (void)startLocalServer {
     // 启动本地服务器
     if (_webServer && _webServer.isRunning) return;
+    _currentPort = _config.localPortMp4;
+    if (_currentPort < 0) return;
     
     _webServer = [[GCDWebServer alloc] init];
     [GCDWebServer setLogLevel:3];   // WARN
     
-    _currentPort = _config.localPortMp4;
+    
     [_webServer startWithPort:_currentPort bonjourName:nil];
     _currentPort = _webServer.port;
     CBInfo(@"Mp4 listening Port: %@", @(_currentPort));
@@ -79,6 +81,10 @@ static SWCMp4Proxy *_instance = nil;
 }
 
 - (NSString *)getProxyUrl:(NSURL *)url withVideoId:(NSString *)videoId {
+    if (_currentPort < 0) {
+        CBWarn(@"Port < 0, fallback to original url");
+        return [url absoluteString];
+    }
     return nil;
 }
 

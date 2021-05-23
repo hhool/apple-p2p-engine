@@ -33,11 +33,10 @@
 - (void)loadSegment:(SWCSegment *)segment withBlock:(void(^)(NSHTTPURLResponse *response, NSData *_Nullable data))block {
     SWCHlsSegment *segHls = (SWCHlsSegment *)segment;
     NSString *segId = segHls.segId;
-//    NSString *url = segment.urlString;
     CBDebug(@"loadSegment segId %@", segId);
     
     NSTimeInterval bufferTime = [[SWCHlsPredictor sharedInstance] getAvailableDuration];
-    CBInfo(@"CBHlsPredictor bufferTime %@", @(bufferTime));
+    CBDebug(@"CBHlsPredictor bufferTime %@", @(bufferTime));
     // 如果有playerStats并且大于等于0
     if ([self.delegate respondsToSelector:@selector(bufferedDuration)])
     {

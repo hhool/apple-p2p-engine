@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * _Nonnull (^SegmentId) (NSNumber *sn, NSString * _Nonnull segmentUrl, SWCRange byteRange);
+typedef NSString * _Nonnull (^SegmentId) (NSString * _Nonnull streamId, NSNumber *sn, NSString * _Nonnull segmentUrl, SWCRange byteRange);
 
 extern NSString *const kP2pEngineDidReceiveStatistics ;
 

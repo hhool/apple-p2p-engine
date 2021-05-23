@@ -209,8 +209,10 @@ static SWCP2pEngine *_instance = nil;
     [SWCM3u8Proxy.sharedInstance initWithTkoen:_token config:_p2pConfig];
     [SWCMp4Proxy.sharedInstance initWithTkoen:_token config:_p2pConfig];
     
-    NSLog(@"start Local Server");
-    [self p_startLocalServer];
+    if (_p2pConfig.p2pEnabled) {
+        NSLog(@"start Local Server");
+        [self p_startLocalServer];
+    }
     
     // 启动3秒后开始NAT探测
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{

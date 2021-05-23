@@ -193,7 +193,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     
     if (!resp) {
         CBWarn(@"datachannel timeout while downloading seg %@ from %@", _criticalSegId, self.remotePeerId);
-        resp = [[SWCNetworkResponse alloc] initWithNoResponse];  // TODO 验证
+        resp = [[SWCNetworkResponse alloc] initWithNoResponse];
     }
     return resp;
 }

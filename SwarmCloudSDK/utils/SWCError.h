@@ -27,6 +27,8 @@ typedef NS_ENUM(NSInteger, SWCErrorCode) {
 
 + (NSError *)errorForException:(NSException *)exception;
 
++ (NSError *)errorWithReason:(NSString *)reason;
+
 @end
 
 

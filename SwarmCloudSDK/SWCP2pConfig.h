@@ -37,10 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL wifiOnly;
 
 /** The port for local http server. Hls本地代理服务器的端口号 */
-@property(nonatomic, assign) NSUInteger localPortHls;
+@property(nonatomic, assign) NSInteger localPortHls;
 
 /** The port for local http server. Mp4本地代理服务器的端口号 */
-@property(nonatomic, assign) NSUInteger localPortMp4;
+@property(nonatomic, assign) NSInteger localPortMp4;
 
 /** Max download timeout for WebRTC datachannel. datachannel下载二进制数据的最大超时时间 */
 @property(nonatomic, assign) NSTimeInterval dcDownloadTimeout;

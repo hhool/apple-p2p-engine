@@ -10,12 +10,22 @@
 
 @implementation SWCNetworkResponse
 
-- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type
+- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type responseUrl:(NSURL *)responseUrl
 {
     self = [super init];
     if (self) {
-        self->_data = data;
-        self->_contentType = type;
+        _data = data;
+        _contentType = type;
+        _responseUrl = responseUrl;
+    }
+    return self;
+}
+
+- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type {
+    self = [super init];
+    if (self) {
+        _data = data;
+        _contentType = type;
     }
     return self;
 }

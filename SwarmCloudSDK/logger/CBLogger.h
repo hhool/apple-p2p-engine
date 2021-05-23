@@ -13,12 +13,13 @@
 #define CBWarn(frmt, ...) DDLogWarn(frmt, ##__VA_ARGS__)
 #define CBInfo(frmt, ...) DDLogInfo(frmt, ##__VA_ARGS__)
 
+#ifdef DEBUG
 #define CBDebug(frmt, ...) DDLogDebug(frmt, ##__VA_ARGS__)
 #define CBVerbose(frmt, ...) DDLogVerbose(frmt, ##__VA_ARGS__)
-
-//#define CBDebug(frmt, ...)
-//#define CBVerbose(frmt, ...)
-
+#else
+#define CBDebug(frmt, ...)
+#define CBVerbose(frmt, ...)
+#endif
 
 //#if DEBUG
 //static const DDLogLevel ddLogLevel = DDLogLevelVerbose;   // DDLogLevelOff

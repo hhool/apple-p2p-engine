@@ -51,8 +51,11 @@ static NSString *const SCHEDULER_CHECK_CONNS = @"SCHEDULER_CHECK_CONNS";
         }
         _cacheManager = [[SWCSegmentManager alloc] initWithName:name cacheLimit:_p2pConfig.memoryCacheLimit diskLimit:limit useDisk:useDisk];
         _cacheManager.delegate = self;
-        
         _peerManager = [[CBPeerManager alloc] initManager];
+        
+#ifdef DEBUG
+        [self->_cacheManager clearAllSegments];
+#endif
     }
     return self;
 }

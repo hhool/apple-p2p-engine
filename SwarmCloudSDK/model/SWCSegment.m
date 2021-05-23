@@ -81,4 +81,9 @@
     return SWCRangeGetHeaderString(_byteRange);
 }
 
+- (void)setByteRangeFromNSRange:(NSRange)range {
+    self->_byteRange = SWCMakeRange(range.location, range.location + range.length - 1);
+    self->_hasByteRange = YES;
+}
+
 @end

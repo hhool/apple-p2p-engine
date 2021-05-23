@@ -11,8 +11,6 @@
 #import "ViewController.h"
 #import "MainWindowController.h"
 
-NSString *URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/chunklist_b591000.m3u8";
-
 @interface AppDelegate ()
 
 @property (nonatomic, strong)MainWindowController *windowController;
@@ -25,6 +23,8 @@ NSString *URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/chunklist_b5910
     SWCP2pConfig *config = [SWCP2pConfig defaultConfiguration];
     config.logLevel = SWCLogLevelDebug;
     config.announce = @"http://tracker.p2pengine.net:7066/v1";
+//    config.p2pEnabled = NO;
+    config.localPortMp4 = -1;
     [[SWCP2pEngine sharedInstance] startWithToken:@"U8qIyZDZg" andP2pConfig:config];
     
     

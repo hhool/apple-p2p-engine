@@ -13,15 +13,17 @@
 
 #define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
 
-NSString *LIVE_URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/chunklist_b591000.m3u8";
+NSString *LIVE_URL = @"https://weather-lh.akamaihd.net/i/twc_1@92006/index_2400_av-p.m3u8?sd=10&rebase=on";
+//NSString *LIVE_URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/chunklist_b591000.m3u8";
 //NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294d47d73107641/cloudv-transfer/555555555po0q1sn5556526553738q1r_73ac26e878d047498fa906ef9e913036_0_4.m3u8";
-NSString *VOD_URL = @"https://video.dious.cc/20200707/g5EIwDkS/index.m3u8";
+//NSString *VOD_URL = @"https://video.dious.cc/20200707/g5EIwDkS/index.m3u8";
+//NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294d47d73107641/cloudv-transfer/555555555po0q1sn5556526553738q1r_73ac26e878d047498fa906ef9e913036_0_4.m3u8";
+//NSString *VOD_URL = @"https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+NSString *VOD_URL = @"http://xc.kuda.pw/live/papa/123456/37138.m3u8";
 
 @interface ViewController ()
 
 @property (strong, nonatomic) AVPlayer *player;
-@property (strong, nonatomic) AVPlayerView *playerV;
-@property (strong, nonatomic) SWCP2pEngine *engine;
 @property (strong, nonatomic) NSString *urlString;
 
 @property (assign, nonatomic) double totalHttpDownloaded;
@@ -60,6 +62,7 @@ NSString *VOD_URL = @"https://video.dious.cc/20200707/g5EIwDkS/index.m3u8";
     NSRect frame = CGRectMake(0, 0, 600, 400);
     NSView *view = [[NSView alloc]initWithFrame:frame];
     self.view = view;
+    self.view.wantsLayer = YES;
     self.view.layer.backgroundColor = [NSColor clearColor].CGColor; // 设置窗口contentView为透明
     [self setSubViews];
     
@@ -80,18 +83,19 @@ NSString *VOD_URL = @"https://video.dious.cc/20200707/g5EIwDkS/index.m3u8";
 
 
 - (void)showView:(NSButton *)button{
-    NSLog(@"点击我");
+//    NSLog(@"点击我");
 }
 
 - (AVPlayer *)player {
     if (!_player ) {
-        
-        AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:LIVE_URL]];
+        NSURL *url = [[SWCP2pEngine sharedInstance] parseStreamURL:[NSURL URLWithString:LIVE_URL]];
+//        NSURL *url = [[SWCP2pEngine sharedInstance] parseStreamURL:[NSURL URLWithString:VOD_URL]];
+        AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:url];
         
         _player = [AVPlayer playerWithPlayerItem:playerItem];
         
         AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-        playerLayer.frame = CGRectMake(200, 50, 100, 60);
+        playerLayer.frame = self.view.bounds;
         playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
         [self.view.layer addSublayer:playerLayer];
         playerLayer.player = _player;

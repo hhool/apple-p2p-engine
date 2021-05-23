@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)rangeStringForHeader;
 
+- (void)setByteRangeFromNSRange:(NSRange)range;
+
 @end
 
 NS_ASSUME_NONNULL_END

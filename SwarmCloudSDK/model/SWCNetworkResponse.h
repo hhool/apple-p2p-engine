@@ -14,10 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy, readonly) NSString *contentType;
 @property(nonatomic, strong, readonly) NSData *data;          // 如果没有数据为 nil
+@property(nonatomic, strong, readonly) NSURL *responseUrl;
 
-- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type;
+- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type responseUrl:(NSURL *)responseUrl;
 
 - (instancetype)initWithNoResponse;
+
+- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type;
 
 @end
 

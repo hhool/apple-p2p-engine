@@ -12,11 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SWCPlaylistUtils : NSObject
 
-+ (NSString *)checkAndRewritePlaylist:(NSString *)m3u8  isLive:(BOOL)isLive;
++ (NSString *)checkAndRewritePlaylist:(NSString *)m3u8;
+
++ (NSString *)redirectedRewritePlaylist:(NSString *)m3u8 baseUri:(NSURL *)baseUri;
 
 + (NSString *)insertTimeOffsetTag:(NSString *)m3u8;
 
-+ (BOOL)isLivePlaylist:(NSString *)m3u8;
 
 @end
 

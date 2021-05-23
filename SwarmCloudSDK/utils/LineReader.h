@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
     
 - (instancetype)initWithText:(NSString*)text;
 - (NSString*)next;
+- (BOOL)hasNext;
+- (instancetype)reset;
 
 @end
 

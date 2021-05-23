@@ -53,8 +53,8 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
     
     self.playerVC = [[AVPlayerViewController alloc] init];
         
-//    [SWCP2pEngine sharedInstance].segmentIdForHls = ^NSString * _Nonnull(NSNumber * _Nonnull sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
-//        return [NSString stringWithFormat:@"%@", sn];
+    [SWCP2pEngine sharedInstance].segmentIdForHls = ^NSString * _Nonnull(NSNumber * _Nonnull sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
+        return [NSString stringWithFormat:@"%@", sn];
 //    };
         
     self.urlString = LIVE_URL;

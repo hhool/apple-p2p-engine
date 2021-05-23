@@ -501,10 +501,10 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
             break;
         }
         
-        // 不能超过12个，否则卡住 TODO 验证
-        if (_datachannelDic.count > 12) {
-            break;
-        }
+        // 不能超过12个，否则卡住 TODO 验证!
+//        if (_datachannelDic.count > 12) {
+//            break;
+//        }
         
         [self createDatachannelWithRemoteId:peerId isInitiator:YES intermediator:peer.intermediator];
 //        CBInfo(@"_datachannelDic setObject forKey %@ remain %@", peerId, @(_datachannelDic.count));

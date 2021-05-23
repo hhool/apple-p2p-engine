@@ -41,7 +41,6 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
     NSUInteger _requestingSN;
     BOOL isSubscribeMode;
     
-//    NSCountedSet *a;
 }
 @end
 
@@ -71,11 +70,10 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
 - (void)loadSegment:(SWCSegment *)segment withBlock:(void(^)(NSHTTPURLResponse *response, NSData *_Nullable data))block {
     SWCHlsSegment *segHls = (SWCHlsSegment *)segment;
     NSString *segId = segHls.segId;
-//    NSString *url = segment.urlString;
     CBDebug(@"loadSegment sn %@", segHls.SN);
     
     NSTimeInterval bufferTime = [[SWCHlsPredictor sharedInstance] getAvailableDuration];
-    CBInfo(@"CBHlsPredictor bufferTime %@", @(bufferTime));
+    CBDebug(@"CBHlsPredictor bufferTime %@", @(bufferTime));
     // 如果有playerStats并且大于等于0
     if ([self.delegate respondsToSelector:@selector(bufferedDuration)])
     {
@@ -401,7 +399,7 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
     
     if (_currentLoadedSN == 0) return;
     if (!_isLive && _currentLoadedSN == _endSN) return;
-    if (_currLostSN > 0 && _loadingSN - _currLostSN <= 30) return;       // TODO 验证
+    if (_currLostSN > 0 && _loadingSN - _currLostSN <= 30) return;       
     if (![self hasIdlePeers]) return;
     NSArray *availablePeers = [_peerManager getPeersOrderByWeight];
     NSUInteger prefetchCount = 0;

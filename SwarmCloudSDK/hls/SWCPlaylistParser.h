@@ -7,10 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SWCHlsPlaylist.h"
+#import "SWCHlsMasterPlaylist.h"
+#import "SWCHlsMediaPlaylist.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SWCPlaylistParser : NSObject
+
+
+- (SWCHlsPlaylist *)parseWithUri:(NSURL *)uri m3u8:(NSString *)m3u8 error:(NSError **)err;
 
 @end
 

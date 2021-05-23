@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SWCHlsSegment : SWCSegment
 
+@property (nonatomic, copy, readonly) NSString *baseUri;           // m3u8
+
 @property (nonatomic, assign, readonly) NSNumber *SN;
 
 @property (nonatomic, assign) NSTimeInterval duration;
@@ -23,11 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)getDefaultContentType;
 
-- (instancetype)initWithBuffer:(NSData *)buf url:(NSString *)urlString sn:(NSNumber *)SN duration:(NSTimeInterval)duration;
+- (instancetype)initWithBuffer:(NSData *)buf url:(NSString *)urlString sn:(NSNumber *)SN duration:(NSTimeInterval)duration streamId:(NSString *)streamId;
 
-- (instancetype)initWithSN:(NSNumber *)SN url:(NSString *)urlString andDuration:(NSTimeInterval)duration;
+- (instancetype)initWithSN:(NSNumber *)SN url:(NSString *)urlString andDuration:(NSTimeInterval)duration streamId:(NSString *)streamId;
 
-- (instancetype)initWithSN:(NSNumber *)SN url:(NSString *)urlString andDuration:(NSTimeInterval)duration byteRange:(SWCRange)range;
+- (instancetype)initWithSN:(NSNumber *)SN url:(NSString *)urlString andDuration:(NSTimeInterval)duration byteRange:(SWCRange)range streamId:(NSString *)streamId;
 
 - (instancetype)initWithBuffer:(NSData *)buf sn:(NSNumber *)SN segId:(NSString *)segId;
 

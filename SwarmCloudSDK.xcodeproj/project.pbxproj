@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09B9A9C8A4F1660DAA58BD8A /* libPods-macOS SwarmCloudSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AD80A7655A7875B6B641CD /* libPods-macOS SwarmCloudSDK.a */; };
 		7337400E34F409FB5F94E8D1 /* libPods-tvOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5186EC4A6972A0E91E7E7C /* libPods-tvOS Demo.a */; };
 		9406C6A22657ECC500A457E8 /* SWCPlaylistParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9406C6A02657ECC500A457E8 /* SWCPlaylistParser.h */; };
 		9406C6A32657ECC500A457E8 /* SWCPlaylistParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9406C6A02657ECC500A457E8 /* SWCPlaylistParser.h */; };
@@ -64,6 +63,24 @@
 		940C06C72646F42700836F73 /* SwarmCloudSDK.h in Sources */ = {isa = PBXBuildFile; fileRef = 947BFB7D2641ACE0001C7C99 /* SwarmCloudSDK.h */; };
 		9429A6E6264CFA47008AD0AB /* SwarmCloudSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BFB7A2641ACE0001C7C99 /* SwarmCloudSDK.framework */; };
 		9429A6E7264CFA7E008AD0AB /* SwarmCloudSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BFB972641AD62001C7C99 /* SwarmCloudSDK.framework */; };
+		945A7300265903CD00AC351A /* SWCHlsPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 945A72FE265903CD00AC351A /* SWCHlsPlaylist.h */; };
+		945A7301265903CD00AC351A /* SWCHlsPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 945A72FE265903CD00AC351A /* SWCHlsPlaylist.h */; };
+		945A7302265903CD00AC351A /* SWCHlsPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 945A72FE265903CD00AC351A /* SWCHlsPlaylist.h */; };
+		945A7303265903CD00AC351A /* SWCHlsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 945A72FF265903CD00AC351A /* SWCHlsPlaylist.m */; };
+		945A7304265903CD00AC351A /* SWCHlsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 945A72FF265903CD00AC351A /* SWCHlsPlaylist.m */; };
+		945A7305265903CD00AC351A /* SWCHlsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 945A72FF265903CD00AC351A /* SWCHlsPlaylist.m */; };
+		945A7308265903F700AC351A /* SWCHlsMasterPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 945A7306265903F700AC351A /* SWCHlsMasterPlaylist.h */; };
+		945A7309265903F700AC351A /* SWCHlsMasterPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 945A7306265903F700AC351A /* SWCHlsMasterPlaylist.h */; };
+		945A730A265903F700AC351A /* SWCHlsMasterPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 945A7306265903F700AC351A /* SWCHlsMasterPlaylist.h */; };
+		945A730B265903F700AC351A /* SWCHlsMasterPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 945A7307265903F700AC351A /* SWCHlsMasterPlaylist.m */; };
+		945A730C265903F700AC351A /* SWCHlsMasterPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 945A7307265903F700AC351A /* SWCHlsMasterPlaylist.m */; };
+		945A730D265903F700AC351A /* SWCHlsMasterPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 945A7307265903F700AC351A /* SWCHlsMasterPlaylist.m */; };
+		945A73102659040E00AC351A /* SWCHlsMediaPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 945A730E2659040E00AC351A /* SWCHlsMediaPlaylist.h */; };
+		945A73112659040E00AC351A /* SWCHlsMediaPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 945A730E2659040E00AC351A /* SWCHlsMediaPlaylist.h */; };
+		945A73122659040E00AC351A /* SWCHlsMediaPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 945A730E2659040E00AC351A /* SWCHlsMediaPlaylist.h */; };
+		945A73132659040E00AC351A /* SWCHlsMediaPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 945A730F2659040E00AC351A /* SWCHlsMediaPlaylist.m */; };
+		945A73142659040E00AC351A /* SWCHlsMediaPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 945A730F2659040E00AC351A /* SWCHlsMediaPlaylist.m */; };
+		945A73152659040E00AC351A /* SWCHlsMediaPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 945A730F2659040E00AC351A /* SWCHlsMediaPlaylist.m */; };
 		945FE2E6264D5BA700EDE4F5 /* SWCPlaylistInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */; };
 		945FE2E7264D5BA700EDE4F5 /* SWCPlaylistInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */; };
 		945FE2E8264D5BA700EDE4F5 /* SWCPlaylistInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */; };
@@ -82,6 +99,7 @@
 		9464500D2649698A006EDBD7 /* SWCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 946450092649698A006EDBD7 /* SWCError.m */; };
 		9464500E2649698A006EDBD7 /* SWCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 946450092649698A006EDBD7 /* SWCError.m */; };
 		9464500F2649698A006EDBD7 /* SWCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 946450092649698A006EDBD7 /* SWCError.m */; };
+		94662151265A58C000F4B287 /* SwarmCloudSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BFBA42641AD74001C7C99 /* SwarmCloudSDK.framework */; };
 		94746E3E2647C79000245E7A /* SWCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E3C2647C79000245E7A /* SWCScheduler.h */; };
 		94746E3F2647C79000245E7A /* SWCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E3C2647C79000245E7A /* SWCScheduler.h */; };
 		94746E402647C79000245E7A /* SWCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E3C2647C79000245E7A /* SWCScheduler.h */; };
@@ -279,7 +297,6 @@
 		9492CD222643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */; };
 		9492CD232643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */; };
 		9492CD242643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */; };
-		94A179A92654C25300971FE6 /* SwarmCloudSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BFBA42641AD74001C7C99 /* SwarmCloudSDK.framework */; };
 		94E099712652A7CC00268FC5 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E099702652A7CC00268FC5 /* MainWindowController.m */; };
 		9BB7C9624F4673C2516F33FF /* libPods-iOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9461A112264C94C90090EF49 /* libPods-iOS Demo.a */; };
 		C5ED26B18C60FA701A90D408 /* libPods-macOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF4FF0B956C03D647660E26D /* libPods-macOS Demo.a */; };
@@ -340,6 +357,12 @@
 		940C06AD2646905400836F73 /* SWCSignalClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCSignalClient.h; sourceTree = "<group>"; };
 		940C06AE2646905400836F73 /* SWCSignalClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCSignalClient.m; sourceTree = "<group>"; };
 		940C06BD2646F1E900836F73 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = vendor/tvOS/WebRTC.xcframework; sourceTree = "<group>"; };
+		945A72FE265903CD00AC351A /* SWCHlsPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsPlaylist.h; sourceTree = "<group>"; };
+		945A72FF265903CD00AC351A /* SWCHlsPlaylist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCHlsPlaylist.m; sourceTree = "<group>"; };
+		945A7306265903F700AC351A /* SWCHlsMasterPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsMasterPlaylist.h; sourceTree = "<group>"; };
+		945A7307265903F700AC351A /* SWCHlsMasterPlaylist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCHlsMasterPlaylist.m; sourceTree = "<group>"; };
+		945A730E2659040E00AC351A /* SWCHlsMediaPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsMediaPlaylist.h; sourceTree = "<group>"; };
+		945A730F2659040E00AC351A /* SWCHlsMediaPlaylist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCHlsMediaPlaylist.m; sourceTree = "<group>"; };
 		945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCPlaylistInfo.h; sourceTree = "<group>"; };
 		945FE2E5264D5BA700EDE4F5 /* SWCPlaylistInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCPlaylistInfo.m; sourceTree = "<group>"; };
 		9461A112264C94C90090EF49 /* libPods-iOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-iOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -484,7 +507,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09B9A9C8A4F1660DAA58BD8A /* libPods-macOS SwarmCloudSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,7 +523,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94A179A92654C25300971FE6 /* SwarmCloudSDK.framework in Frameworks */,
+				94662151265A58C000F4B287 /* SwarmCloudSDK.framework in Frameworks */,
 				C5ED26B18C60FA701A90D408 /* libPods-macOS Demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,6 +560,12 @@
 				940C069D26468A8300836F73 /* SWCPeer.m */,
 				945FE2E4264D5BA700EDE4F5 /* SWCPlaylistInfo.h */,
 				945FE2E5264D5BA700EDE4F5 /* SWCPlaylistInfo.m */,
+				945A72FE265903CD00AC351A /* SWCHlsPlaylist.h */,
+				945A72FF265903CD00AC351A /* SWCHlsPlaylist.m */,
+				945A7306265903F700AC351A /* SWCHlsMasterPlaylist.h */,
+				945A7307265903F700AC351A /* SWCHlsMasterPlaylist.m */,
+				945A730E2659040E00AC351A /* SWCHlsMediaPlaylist.h */,
+				945A730F2659040E00AC351A /* SWCHlsMediaPlaylist.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -818,6 +846,7 @@
 				947BFB7F2641ACE0001C7C99 /* SwarmCloudSDK.h in Headers */,
 				9406C6A22657ECC500A457E8 /* SWCPlaylistParser.h in Headers */,
 				94746E6626480F3600245E7A /* SWCDataChannel.h in Headers */,
+				945A73102659040E00AC351A /* SWCHlsMediaPlaylist.h in Headers */,
 				94746E6E264819DD00245E7A /* CBPeerManager.h in Headers */,
 				940C06AF2646905400836F73 /* SWCSignalClient.h in Headers */,
 				940C0679264543D100836F73 /* SWCP2pEngine.h in Headers */,
@@ -852,8 +881,10 @@
 				947BFC9D2642A410001C7C99 /* SWCUtils.h in Headers */,
 				94746E462647C7B300245E7A /* SWCHlsScheduler.h in Headers */,
 				947BFC7826429F54001C7C99 /* CBTimerManager.h in Headers */,
+				945A7308265903F700AC351A /* SWCHlsMasterPlaylist.h in Headers */,
 				947BFC4D26429BF6001C7C99 /* CBSocket.h in Headers */,
 				940C068E2646846900836F73 /* SWCSegment.h in Headers */,
+				945A7300265903CD00AC351A /* SWCHlsPlaylist.h in Headers */,
 				947BFC4126429BF6001C7C99 /* StunResult.h in Headers */,
 				9492CD0F2643F40200B61AD3 /* SWCProxy.h in Headers */,
 			);
@@ -867,6 +898,7 @@
 				947BFBE82641B038001C7C99 /* SWCP2pConfig.h in Headers */,
 				9406C6A32657ECC500A457E8 /* SWCPlaylistParser.h in Headers */,
 				94746E6726480F3600245E7A /* SWCDataChannel.h in Headers */,
+				945A73112659040E00AC351A /* SWCHlsMediaPlaylist.h in Headers */,
 				94746E6F264819DD00245E7A /* CBPeerManager.h in Headers */,
 				940C06B02646905400836F73 /* SWCSignalClient.h in Headers */,
 				947BFC932642A2EA001C7C99 /* CBPeerChannel.h in Headers */,
@@ -901,8 +933,10 @@
 				947BFC9E2642A410001C7C99 /* SWCUtils.h in Headers */,
 				94746E472647C7B300245E7A /* SWCHlsScheduler.h in Headers */,
 				947BFC7926429F54001C7C99 /* CBTimerManager.h in Headers */,
+				945A7309265903F700AC351A /* SWCHlsMasterPlaylist.h in Headers */,
 				947BFC4E26429BF6001C7C99 /* CBSocket.h in Headers */,
 				940C068F2646846900836F73 /* SWCSegment.h in Headers */,
+				945A7301265903CD00AC351A /* SWCHlsPlaylist.h in Headers */,
 				947BFC4226429BF6001C7C99 /* StunResult.h in Headers */,
 				9492CD102643F40200B61AD3 /* SWCProxy.h in Headers */,
 			);
@@ -916,6 +950,7 @@
 				947BFC1B26428C70001C7C99 /* SwarmCloudSDK.h in Headers */,
 				9406C6A42657ECC500A457E8 /* SWCPlaylistParser.h in Headers */,
 				94746E6826480F3600245E7A /* SWCDataChannel.h in Headers */,
+				945A73122659040E00AC351A /* SWCHlsMediaPlaylist.h in Headers */,
 				94746E70264819DD00245E7A /* CBPeerManager.h in Headers */,
 				940C06B12646905400836F73 /* SWCSignalClient.h in Headers */,
 				947BFC942642A2EA001C7C99 /* CBPeerChannel.h in Headers */,
@@ -950,8 +985,10 @@
 				947BFC9F2642A410001C7C99 /* SWCUtils.h in Headers */,
 				94746E482647C7B300245E7A /* SWCHlsScheduler.h in Headers */,
 				947BFC7A26429F54001C7C99 /* CBTimerManager.h in Headers */,
+				945A730A265903F700AC351A /* SWCHlsMasterPlaylist.h in Headers */,
 				947BFC4F26429BF6001C7C99 /* CBSocket.h in Headers */,
 				940C06902646846900836F73 /* SWCSegment.h in Headers */,
+				945A7302265903CD00AC351A /* SWCHlsPlaylist.h in Headers */,
 				947BFC4326429BF6001C7C99 /* StunResult.h in Headers */,
 				9492CD112643F40200B61AD3 /* SWCProxy.h in Headers */,
 			);
@@ -1428,6 +1465,7 @@
 			files = (
 				947BFC5626429BF6001C7C99 /* StunClient.m in Sources */,
 				9492CD222643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */,
+				945A73132659040E00AC351A /* SWCHlsMediaPlaylist.m in Sources */,
 				94746E512647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */,
 				947BFC5F26429BF6001C7C99 /* CBSocket.m in Sources */,
 				9464500D2649698A006EDBD7 /* SWCError.m in Sources */,
@@ -1436,6 +1474,7 @@
 				94746E822648273A00245E7A /* SWCSchedulerFactory.m in Sources */,
 				947BFC8D2642A284001C7C99 /* CBQueue.m in Sources */,
 				940C0681264580D100836F73 /* SWCNetworkResponse.m in Sources */,
+				945A730B265903F700AC351A /* SWCHlsMasterPlaylist.m in Sources */,
 				94746E612647C9D900245E7A /* SWCTracker.m in Sources */,
 				940C06B22646905400836F73 /* SWCSignalClient.m in Sources */,
 				94746E412647C79000245E7A /* SWCScheduler.m in Sources */,
@@ -1457,6 +1496,7 @@
 				945FE2E9264D5BA700EDE4F5 /* SWCPlaylistInfo.m in Sources */,
 				940C06912646846900836F73 /* SWCSegment.m in Sources */,
 				947BFC7B26429F54001C7C99 /* CBTimerManager.m in Sources */,
+				945A7303265903CD00AC351A /* SWCHlsPlaylist.m in Sources */,
 				9492CD122643F40200B61AD3 /* SWCProxy.m in Sources */,
 				947BFCA52642A5A0001C7C99 /* CBReachability.m in Sources */,
 				947BFC4426429BF6001C7C99 /* SocketAddress.m in Sources */,
@@ -1476,6 +1516,7 @@
 			files = (
 				947BFC5726429BF6001C7C99 /* StunClient.m in Sources */,
 				9492CD232643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */,
+				945A73142659040E00AC351A /* SWCHlsMediaPlaylist.m in Sources */,
 				94746E522647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */,
 				947BFC6026429BF6001C7C99 /* CBSocket.m in Sources */,
 				9464500E2649698A006EDBD7 /* SWCError.m in Sources */,
@@ -1484,6 +1525,7 @@
 				94746E832648273A00245E7A /* SWCSchedulerFactory.m in Sources */,
 				947BFC8E2642A284001C7C99 /* CBQueue.m in Sources */,
 				940C0682264580D100836F73 /* SWCNetworkResponse.m in Sources */,
+				945A730C265903F700AC351A /* SWCHlsMasterPlaylist.m in Sources */,
 				94746E622647C9D900245E7A /* SWCTracker.m in Sources */,
 				940C06B32646905400836F73 /* SWCSignalClient.m in Sources */,
 				94746E422647C79000245E7A /* SWCScheduler.m in Sources */,
@@ -1505,6 +1547,7 @@
 				945FE2EA264D5BA700EDE4F5 /* SWCPlaylistInfo.m in Sources */,
 				940C06922646846900836F73 /* SWCSegment.m in Sources */,
 				947BFC7C26429F54001C7C99 /* CBTimerManager.m in Sources */,
+				945A7304265903CD00AC351A /* SWCHlsPlaylist.m in Sources */,
 				9492CD132643F40200B61AD3 /* SWCProxy.m in Sources */,
 				947BFCA62642A5A0001C7C99 /* CBReachability.m in Sources */,
 				947BFC4526429BF6001C7C99 /* SocketAddress.m in Sources */,
@@ -1524,6 +1567,7 @@
 			files = (
 				947BFC5826429BF6001C7C99 /* StunClient.m in Sources */,
 				9492CD242643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */,
+				945A73152659040E00AC351A /* SWCHlsMediaPlaylist.m in Sources */,
 				94746E532647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */,
 				947BFC6126429BF6001C7C99 /* CBSocket.m in Sources */,
 				9464500F2649698A006EDBD7 /* SWCError.m in Sources */,
@@ -1532,6 +1576,7 @@
 				94746E842648273A00245E7A /* SWCSchedulerFactory.m in Sources */,
 				947BFC8F2642A284001C7C99 /* CBQueue.m in Sources */,
 				940C0683264580D100836F73 /* SWCNetworkResponse.m in Sources */,
+				945A730D265903F700AC351A /* SWCHlsMasterPlaylist.m in Sources */,
 				94746E632647C9D900245E7A /* SWCTracker.m in Sources */,
 				940C06B42646905400836F73 /* SWCSignalClient.m in Sources */,
 				94746E432647C79000245E7A /* SWCScheduler.m in Sources */,
@@ -1553,6 +1598,7 @@
 				945FE2EB264D5BA700EDE4F5 /* SWCPlaylistInfo.m in Sources */,
 				940C06932646846900836F73 /* SWCSegment.m in Sources */,
 				947BFC7D26429F54001C7C99 /* CBTimerManager.m in Sources */,
+				945A7305265903CD00AC351A /* SWCHlsPlaylist.m in Sources */,
 				9492CD142643F40200B61AD3 /* SWCProxy.m in Sources */,
 				947BFCA72642A5A0001C7C99 /* CBReachability.m in Sources */,
 				947BFC4626429BF6001C7C99 /* SocketAddress.m in Sources */,
@@ -2019,7 +2065,7 @@
 				CODE_SIGN_ENTITLEMENTS = "macOS Demo/macOS_Demo.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = FKPFDM8FHV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2047,7 +2093,7 @@
 				CODE_SIGN_ENTITLEMENTS = "macOS Demo/macOS_Demo.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = FKPFDM8FHV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

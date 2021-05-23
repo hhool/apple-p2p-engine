@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
     SWCP2pConfig *_config;
     NSString *_token;
     GCDWebServer* _webServer;
-    NSUInteger _currentPort;
+    NSInteger _currentPort;
     NSLock *_locker;
     NSURL *_originalURL;
     NSURL *_originalLocation;

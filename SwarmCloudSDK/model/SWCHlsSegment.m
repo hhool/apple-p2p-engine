@@ -12,10 +12,10 @@ static NSString *CONTENT_TYPE = @"video/mp2t";
 
 @implementation SWCHlsSegment
 
-static SegmentId segmengId = ^NSString * _Nonnull(NSNumber *sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
+static SegmentId segmengId = ^NSString * _Nonnull(NSString * _Nonnull streamId, NSNumber *sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
+//    NSLog(@"streamId %@", streamId);
     NSString *segId = segmentUrl;
-    NSArray<NSString *> *strs = [segmentUrl componentsSeparatedByString:@"?"];
-    segId = strs[0];
+    segId = [segmentUrl componentsSeparatedByString:@"?"][0];
     if ([segId hasPrefix:@"http://"]) {
         segId = [segId stringByReplacingOccurrencesOfString:@"http://" withString:@""];
     } else if ([segId hasPrefix:@"https://"]) {
@@ -48,9 +48,9 @@ static SegmentId segmengId = ^NSString * _Nonnull(NSNumber *sn, NSString * _Nonn
     return self;
 }
 
-- (instancetype)initWithBuffer:(NSData *)buf url:(NSString *)urlString sn:(NSNumber *)SN duration:(NSTimeInterval)duration
+- (instancetype)initWithBuffer:(NSData *)buf url:(NSString *)urlString sn:(NSNumber *)SN duration:(NSTimeInterval)duration streamId:(NSString *)streamId
 {
-    self = [super initWithBuffer:buf segId:segmengId(SN, urlString, SWCMakeRange(NSNotFound, NSNotFound)) url:urlString];
+    self = [super initWithBuffer:buf segId:segmengId(streamId, SN, urlString, SWCMakeRange(NSNotFound, NSNotFound)) url:urlString];
     if (self) {
         _SN = SN;
         _duration = duration;
@@ -58,8 +58,8 @@ static SegmentId segmengId = ^NSString * _Nonnull(NSNumber *sn, NSString * _Nonn
     return self;
 }
 
-- (instancetype)initWithBuffer:(NSData *)buf url:(NSString *)urlString sn:(NSNumber *)SN duration:(NSTimeInterval)duration byteRange:(SWCRange)range {
-    self = [super initWithBuffer:buf segId:segmengId(SN, urlString, SWCMakeRange(NSNotFound, NSNotFound)) url:urlString byteRange:range];
+- (instancetype)initWithBuffer:(NSData *)buf url:(NSString *)urlString sn:(NSNumber *)SN duration:(NSTimeInterval)duration byteRange:(SWCRange)range streamId:(NSString *)streamId {
+    self = [super initWithBuffer:buf segId:segmengId(streamId, SN, urlString, SWCMakeRange(NSNotFound, NSNotFound)) url:urlString byteRange:range];
     if (self) {
         _SN = SN;
         _duration = duration;
@@ -67,20 +67,22 @@ static SegmentId segmengId = ^NSString * _Nonnull(NSNumber *sn, NSString * _Nonn
     return self;
 }
 
-- (instancetype)initWithSN:(NSNumber *)SN url:(NSString *)urlString andDuration:(NSTimeInterval)duration {
-    self = [super initWithSegId:segmengId(SN, urlString, SWCMakeRange(NSNotFound, NSNotFound)) url:urlString];     
+- (instancetype)initWithSN:(NSNumber *)SN url:(NSString *)urlString andDuration:(NSTimeInterval)duration streamId:(NSString *)streamId {
+    self = [super initWithSegId:segmengId(streamId, SN, urlString, SWCMakeRange(NSNotFound, NSNotFound)) url:urlString];
     if (self) {
         _SN = SN;
         _duration = duration;
+        _baseUri = streamId;
     }
     return self;
 }
 
-- (instancetype)initWithSN:(NSNumber *)SN url:(NSString *)urlString andDuration:(NSTimeInterval)duration byteRange:(SWCRange)range{
-    self = [super initWithSegId:segmengId(SN, urlString, range) url:urlString byteRange:range];
+- (instancetype)initWithSN:(NSNumber *)SN url:(NSString *)urlString andDuration:(NSTimeInterval)duration byteRange:(SWCRange)range streamId:(NSString *)streamId {
+    self = [super initWithSegId:segmengId(streamId, SN, urlString, range) url:urlString byteRange:range];
     if (self) {
         _SN = SN;
         _duration = duration;
+        _baseUri = streamId;
     }
     return self;
 }

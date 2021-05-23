@@ -30,4 +30,13 @@
     return nil;
 }
 
+- (BOOL)hasNext {
+    return _index < _lines.count;
+}
+
+- (instancetype)reset {
+    _index = 0;
+    return self;
+}
+
 @end
