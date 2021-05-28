@@ -32,7 +32,7 @@
     NSString* line = [reader next];
     if (![line hasPrefix:HLS_PREFIX_FILE_FIRST_LINE]) {
         if (err) {
-            *err = [SWCError errorWithReason:@"Input does not start with the #EXTM3U header."];
+            *err = [SWCError errorForExceptionWithReason:@"Input does not start with the #EXTM3U header."];
         }
         return nil;
     }
@@ -53,7 +53,7 @@
         }
     }
     if (err) {
-        *err = [SWCError errorWithReason:@"Failed to parse the playlist, could not identify any tags."];
+        *err = [SWCError errorForExceptionWithReason:@"Failed to parse the playlist, could not identify any tags."];
     }
     return nil;
 }

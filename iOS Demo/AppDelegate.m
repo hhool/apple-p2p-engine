@@ -23,13 +23,18 @@
     
     SWCP2pConfig *config = [SWCP2pConfig defaultConfiguration];
     config.logLevel =  SWCLogLevelDebug;
-    config.isSharePlaylist = YES;
-    config.announce = @"http://tracker.p2pengine.net:7066/v1";
+//    config.isSharePlaylist = YES;
+//    config.announce = @"http://tracker.p2pengine.net:7066/v1";
 //    config.trickleICE = NO;
+//    config.p2pEnabled = NO;
 //    config.channelIdPrefix = @"abffff";
-    [[SWCP2pEngine sharedInstance] startWithToken:@"U8qIyZDZg" andP2pConfig:config];
+    [[SWCP2pEngine sharedInstance] startWithToken:@"ZMuO5qHZg" andP2pConfig:config];
     
     return YES;
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
 }
 
 

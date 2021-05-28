@@ -235,7 +235,7 @@
 
 - (void)handshakePeer:(SWCDataChannel *)peer {
     if (peer) {
-        [peer sendMetaData:_bitmap sequential:YES peersNum:[self peersNum]];
+        [peer sendMetaData:_bitmap sequential:NO peersNum:[self peersNum]];
     }
 }
 

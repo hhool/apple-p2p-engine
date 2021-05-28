@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, SWCErrorCode) {
     SWCErrorCodeUnsupportContentType = -192701,
     SWCErrorCodeNotEnoughDiskSpace   = -192702,
     SWCErrorCodeException            = -192703,
+    SWCErrorCodeInvalidArgument      = -192704,
 };
 
 @interface SWCError : NSObject
@@ -27,7 +28,9 @@ typedef NS_ENUM(NSInteger, SWCErrorCode) {
 
 + (NSError *)errorForException:(NSException *)exception;
 
-+ (NSError *)errorWithReason:(NSString *)reason;
++ (NSError *)errorForExceptionWithReason:(NSString *)reason;
+
++ (NSError *)errorForInvalidArgumentWithReason:(NSString *)reason;
 
 @end
 

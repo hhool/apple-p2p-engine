@@ -62,8 +62,12 @@ NSString * const SWCErrorUserInfoKeyResponse = @"SWCErrorUserInfoKeyResponse";
     return error;
 }
 
-+ (NSError *)errorWithReason:(NSString *)reason {
++ (NSError *)errorForExceptionWithReason:(NSString *)reason {
     return [NSError errorWithDomain:@"SwarmCloudSDK error" code:SWCErrorCodeException userInfo:@{@"reason": reason}];
+}
+
++ (NSError *)errorForInvalidArgumentWithReason:(NSString *)reason {
+    return [NSError errorWithDomain:@"SwarmCloudSDK error" code:SWCErrorCodeInvalidArgument userInfo:@{@"reason": reason}];
 }
 
 @end

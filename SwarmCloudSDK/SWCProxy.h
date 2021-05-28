@@ -27,11 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *_token;
     GCDWebServer* _webServer;
     NSInteger _currentPort;
-    NSLock *_locker;
     NSURL *_originalURL;
     NSURL *_originalLocation;
     NSString *_videoId;
     SWCTracker *_tracker;
+    NSURLSession *_httpSession;
 }
 
 @property(nonatomic, copy, readonly) NSString *localIp;
@@ -40,7 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<SWCProxyDelegate> delegate;
 
-- (void)startLocalServer;
+- (void)initWithTkoen:(NSString *)token config:(SWCP2pConfig *)config;
+
+- (void)startLocalServer:(NSError **)error;
 
 - (void)shutdown;
 
@@ -56,6 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)getProxyUrl:(NSURL *)url withVideoId:(NSString *)videoId;
 
+- (SWCNetworkResponse *)requestFromNetworkWithUrl:(NSURL *)url req:(GCDWebServerRequest *)request headers:(NSDictionary *)headers error:(NSError **)err;
 
 @end
 

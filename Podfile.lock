@@ -8,7 +8,7 @@ PODS:
   - GCDWebServer/Core (3.5.4)
   - PINCache (2.3)
   - SocketRocket (0.5.1)
-  - WebRTCDatachannel (0.1.0)
+  - WebRTCDatachannel (0.2.0)
 
 DEPENDENCIES:
   - CocoaAsyncSocket (~> 7.6)
@@ -33,8 +33,8 @@ SPEC CHECKSUMS:
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
-  WebRTCDatachannel: 279b34f1aae963448decdf2adb9b7176f4513419
+  WebRTCDatachannel: ab69385b831e5ed691a28f31e1b6fe9efbd39181
 
 PODFILE CHECKSUM: 4d3dd6af8498d5cc41b92d6bf73ab5c099e3e7dc
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.1

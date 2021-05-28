@@ -18,6 +18,7 @@
 #import "SWCMp4Proxy.h"
 #import "SWCDataChannel.h"
 #import "SWCHlsSegment.h"
+#import "SWCError.h"
 
 NSString *const VERSION = @"2.0.0";                 // SDK版本号
 
@@ -74,6 +75,11 @@ static SWCP2pEngine *_instance = nil;
 }
 
 - (void)startWithToken:(NSString *)token andP2pConfig:(nullable SWCP2pConfig *)config {
+    
+    return [self startWithToken:token p2pConfig:config error:nil];
+}
+
+- (void)startWithToken:(NSString *)token p2pConfig:(nullable SWCP2pConfig *)config error:(NSError **)error {
     self->_isvalid = YES;
     if (!config) {
         self.p2pConfig = [SWCP2pConfig defaultConfiguration];
@@ -85,31 +91,45 @@ static SWCP2pEngine *_instance = nil;
     
     self->_token = token;
     if (!self->_token || token.length == 0) {
-        CBError(@"Token is invalid");
+        NSString *errMsg = @"Token is invalid";
+        if (error)
+          *error = [SWCError errorForInvalidArgumentWithReason:errMsg];
+        CBError(@"%@", errMsg);
         self->_isvalid = NO;
     } else if (self->_token.length > 20) {
-        CBError(@"Token length is too long");
+        NSString *errMsg = @"Token length is too long";
+        if (error)
+          *error = [SWCError errorForInvalidArgumentWithReason:errMsg];
+        CBError(@"%@", errMsg);
         self->_isvalid = NO;
     }
     if (self->_p2pConfig.tag.length > 20) {
-        CBError(@"Tag length is too long");
+        NSString *errMsg = @"Tag length is too long";
+        if (error)
+          *error = [SWCError errorForInvalidArgumentWithReason:errMsg];
+        CBError(@"%@", errMsg);
         self->_isvalid = NO;
     }
     if (self->_p2pConfig.localPortHls > 65535 || self->_p2pConfig.localPortMp4 > 65535) {
-        CBError(@"Port is invalid");
+        NSString *errMsg = @"Port is invalid";
+        if (error)
+          *error = [SWCError errorForInvalidArgumentWithReason:errMsg];
+        CBError(@"%@", errMsg);
         self->_isvalid = NO;
     }
 
+    [SWCM3u8Proxy.sharedInstance initWithTkoen:_token config:_p2pConfig];
+    [SWCMp4Proxy.sharedInstance initWithTkoen:_token config:_p2pConfig];
     
-    self->_locker = [[NSLock alloc] init];
-    
+    if (_p2pConfig.p2pEnabled) {
+        NSLog(@"start Local Server");
+        [self p_startLocalServer:error];
+    }
     
     self->_stunClient = [[StunClient alloc] initWithLocalPort:UDP_SEND_PORT];
     self->_natType = NatTypeUnknown;
     
     [self p_initInternal];
-    
-    
 }
 
 + (id)allocWithZone:(struct _NSZone *)zone{
@@ -206,14 +226,7 @@ static SWCP2pEngine *_instance = nil;
 #pragma mark - **************** private methods
 
 - (void)p_initInternal {
-    [SWCM3u8Proxy.sharedInstance initWithTkoen:_token config:_p2pConfig];
-    [SWCMp4Proxy.sharedInstance initWithTkoen:_token config:_p2pConfig];
-    
-    if (_p2pConfig.p2pEnabled) {
-        NSLog(@"start Local Server");
-        [self p_startLocalServer];
-    }
-    
+    self->_locker = [[NSLock alloc] init];
     // 启动3秒后开始NAT探测
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         if (!self) return;
@@ -221,9 +234,9 @@ static SWCP2pEngine *_instance = nil;
     });
 }
 
-- (void)p_startLocalServer {
-    [SWCM3u8Proxy.sharedInstance startLocalServer];
-    [SWCMp4Proxy.sharedInstance startLocalServer];
+- (void)p_startLocalServer:(NSError **)error {
+    [SWCM3u8Proxy.sharedInstance startLocalServer:error];
+    [SWCMp4Proxy.sharedInstance startLocalServer:error];
 }
 
 - (void)p_initLogLevel {

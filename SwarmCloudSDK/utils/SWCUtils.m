@@ -88,7 +88,10 @@
     const char *cStr = [raw UTF8String];
     unsigned char digest[16];
     unsigned int x=(int)strlen(cStr) ;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     CC_MD5( cStr, x, digest );
+#pragma clang diagnostic pop
     // This is the md5 call
     NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
 

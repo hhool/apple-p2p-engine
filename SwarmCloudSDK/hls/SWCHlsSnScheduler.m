@@ -56,7 +56,7 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
         _endSN = sn;
         
         // 点播模式下开启定时器
-        [self checkPeersRecursively];        // TODO 打开
+        [self checkPeersRecursively];        
     }
     _bitmap = [NSMutableSet set];
     _bitCounts  = [NSMutableDictionary dictionary];

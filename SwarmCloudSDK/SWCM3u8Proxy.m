@@ -23,16 +23,17 @@
 
 static SWCM3u8Proxy *_instance = nil;
 
-@interface SWCM3u8Proxy()<NSURLSessionTaskDelegate, SWCSchedulerDelegate>
+@interface SWCM3u8Proxy()<NSURLSessionTaskDelegate, SWCSchedulerDelegate, GCDWebServerDelegate>
 {
-    NSURLSession *_httpSession;
     BOOL _isLive;
     BOOL _rangeTested;
     BOOL _m3u8Redirected;
+    NSUInteger _endSN;
     NSMutableSet<NSString *> *_mediaListUrls;
     BOOL _scheduledBySegId;
     NSDictionary<NSString *, SWCHlsSegment *> *_segmentMapVod;
     NSCache<NSString *, SWCHlsSegment *> *_segmentMapLive;
+    NSLock *_locker;
 }
 @end
 
@@ -40,8 +41,7 @@ static SWCM3u8Proxy *_instance = nil;
 
 - (void)initWithTkoen:(NSString *)token config:(SWCP2pConfig *)config
 {
-    _config = config;
-    _token = token;
+    [super initWithTkoen:token config:config];
     [self initVariable];
 }
 
@@ -53,7 +53,7 @@ static SWCM3u8Proxy *_instance = nil;
     self->_locker = [[NSLock alloc] init];
     NSURLSessionConfiguration *httpConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     httpConfig.allowsCellularAccess = YES;
-    self->_httpSession = [NSURLSession sessionWithConfiguration:httpConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    _httpSession = [NSURLSession sessionWithConfiguration:httpConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 }
 
 + (instancetype)sharedInstance {
@@ -66,18 +66,19 @@ static SWCM3u8Proxy *_instance = nil;
     
 }
 
-- (void)startLocalServer {
+- (void)startLocalServer:(NSError **)error {
     // 启动本地服务器
     if (_webServer && _webServer.isRunning) return;
     _currentPort = _config.localPortHls;
     if (_currentPort < 0) return;
     _webServer = [[GCDWebServer alloc] init];
+    _webServer.delegate = self;
     [GCDWebServer setLogLevel:3];   // WARN
     
     __weak typeof(self) weakSelf = self;
     
     // .m3u8 handler
-    [_webServer addHandlerForMethod:@"GET" pathRegex:@"^/.*\\.m3u8$" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    [_webServer addHandlerForMethod:@"GET" pathRegex:@"^/.*\\.m3u8$" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerRequest * _Nonnull request) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         CBDebug(@"request m3u8 path %@ query %@", request.path, request.URL.query);
         NSString *uri = request.path;
@@ -91,19 +92,20 @@ static SWCM3u8Proxy *_instance = nil;
         if (strongSelf->_m3u8Redirected) {
             url = strongSelf->_originalLocation;
         }
+        NSDictionary *headers = strongSelf->_config.httpHeadersForHls;
         SWCNetworkResponse *netResp;
         NSError *error;
         if (strongSelf->_config.isSharePlaylist && strongSelf->_tracker) {
             NSString *netUrlString = [url.absoluteString componentsSeparatedByString:@"?"][0];
             SWCPlaylistInfo *playlist = [strongSelf requestPlaylistFromPeerWithUrl:netUrlString];
             if (!playlist) {
-                netResp = [strongSelf requestFromNetworkWithUrl:url req:request error:&error];
+                netResp = [strongSelf requestFromNetworkWithUrl:url req:request headers:headers error:&error];
                 [strongSelf->_tracker.scheduler broadcastPlaylist:netUrlString data:[NSString.alloc initWithData:netResp.data encoding:NSUTF8StringEncoding]];
             } else {
                 netResp = [SWCNetworkResponse.alloc initWithData:[playlist.data dataUsingEncoding:NSUTF8StringEncoding] contentType:@"application/x-mpeg"];
             }
         } else {
-            netResp = [strongSelf requestFromNetworkWithUrl:url req:request error:&error];
+            netResp = [strongSelf requestFromNetworkWithUrl:url req:request headers:headers error:&error];
         }
         // 重定向导致url变化
         if (netResp.responseUrl && ![netResp.responseUrl.absoluteString isEqualToString:url.absoluteString]) {
@@ -112,74 +114,56 @@ static SWCM3u8Proxy *_instance = nil;
             url = netResp.responseUrl;
             strongSelf->_m3u8Redirected = YES;
         }
-        NSUInteger endSN = 0;
         GCDWebServerResponse *resp;
         if (error) {
             CBWarn(@"request m3u8 failed, error %@ redirect to %@", error, url);
             resp = [GCDWebServerResponse responseWithRedirect:strongSelf->_originalURL permanent:NO];
-            completionBlock(resp);
-            return;
-        } else {
-            NSString *m3u8Text = [[NSString alloc] initWithData:netResp.data encoding:NSUTF8StringEncoding];
-            SWCHlsPlaylist *playlist = [SWCPlaylistParser.alloc parseWithUri:url m3u8:m3u8Text error:&error];
-            if (error) {
-                CBWarn(@"parse m3u8 failed, error %@ redirect to %@", error.userInfo, url);
-                resp = [GCDWebServerResponse responseWithRedirect:strongSelf->_originalURL permanent:NO];
-                return;
-            }
-            if ([playlist isMemberOfClass:[SWCHlsMasterPlaylist class]]) {
-                SWCHlsMasterPlaylist *masterPlaylist = (SWCHlsMasterPlaylist *)playlist;
-                for (NSURL *mediaPlaylistUrl in masterPlaylist.mediaPlaylistUrls) {
-//                    CBDebug(@"mediaPlaylistUrl %@", [mediaPlaylistUrl absoluteString]);
-                    [strongSelf->_mediaListUrls addObject:[mediaPlaylistUrl absoluteString]];
-                }
-                strongSelf->_scheduledBySegId = masterPlaylist.isMultiPlaylisy;
-                
-            } else if ([playlist isMemberOfClass:[SWCHlsMediaPlaylist class]]) {
-                SWCHlsMediaPlaylist *mediaPlaylist = (SWCHlsMediaPlaylist *)playlist;
-                strongSelf->_isLive = !mediaPlaylist.hasEndTag;
-//                CBDebug(@"mediaPlaylist endSN %@", @(mediaPlaylist.endSN));
-                if (strongSelf->_isLive) {
-                    [mediaPlaylist.uriToSegments enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, SWCHlsSegment * _Nonnull obj, BOOL * _Nonnull stop) {
-                        [strongSelf->_segmentMapLive setObject:obj forKey:key];
-                    }];
-                    m3u8Text = [SWCPlaylistUtils insertTimeOffsetTag:m3u8Text];
-                } else {
-                    endSN = mediaPlaylist.endSN;
-                    strongSelf->_segmentMapVod = mediaPlaylist.uriToSegments;
-                }
-            }
-            CBInfo(@"original m3u8Text %@", m3u8Text);
-            if (strongSelf->_m3u8Redirected) {
-//                CBDebug(@"redirectedRewritePlaylist");
-                m3u8Text = [SWCPlaylistUtils redirectedRewritePlaylist:m3u8Text baseUri:strongSelf->_originalLocation];
-            } else {
-//                CBDebug(@"checkAndRewritePlaylist");
-                m3u8Text = [SWCPlaylistUtils checkAndRewritePlaylist:m3u8Text];
-            }
-            
-            resp = [GCDWebServerDataResponse responseWithData:[m3u8Text dataUsingEncoding:NSUTF8StringEncoding] contentType:netResp.contentType];
-            
-            CBInfo(@"m3u8Text %@ isLive %@ scheduledBySegId %@", m3u8Text, @(strongSelf->_isLive), @(strongSelf->_scheduledBySegId));
-            
-            if (!strongSelf->_tracker && strongSelf->_config.p2pEnabled) {
-                if (strongSelf->_config.scheduledBySegId) strongSelf->_scheduledBySegId = YES;
-                [strongSelf->_locker lock];
-                @try {
-                    [strongSelf initTrackerClient:strongSelf->_isLive endSN:endSN scheduledBySegId:strongSelf->_scheduledBySegId];    // TODO
-                } @catch (NSException *exception) {
-                    CBError(@"NSException caught, reason: %@", exception.reason);
-                    strongSelf->_config.p2pEnabled = NO;
-                }
-               [strongSelf->_locker unlock];
-            }
-            
+            return resp;
         }
-        completionBlock(resp);
+        NSString *m3u8Text = [[NSString alloc] initWithData:netResp.data encoding:NSUTF8StringEncoding];
+        SWCHlsPlaylist *playlist = [SWCPlaylistParser.alloc parseWithUri:url m3u8:m3u8Text error:&error];
+        if (error) {
+            CBWarn(@"parse m3u8 failed, error %@ redirect to %@", error.userInfo, url);
+            resp = [GCDWebServerResponse responseWithRedirect:strongSelf->_originalURL permanent:NO];
+            return resp;
+        }
+        if ([playlist isMemberOfClass:[SWCHlsMasterPlaylist class]]) {
+            SWCHlsMasterPlaylist *masterPlaylist = (SWCHlsMasterPlaylist *)playlist;
+            for (NSURL *mediaPlaylistUrl in masterPlaylist.mediaPlaylistUrls) {
+//                    CBDebug(@"mediaPlaylistUrl %@", [mediaPlaylistUrl absoluteString]);
+                [strongSelf->_mediaListUrls addObject:[mediaPlaylistUrl absoluteString]];
+            }
+            strongSelf->_scheduledBySegId = masterPlaylist.isMultiPlaylisy;
+            CBDebug(@"isMultiPlaylisy %@", @(masterPlaylist.isMultiPlaylisy));
+            
+        } else if ([playlist isMemberOfClass:[SWCHlsMediaPlaylist class]]) {
+            SWCHlsMediaPlaylist *mediaPlaylist = (SWCHlsMediaPlaylist *)playlist;
+            strongSelf->_isLive = !mediaPlaylist.hasEndTag;
+//                CBDebug(@"mediaPlaylist endSN %@", @(mediaPlaylist.endSN));
+            if (strongSelf->_isLive) {
+                [mediaPlaylist.uriToSegments enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, SWCHlsSegment * _Nonnull obj, BOOL * _Nonnull stop) {
+                    [strongSelf->_segmentMapLive setObject:obj forKey:key];
+                }];
+                m3u8Text = [SWCPlaylistUtils insertTimeOffsetTag:m3u8Text];
+            } else {
+                strongSelf->_endSN = mediaPlaylist.endSN;
+                strongSelf->_segmentMapVod = mediaPlaylist.uriToSegments;
+            }
+        }
+//            CBInfo(@"original m3u8Text %@", m3u8Text);
+        if (strongSelf->_m3u8Redirected) {
+//                CBDebug(@"redirectedRewritePlaylist");
+            m3u8Text = [SWCPlaylistUtils redirectedRewritePlaylist:m3u8Text baseUri:strongSelf->_originalLocation];
+        } else {
+//                CBDebug(@"checkAndRewritePlaylist");
+            m3u8Text = [SWCPlaylistUtils checkAndRewritePlaylist:m3u8Text];
+        }
+        resp = [GCDWebServerDataResponse responseWithData:[m3u8Text dataUsingEncoding:NSUTF8StringEncoding] contentType:netResp.contentType];
+        return resp;
     }];
     
     // .ts handler
-    [_webServer addHandlerForMethod:@"GET" pathRegex:@"^/.*\\.(ts|jpg|mp4|m4s)$" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    [_webServer addHandlerForMethod:@"GET" pathRegex:@"^/.*\\.(ts|mp4|m4s)$" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
 
 //        CBDebug(@"ts url %@", request.URL.absoluteString);
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -188,7 +172,7 @@ static SWCM3u8Proxy *_instance = nil;
         NSString *proxyOrigin = [request.query objectForKey:@"_ProxyOrigin_"];
         NSString *proxyTarget = [request.query objectForKey:@"_ProxyTarget_"];
         if (proxyOrigin) {
-            uri = [NSString stringWithFormat:@"%@%@", proxyOrigin, uri];         // TODO
+            uri = [NSString stringWithFormat:@"%@%@", proxyOrigin, uri];
             CBInfo(@"reset uri %@", uri);
         } else if (proxyTarget) {
             uri = proxyTarget;
@@ -221,6 +205,7 @@ static SWCM3u8Proxy *_instance = nil;
         if (request.hasByteRange) {
             [playlistSeg setByteRangeFromNSRange:request.byteRange];
         }
+        NSDictionary *headers = strongSelf->_config.httpHeadersForHls;
         NSError *error;
         if (strongSelf.isConnected && strongSelf->_config.p2pEnabled) {
             [strongSelf->_tracker.scheduler loadSegment:playlistSeg withBlock:^(NSHTTPURLResponse * _Nonnull response, NSData * _Nullable data) {
@@ -229,7 +214,7 @@ static SWCM3u8Proxy *_instance = nil;
                 completionBlock(resp);
             }];
         } else{
-            SWCNetworkResponse *netResp = [strongSelf requestFromNetworkWithUrl:url req:request error:&error];
+            SWCNetworkResponse *netResp = [strongSelf requestFromNetworkWithUrl:url req:request headers:headers error:&error];
             GCDWebServerResponse *resp;
             if (error) {
                 CBWarn(@"request m3u8 failed, error %@ redirect to %@", error, url);
@@ -247,12 +232,23 @@ static SWCM3u8Proxy *_instance = nil;
             }
             [[SWCHlsPredictor sharedInstance] addDuration:playlistSeg.duration];
             completionBlock(resp);
+            if (!strongSelf->_tracker && strongSelf->_config.p2pEnabled) {
+                if (strongSelf->_config.scheduledBySegId) strongSelf->_scheduledBySegId = YES;
+                [strongSelf->_locker lock];
+                @try {
+                    [strongSelf initTrackerClient:strongSelf->_isLive endSN:strongSelf->_endSN scheduledBySegId:strongSelf->_scheduledBySegId];
+                } @catch (NSException *exception) {
+                    CBError(@"NSException caught, reason: %@", exception.reason);
+                    strongSelf->_config.p2pEnabled = NO;
+                }
+               [strongSelf->_locker unlock];
+            }
         }
     }];
 
     // other file handler
-    [_webServer addHandlerForMethod:@"GET" pathRegex:@"^/.*(?<!(.ts|.m3u8|.jpg|.mp4|.m4s))$" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
-
+    [_webServer addHandlerForMethod:@"GET" pathRegex:@"^/.*(?<!(.ts|.m3u8|.mp4|.m4s))$" requestClass:[GCDWebServerRequest class]  processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerRequest * _Nonnull request) {
+        
         __strong typeof(weakSelf) strongSelf = weakSelf;
         CBDebug(@"request other file path %@ query %@", request.path, request.URL.query);
         NSString *uri = request.path;
@@ -264,18 +260,28 @@ static SWCM3u8Proxy *_instance = nil;
         }
         NSURL *url = [NSURL URLWithString:uri relativeToURL:strongSelf->_originalLocation];
         NSError *error;
-        SWCNetworkResponse *netResp = [strongSelf requestFromNetworkWithUrl:url req:request error:&error];
+        NSDictionary *headers = strongSelf->_config.httpHeadersForHls;
+        SWCNetworkResponse *netResp = [strongSelf requestFromNetworkWithUrl:url req:request headers:headers error:&error];
         GCDWebServerResponse *resp;
         if (error) {
             CBWarn(@"request m3u8 failed, error %@ redirect to %@", error, url);
             resp = [GCDWebServerResponse responseWithRedirect:url permanent:NO];
         } else {
             resp = [GCDWebServerDataResponse responseWithData:netResp.data contentType:netResp.contentType];
+            resp.statusCode = netResp.statusCode;
         }
-        completionBlock(resp);
+        return resp;
     }];
     
+#if TARGET_OS_OSX
     [_webServer startWithPort:_currentPort bonjourName:nil];
+#else
+    [_webServer startWithOptions:@{
+        GCDWebServerOption_AutomaticallySuspendInBackground : @(NO),
+        GCDWebServerOption_Port: @(_currentPort),
+        GCDWebServerOption_ConnectedStateCoalescingInterval: @3.0,
+    } error:error];
+#endif
     _currentPort = _webServer.port;
     CBInfo(@"Hls listening Port: %@", @(_currentPort));
 }
@@ -319,71 +325,6 @@ static SWCM3u8Proxy *_instance = nil;
         return _tracker.peerId;
     }
     return nil;
-}
-
-- (NSString *)getProxyUrl:(NSURL *)url withVideoId:(NSString *)videoId {
-    if (_currentPort < 0) {
-        CBWarn(@"Port < 0, fallback to original url");
-        return [url absoluteString];
-    }
-    _videoId = videoId;
-    _originalURL = url;
-    _originalLocation = [SWCUtils getLocationFromURL:url];
-    NSString *path = url.relativePath;
-    NSString *query = url.query;
-    NSString *localUrlStr = [NSString stringWithFormat:@"%@:%@%@", self.localIp, @(_currentPort), path];
-    if (query) {
-        localUrlStr = [NSString stringWithFormat:@"%@?%@", localUrlStr, query];
-    }
-    return localUrlStr;
-}
-
-- (SWCNetworkResponse *)requestFromNetworkWithUrl:(NSURL *)url req:(GCDWebServerRequest *)request error:(NSError **)err{
-    CBInfo(@"requestFromNetworkWithUrl %@", [url absoluteString]);
-    NSTimeInterval timeout = 10.0f;
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
-    
-    // 处理headers
-    NSDictionary *headers = _config.httpHeadersForHls;
-    if (headers) {
-        for (NSString *key in headers) {
-            [req addValue:[headers objectForKey:key]  forHTTPHeaderField:key];
-        }
-    }
-    
-    // 处理range
-    if (request.hasByteRange) {
-        NSString *rangeHeader = SWCRangeGetHeaderStringFromNSRange(request.byteRange);
-        CBInfo(@"range %@", rangeHeader);
-        
-        [req addValue:rangeHeader  forHTTPHeaderField:@"Range"];
-    }
-    
-    __block NSData *respData;
-    __block NSString *mime = @"";
-    __block NSURL *responseUrl;
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    NSURLSessionDataTask *dataTask = [self->_httpSession dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (data && (error == nil)) {
-            // 网络访问成功
-            respData = data;
-            mime = response.MIMEType;
-            responseUrl = response.URL;
-        } else {
-            // 网络访问失败
-            NSLog(@"failed to request m3u8 from %@ %@", req.URL.absoluteString, error.userInfo);
-            
-            
-        }
-        dispatch_semaphore_signal(semaphore);
-    }];
-    [dataTask resume];
-    dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, timeout * NSEC_PER_SEC));
-    if (!respData && err) {
-        NSString *errMsg = [NSString stringWithFormat:@"failed to request %@", url];
-        *err = [NSError errorWithDomain:@"NetworkResponse" code:-908 userInfo:@{NSLocalizedDescriptionKey:errMsg}];
-    }
-    return [SWCNetworkResponse.alloc initWithData:respData contentType:mime responseUrl:responseUrl];
 }
 
 - (SWCPlaylistInfo *)requestPlaylistFromPeerWithUrl:(NSString *)urlString {
@@ -486,6 +427,49 @@ static SWCM3u8Proxy *_instance = nil;
         }
     }];
     [dataTask resume];
+}
+
+#pragma mark - **************** GCDWebServerDelegate
+
+/**
+ *  This method is called after the server has successfully started.
+ */
+- (void)webServerDidStart:(GCDWebServer*)server {
+    CBDebug(@"!-> webServerDidStart");
+}
+
+/**
+ *  This method is called when the first GCDWebServerConnection is opened by the
+ *  server to serve a series of HTTP requests.
+ *
+ *  A series of HTTP requests is considered ongoing as long as new HTTP requests
+ *  keep coming (and new GCDWebServerConnection instances keep being opened),
+ *  until before the last HTTP request has been responded to (and the
+ *  corresponding last GCDWebServerConnection closed).
+ */
+- (void)webServerDidConnect:(GCDWebServer*)server {
+    CBDebug(@"!-> webServerDidConnect");
+}
+
+/**
+ *  This method is called when the last GCDWebServerConnection is closed after
+ *  the server has served a series of HTTP requests.
+ *
+ *  The GCDWebServerOption_ConnectedStateCoalescingInterval option can be used
+ *  to have the server wait some extra delay before considering that the series
+ *  of HTTP requests has ended (in case there some latency between consecutive
+ *  requests). This effectively coalesces the calls to -webServerDidConnect:
+ *  and -webServerDidDisconnect:.
+ */
+- (void)webServerDidDisconnect:(GCDWebServer*)server {
+    CBDebug(@"!-> webServerDidDisconnect");
+}
+
+/**
+ *  This method is called after the server has stopped.
+ */
+- (void)webServerDidStop:(GCDWebServer*)server {
+    CBDebug(@"!-> webServerDidStop");
 }
 
 @end

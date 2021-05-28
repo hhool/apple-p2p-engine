@@ -32,21 +32,21 @@
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage{
     NSString *loglevel = @"[P2P Log]";
     switch (logMessage.flag){
-//        case LOG_FLAG_ERROR:
-//            loglevel = @"[CDNBye ERROR]-->";
-//            break;
-//        case LOG_FLAG_WARN:
-//            loglevel = @"[CDNBye WARN]-->";
-//            break;
-//        case LOG_FLAG_INFO:
-//            loglevel = @"[CDNBye INFO]-->";
-//            break;
-//        case LOG_FLAG_DEBUG:
-//            loglevel = @"[CDNBye DEBUG]-->";
-//            break;
-//        case LOG_FLAG_VERBOSE:
-//            loglevel = @"[CDNBye VBOSE]-->";
-//            break;
+        case LOG_FLAG_ERROR:
+            loglevel = @"[P2P ERROR]-->";
+            break;
+        case LOG_FLAG_WARN:
+            loglevel = @"[P2P WARN]-->";
+            break;
+        case LOG_FLAG_INFO:
+            loglevel = @"[P2P INFO]-->";
+            break;
+        case LOG_FLAG_DEBUG:
+            loglevel = @"[P2P DEBUG]-->";
+            break;
+        case LOG_FLAG_VERBOSE:
+            loglevel = @"[P2P VBOSE]-->";
+            break;
         default:
             break;
     }

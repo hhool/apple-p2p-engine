@@ -58,6 +58,15 @@ extern NSString *const kP2pEngineDidReceiveStatistics ;
 - (void)startWithToken:(NSString *)token andP2pConfig:(nullable SWCP2pConfig *)config NS_SWIFT_NAME(start(token:p2pConfig:));
 
 /**
+ Start p2p engine with token and the specified config.
+ 
+ @param token  The token which can be obtained from CDNBye console.
+ @param config  The specified p2p config or nil.
+ @param error  Pointer to receive service error.
+ */
+- (void)startWithToken:(NSString *)token p2pConfig:(nullable SWCP2pConfig *)config error:(NSError **)error NS_SWIFT_NAME(start(token:p2pConfig:error:));
+
+/**
  Get the shared instance of CBP2pEngine.
  Please call [CBP2pEngine initWithToken: andP2pConfig:] before calling it.
  */

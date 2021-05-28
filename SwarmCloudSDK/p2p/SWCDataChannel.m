@@ -406,28 +406,12 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 - (void)sendRequestSegmentById:(NSString *)segId SN:(NSNumber *)sn isUrgent:(BOOL)urgent {
     NSDictionary *dict = @{@"event":DC_REQUEST, @"urgent":@(urgent), @"seg_id":segId, @"sn":sn};
-//    [_simpleChannel sendJSONMessage:dict];
-    dispatch_async(_concurrentQueue, ^{
-      [self->_simpleChannel sendJSONMessage:dict];
-        // test 下载超时测试
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self->_simpleChannel sendJSONMessage:dict];
-//        });
-    });
-    // 开始计时
-    _timeSendRequest = CFAbsoluteTimeGetCurrent();
-    _downloading = YES;
+    [self realSendRequest:dict];
 }
 
 - (void)sendRequestSegmentBySN:(NSNumber *)sn isUrgent:(BOOL)urgent {
     NSDictionary *dict = @{@"event":DC_REQUEST, @"urgent":@(urgent), @"sn":sn};
-//    [_simpleChannel sendJSONMessage:dict];
-    dispatch_async(_concurrentQueue, ^{
-        [self->_simpleChannel sendJSONMessage:dict];
-    });
-    // 开始计时
-    _timeSendRequest = CFAbsoluteTimeGetCurrent();
-    _downloading = YES;
+    [self realSendRequest:dict];
 }
 
 - (void)sendMsgClose {
@@ -574,6 +558,15 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 #pragma mark - **************** private methods
+
+- (void)realSendRequest:(NSDictionary *)msg {
+    dispatch_async(_concurrentQueue, ^{
+        [self->_simpleChannel sendJSONMessage:msg];
+    });
+    // 开始计时
+    _timeSendRequest = CFAbsoluteTimeGetCurrent();
+    _downloading = YES;
+}
 
 - (void)connTimeout {
     CBWarn(@"dc %@ connection timeout", self.channelId);
@@ -909,20 +902,27 @@ didReceiveJSONMessage:(NSDictionary *)dict {
     _remainAttachments --;
     if (_remainAttachments == 0) {
         
-        // 计算下载速度
-        long downloadSpeed = _expectedSize.integerValue / lround((CFAbsoluteTimeGetCurrent() - _timeSendRequest)*1000);
-//        CBInfo(@"%@ expectedSize %@ time %@ downloadSpeed %@", _remotePeerId, _expectedSize, @(CFAbsoluteTimeGetCurrent() - _timeSendRequest), @(downloadSpeed));
-//        long totalWeight = _weight * _times;
-//        _weight = (totalWeight + downloadSpeed) / (++_times);
-        _weight = downloadSpeed;
-//        CBDebug(@"weight %@ times %@", @(_weight), @(_times));
+        if (_timeSendRequest != 0) {
+            // 计算下载速度
+            long downloadSpeed = _expectedSize.integerValue / lround((CFAbsoluteTimeGetCurrent() - _timeSendRequest)*1000);
+    //        CBInfo(@"%@ expectedSize %@ time %@ downloadSpeed %@", _remotePeerId, _expectedSize, @(CFAbsoluteTimeGetCurrent() - _timeSendRequest), @(downloadSpeed));
+    //        long totalWeight = _weight * _times;
+    //        _weight = (totalWeight + downloadSpeed) / (++_times);
+            _weight = downloadSpeed;
+    //        CBDebug(@"weight %@ times %@", @(_weight), @(_times));
+        }
+        
         
         [self handleBinaryData];
-        NSDictionary *dict = @{@"event":DC_PIECE_ACK, @"sn":_bufSN, @"seg_id":_segId, @"size":_expectedSize, @"speed":@(downloadSpeed)};
+        NSDictionary *dict = @{@"event":DC_PIECE_ACK, @"sn":_bufSN, @"seg_id":_segId, @"size":_expectedSize};
+        NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:dict];
+        if (_timeSendRequest != 0) [dictM setObject:@(_weight) forKey:@"speed"];
 //        [_simpleChannel sendJSONMessage:dict];
         dispatch_async(_concurrentQueue, ^{
-            [self->_simpleChannel sendJSONMessage:dict];
+            [self->_simpleChannel sendJSONMessage:dictM];
         });
+        
+        _timeSendRequest = 0;
     }
 }
 

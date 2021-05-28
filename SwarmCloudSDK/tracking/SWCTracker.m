@@ -719,6 +719,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
 
 - (SWCDataChannel *)createDatachannelWithRemoteId:(NSString *)remoteId isInitiator:(BOOL)isInitiator intermediator:(NSString *)intermediator {
     SWCDataChannel *dc;
+    CBDebug(@"create datachannel remoteId %@ isSequential %@", remoteId, @(_scheduler.isSequential));
     if (_scheduler.isSequential) {
         dc = [[SWCDataChannel alloc] initWithPeerId:self.peerId remotePeerId:remoteId isInitiator:isInitiator factory:_factory andConfig:_p2pConfig isLive:_isLive sequential:YES channal:_channel intermediator:intermediator];
     } else {
