@@ -66,8 +66,6 @@ static NSString *const ANNOUNCE = @"https://tracker.cdnbye.com/v1";
     
     self.useHttpRange = YES;
     
-    self.signalCompressed = NO;
-    
     self.httpLoadTime = 2.0;
     
     self.pieceLengthForMp4 = 512*1024;

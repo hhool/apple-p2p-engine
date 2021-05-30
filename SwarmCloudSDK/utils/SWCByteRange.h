@@ -23,9 +23,9 @@ long long SWCRangeGetLength(SWCRange range);
 NSString * SWCStringFromRange(SWCRange range);               // Range : {%lld, %lld}
 NSString *SWCRangeGetHeaderString(SWCRange range);           // bytes=start-end
 NSString *SWCRangeGetHeaderStringFromNSRange(NSRange range);
-NSDictionary * SWCRangeFillToRequestHeaders(SWCRange range, NSDictionary *eaders);
-NSDictionary * SWCRangeFillToRequestHeadersIfNeeded(SWCRange range, NSDictionary *headers);      // 没有Range的时候添加
-NSDictionary * SWCRangeFillToResponseHeaders(SWCRange range, NSDictionary *headers, long long totalLength);
+NSDictionary *SWCRangeFillToRequestHeaders(SWCRange range, NSDictionary *eaders);
+NSDictionary *SWCRangeFillToRequestHeadersIfNeeded(SWCRange range, NSDictionary *headers);      // 没有Range的时候添加
+NSDictionary *SWCRangeFillToResponseHeaders(SWCRange range, NSDictionary *headers, long long totalLength);
 
 SWCRange SWCMakeRange(long long start, long long end);
 SWCRange SWCRangeZero(void);

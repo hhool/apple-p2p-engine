@@ -93,7 +93,7 @@
                         block(nil, data);
                     }];
                 } else {
-                    CBWarn(@"loadSegmentFromPeerById failed, turn to http");
+                    CBWarn(@"loadSegmentSyncFromPeerById failed, turn to http");
                     
                     // p2p下载失败转向http下载
                     _currentHttpTask = [self httpLoadSegment:segHls withBlock:^(NSHTTPURLResponse *response, NSData * _Nullable data) {
@@ -360,6 +360,11 @@
 - (void)dataChannel:(SWCDataChannel *)peer didDownloadPieceErrorWithSN:(NSNumber *)sn segId:(NSString *)segId {
     
     CBWarn(@"datachannel download error %@ from %@", segId, peer.remotePeerId);
+}
+
+// TODO
+- (void)dataChannel:(SWCDataChannel *)peer didReceivePieceAbortWithReason:(NSString *)reason {
+    CBWarn(@"peer %@ download aborted, reason %@", peer.remotePeerId, reason);
 }
 
 #pragma mark - **************** CBSegmentManagerDelegate

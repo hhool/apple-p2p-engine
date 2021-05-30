@@ -28,6 +28,7 @@ static NSString *const DC_REQUEST = @"REQUEST";
 static NSString *const DC_PIECE_NOT_FOUND = @"PIECE_NOT_FOUND";
 static NSString *const DC_PIECE = @"PIECE";
 static NSString *const DC_PIECE_ACK = @"PIECE_ACK";
+static NSString *const DC_PIECE_ABORT = @"PIECE_ABORT";
 static NSString *const DC_METADATA = @"METADATA";
 static NSString *const DC_PLAT_ANDROID = @"ANDROID";
 static NSString *const DC_PLAT_IOS = @"IOS";
@@ -86,6 +87,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     
     // 统计
     CFAbsoluteTime _timeSendRequest;     // 发送request的时刻
+    CFAbsoluteTime _timeSendPiece;       // 发送piece的时刻
     
     NSString *_timerID;
     long _uploadSPeed;
@@ -183,14 +185,16 @@ dispatch_async(dispatch_get_main_queue(), block);\
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     [self loadSegmentFromPeerById:segId SN:sn timeout:timeout success:^(NSString * _Nonnull segId, NSData * _Nonnull buffer) {
         if (buffer) {
-            resp = [[SWCNetworkResponse alloc] initWithData:buffer contentType:@"video/mp2t"];
+            resp = [SWCNetworkResponse.alloc initWithData:buffer contentType:@"video/mp2t"];
+        } else {
+            resp = [SWCNetworkResponse.alloc initWithNoResponse];
         }
         dispatch_semaphore_signal(semaphore);
     }];
     
     dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, timeout * NSEC_PER_SEC));
     
-    if (!resp) {
+    if (!resp.data) {
         CBWarn(@"datachannel timeout while downloading seg %@ from %@", _criticalSegId, self.remotePeerId);
         resp = [[SWCNetworkResponse alloc] initWithNoResponse];
     }
@@ -211,6 +215,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 - (void)close {
 //    [self sendMsgClose];
 //    CBInfo(@"test before cancelTimerWithName %@", _timerID);
+    if (_uploading) [self sendMsgPieceAbortWithReason:@"peer is closing"];
     self.connected = NO;
     [[CBTimerManager sharedInstance] cancelTimerWithName:_timerID];
 //    if (_simpleChannel && self.connected) {
@@ -315,6 +320,14 @@ dispatch_async(dispatch_get_main_queue(), block);\
     });
 }
 
+- (void)sendMsgPieceAbortWithReason:(NSString *)reason {
+    _uploading = NO;
+    NSDictionary *dict = @{@"event":DC_PIECE_ABORT, @"reason":reason};
+    dispatch_async(_concurrentQueue, ^{
+        [self->_simpleChannel sendJSONMessage:dict];
+    });
+}
+
 - (void)sendMsgHave:(NSNumber *)sn segId:(NSString *)segId {
     NSDictionary *dict = @{@"event":DC_HAVE, @"sn":sn, @"seg_id":segId};
     dispatch_async(_concurrentQueue, ^{
@@ -345,6 +358,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 - (void)sendPieceNotFound:(NSNumber *)sn andSegId:(NSString *)segId {
+    _uploading = NO;
     NSDictionary *dict = @{@"event":DC_PIECE_NOT_FOUND, @"sn":sn, @"seg_id":segId};
     dispatch_async(_concurrentQueue, ^{
         [self->_simpleChannel sendJSONMessage:dict];
@@ -352,12 +366,8 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 - (void)sendBuffer:(NSData *)buffer segId:(NSString *)segId SN:(NSNumber *)sn {
-    _uploading = YES;
     //开始计时
-//    dispatch_main_async_safe(^{
-//        self->_uploadTimer = [NSTimer scheduledTimerWithTimeInterval:self->_p2pConfig.dcUploadTimeout target:self selector:@selector(uploadtimeout) userInfo:nil repeats:NO];
-//        [[NSRunLoop currentRunLoop] addTimer:self->_uploadTimer forMode:NSRunLoopCommonModes];
-//    })
+    _timeSendPiece = CFAbsoluteTimeGetCurrent();
     
     NSUInteger dataSize = buffer.length;                      // 二进制数据大小
 //    NSUInteger packetSize = DEFAULT_PACKET_SIZE;                // 每个数据包的大小
@@ -565,6 +575,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     });
     // 开始计时
     _timeSendRequest = CFAbsoluteTimeGetCurrent();
+    
     _downloading = YES;
 }
 
@@ -611,7 +622,10 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 - (void)handlePieceAck:(NSNumber *)speed {
     _uploading = NO;
-    _uploadSPeed = [speed longValue];
+    if (speed) {
+        _uploadSPeed = [speed longValue];   
+        CBDebug(@"peer %@ upload speed is %@", self.remotePeerId, @(_uploadSPeed));
+    }
 }
 
 - (void)handleBinaryData {
@@ -657,22 +671,27 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 - (void)handlePieceRequest:(NSDictionary *)dict {
+    _uploading = YES;
     BOOL urgent= [dict[@"urgent"] boolValue];
     NSString *segId = (NSString *)dict[@"seg_id"];
     NSNumber *SN = (NSNumber *)dict[@"sn"];
-    if (self.uploading == YES || _rcvdReqQueue.size > 0) {
-        CBDebug(@"_rcvdReqQueue push %@", SN);
-        if (SN == nil) return;                              // 防止崩溃
-        if (urgent) {
-            [_rcvdReqQueue push:SN];                  // urgent的放在队列末尾
-        } else {
-             [_rcvdReqQueue unshift:SN];
-        }
-    } else {
-        if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceiveRequestWithSegId:SN:andUrgent:)])
-        {
-            [self->_msgDelegate dataChannel:self didReceiveRequestWithSegId:segId SN:SN andUrgent:urgent];
-        }
+//    if (self.uploading == YES || _rcvdReqQueue.size > 0) {
+//        CBDebug(@"_rcvdReqQueue push %@", SN);
+//        if (SN == nil) return;                              // 防止崩溃
+//        if (urgent) {
+//            [_rcvdReqQueue push:SN];                  // urgent的放在队列末尾
+//        } else {
+//             [_rcvdReqQueue unshift:SN];
+//        }
+//    } else {
+//        if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceiveRequestWithSegId:SN:andUrgent:)])
+//        {
+//            [self->_msgDelegate dataChannel:self didReceiveRequestWithSegId:segId SN:SN andUrgent:urgent];
+//        }
+//    }
+    if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceiveRequestWithSegId:SN:andUrgent:)])
+    {
+        [self->_msgDelegate dataChannel:self didReceiveRequestWithSegId:segId SN:SN andUrgent:urgent];
     }
 }
 
@@ -804,10 +823,27 @@ didReceiveJSONMessage:(NSDictionary *)dict {
         NSNumber *SN = (NSNumber *)dict[@"sn"];
         NSNumber *size = (NSNumber *)dict[@"size"];
         NSNumber *speed = (NSNumber *)dict[@"speed"];
+        if (!speed && _timeSendPiece != 0) {
+            _timeSendPiece = 0;
+            speed = @(size.integerValue / lround((CFAbsoluteTimeGetCurrent() - _timeSendRequest)*1000));
+        }
         [self handlePieceAck:speed];
         if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceivePieceAckWithSegId:SN:andSize:)])
         {
             [self->_msgDelegate dataChannel:self didReceivePieceAckWithSegId:segId SN:SN andSize:size];
+        }
+    }
+    
+    else if ([event isEqualToString:DC_PIECE_ABORT]) {
+        _downloading = NO;
+        NSString *reason = (NSString *)dict[@"reason"];
+        if ([self->_msgDelegate respondsToSelector:@selector(dataChannel:didReceivePieceAbortWithReason:)])
+        {
+            [self->_msgDelegate dataChannel:self didReceivePieceAbortWithReason:reason];
+        }
+        if (self.success) {
+            self.success(_segId, nil);
+            self.success = nil;
         }
     }
     
@@ -855,7 +891,7 @@ didReceiveJSONMessage:(NSDictionary *)dict {
     }
     
     else if ([event isEqualToString:DC_PLAY_LIST]) {
-        if (_p2pConfig.isSharePlaylist) {
+        if (_p2pConfig.sharePlaylist) {
             NSString *url = (NSString *)dict[@"url"];
             NSString *data = (NSString *)dict[@"data"];
             [_playlistMap setObject:[SWCPlaylistInfo.alloc initWithTs:[SWCUtils getTimestamp] data:data] forKey:url];

@@ -70,7 +70,7 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
 - (void)loadSegment:(SWCSegment *)segment withBlock:(void(^)(NSHTTPURLResponse *response, NSData *_Nullable data))block {
     SWCHlsSegment *segHls = (SWCHlsSegment *)segment;
     NSString *segId = segHls.segId;
-    CBDebug(@"loadSegment sn %@", segHls.SN);
+    CBDebug(@"loadSegment sn %@ segId %@", segHls.SN, segHls.segId);
     
     NSTimeInterval bufferTime = [[SWCHlsPredictor sharedInstance] getAvailableDuration];
     CBDebug(@"CBHlsPredictor bufferTime %@", @(bufferTime));
@@ -189,7 +189,7 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
                             block(nil, data);
                         }];
                     } else {
-                        CBWarn(@"loadSegmentFromPeerById failed, turn to http");
+                        CBWarn(@"loadSegmentSyncFromPeerById failed, turn to http");
                         
                         // p2p下载失败转向http下载
                         _currentHttpTask = [self httpLoadSegment:segHls withBlock:^(NSHTTPURLResponse *response, NSData * _Nullable data) {
@@ -236,6 +236,8 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
     // 直播一定概率阻塞loadtimeout等待 msg have
 //    CBDebug(@"_isLive %@ _liveLatch %@ shouldWaitForNextSeg %@", @(_isLive), _liveLatch, @(shouldWaitForNextSeg(_isReceiver, _isUploader)));
     if (_isLive && !_liveLatch && shouldWaitForNextSeg(_isReceiver, _isUploader)) {
+        _isUploader = NO;
+        _isReceiver = NO;
         _requestingSN = [sn unsignedIntegerValue];
         CBDebug(@"getTargetPeerBySN strat hangup");
         _liveLatch = dispatch_semaphore_create(0);
@@ -254,7 +256,8 @@ static NSString *const SCHEDULER_CHECK_PEERS = @"SCHEDULER_CHECK_PEERS";
             }
         }
     }
-    
+    _isUploader = NO;
+    _isReceiver = NO;
     return nil;
 }
 
@@ -519,7 +522,7 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
     }
     
     // 如果SN正是目前在请求的
-    if (_isLive && _liveLatch && ([sn unsignedShortValue] == _requestingSN)) {
+    if (_isLive && _liveLatch && ([sn unsignedIntegerValue] == _requestingSN)) {
         CBInfo(@"receive requestingSN %@", sn);
         _requestingSN = 0;            // 置0作为标记
         dispatch_semaphore_signal(_liveLatch);
@@ -622,6 +625,11 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
         [_requestingMap removeObjectForKey:sn];
         if (_latch) dispatch_semaphore_signal(_latch);
     }
+}
+
+// TODO
+- (void)dataChannel:(SWCDataChannel *)peer didReceivePieceAbortWithReason:(NSString *)reason {
+    CBWarn(@"peer %@ download aborted, reason %@", peer.remotePeerId, reason);
 }
 
 #pragma mark - **************** CBSegmentManagerDelegate

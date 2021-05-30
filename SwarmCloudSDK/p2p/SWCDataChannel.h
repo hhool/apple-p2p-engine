@@ -67,6 +67,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** 收到信令 */
 - (void)dataChannel:(SWCDataChannel *)peer didReceivePeerSignalWithAction:(NSString *)action toPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId data:(NSDictionary *)data reason:(NSString *)reason;
 
+/** 收到传输终止信号 */
+- (void)dataChannel:(SWCDataChannel *)peer didReceivePieceAbortWithReason:(NSString *)reason;
+
 @end
 
 @interface SWCDataChannel : NSObject
@@ -158,6 +161,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 发送Peers
 - (void)sendMsgPeers:(NSArray *)peers;
+
+- (void)sendMsgPieceAbortWithReason:(NSString *)reason;
 
 // 发送have
 - (void)sendMsgHave:(NSNumber *)sn segId:(NSString *)segId;

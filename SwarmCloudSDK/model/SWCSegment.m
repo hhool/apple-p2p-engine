@@ -12,7 +12,7 @@
 @implementation SWCSegment
 
 - (instancetype)initWithSegId:(NSString *)segId url:(NSString *)urlString {
-    return [self initWithSegId:segId url:urlString byteRange:SWCMakeRange(NSNotFound, NSNotFound)];
+    return [self initWithSegId:segId url:urlString byteRange:SWCRangeInvaild()];
 }
 
 - (instancetype)initWithSegId:(NSString *)segId url:(NSString *)urlString byteRange:(SWCRange)range {
@@ -20,7 +20,7 @@
     if (self) {
         self->_segId = segId;
         self->_urlString = urlString;
-        if (range.end != NSNotFound) {
+        if (range.end != SWCNotFound) {
             self->_hasByteRange = YES;
             self->_byteRange = range;
         } else {
@@ -31,7 +31,7 @@
 }
 
 - (instancetype)initWithBuffer:(NSData *)buf segId:(NSString *)segId url:(NSString *)urlString {
-    return [self initWithBuffer:buf segId:segId url:urlString byteRange:SWCMakeRange(NSNotFound, NSNotFound)];
+    return [self initWithBuffer:buf segId:segId url:urlString byteRange:SWCRangeInvaild()];
 }
 
 - (instancetype)initWithBuffer:(NSData *)buf segId:(NSString *)segId url:(NSString *)urlString byteRange:(SWCRange)range
@@ -41,7 +41,7 @@
         self->_segId = segId;
         self->_buffer = buf;
         self->_urlString = urlString;
-        if (range.end != NSNotFound) {
+        if (range.end != SWCNotFound) {
             self->_hasByteRange = YES;
             self->_byteRange = range;
         } else {

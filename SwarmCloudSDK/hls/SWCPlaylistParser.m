@@ -80,7 +80,9 @@
     NSTimeInterval segmentDuration = 0.0;;
     NSUInteger mediaSequence = 0;
     NSUInteger segmentMediaSequence = 0;
-    NSString* line;
+    NSInteger segmentByteRangeLength = NSNotFound;
+    NSInteger segmentByteRangeOffset = 0;
+    NSString * line;
     while ([reader hasNext]) {
         line = [reader next];
         if ([line hasPrefix:HLS_TAG_MEDIA_SEQUENCE]) {
@@ -99,6 +101,14 @@
             line = [line stringByReplacingOccurrencesOfString:@"," withString:@""];
             segmentDuration = [line doubleValue];
         }
+        else if ([line hasPrefix:HLS_TAG_BYTERANGE]) {
+            line = [line stringByReplacingOccurrencesOfString:@"#EXT-X-BYTERANGE:" withString:@""];
+            NSArray<NSString *> *splitByteRange = [line componentsSeparatedByString:@"@"];
+            segmentByteRangeLength = [splitByteRange[0] integerValue];
+            if (splitByteRange.count > 1) {
+                segmentByteRangeOffset = [splitByteRange[1] integerValue];
+            }
+        }
         else if ([line hasPrefix:HLS_TAG_ENDLIST]) {
             playlist.hasEndTag = YES;
         }
@@ -107,11 +117,25 @@
 //            CBDebug(@"line %@ playlist.baseUri %@ ", line, playlist.baseUri);
             NSURL *segmentUrl = [NSURL URLWithString:line relativeToURL:playlist.baseUri];
             NSString *urlString = segmentUrl.absoluteString;
-//            CBDebug(@"SWCHlsSegment sn %@ duration %@ urlString %@", @(segmentMediaSequence), @(segmentDuration), urlString);
-            SWCHlsSegment *segment = [SWCHlsSegment.alloc initWithSN:@(segmentMediaSequence) url:urlString andDuration:segmentDuration streamId:uri.absoluteString];  // TODO
+            SWCRange range = SWCRangeInvaild();
+            if (segmentByteRangeLength == NSNotFound) {
+                // The segment is not byte range defined.
+                segmentByteRangeOffset = 0;
+            } else {
+                range = SWCMakeRange(segmentByteRangeOffset, segmentByteRangeOffset+segmentByteRangeLength-1);
+            }
+//            CBDebug(@"SWCHlsSegment sn %@ duration %@ urlString %@ range %@", @(segmentMediaSequence), @(segmentDuration), urlString, SWCStringFromRange(range));
+            SWCHlsSegment *segment = [SWCHlsSegment.alloc initWithSN:@(segmentMediaSequence) url:urlString andDuration:segmentDuration byteRange:range streamId:uri.absoluteString];  // TODO
             urlString = [urlString componentsSeparatedByString:@"?"][0];
+            if (SWCRangeIsVaild(range)) {
+                urlString = [urlString stringByAppendingFormat:@"|%@", SWCRangeGetHeaderString(range)];
+            }
             [playlist addSegment:segment forUri:urlString];
             segmentMediaSequence ++;
+            if (segmentByteRangeLength != NSNotFound) {
+                segmentByteRangeOffset += segmentByteRangeLength;
+            }
+            segmentByteRangeLength = NSNotFound;
         }
     }
     playlist.endSN = segmentMediaSequence;

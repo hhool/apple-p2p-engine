@@ -21,8 +21,8 @@
     
     SWCP2pConfig *config = [SWCP2pConfig defaultConfiguration];
     config.logLevel = SWCLogLevelDebug;
-    config.announce = @"http://tracker.p2pengine.net:7066/v1";
-    [[SWCP2pEngine sharedInstance] startWithToken:@"U8qIyZDZg" andP2pConfig:config];
+//    config.announce = @"http://tracker.p2pengine.net:7066/v1";
+    [[SWCP2pEngine sharedInstance] startWithToken:@"ZMuO5qHZg" andP2pConfig:config];
         
     return YES;
 }

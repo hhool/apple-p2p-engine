@@ -13,10 +13,10 @@
 
 #define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
 
-NSString *LIVE_URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/chunklist_b591000.m3u8";
+NSString *HLS_LIVE_URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/chunklist_b591000.m3u8";
 //NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294d47d73107641/cloudv-transfer/555555555po0q1sn5556526553738q1r_73ac26e878d047498fa906ef9e913036_0_4.m3u8";
 //NSString *VOD_URL = @"https://video.dious.cc/20200707/g5EIwDkS/index.m3u8";
-NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294d47d73107641/cloudv-transfer/555555555po0q1sn5556526553738q1r_73ac26e878d047498fa906ef9e913036_0_4.m3u8";
+NSString *HLS_VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294d47d73107641/cloudv-transfer/555555555po0q1sn5556526553738q1r_73ac26e878d047498fa906ef9e913036_0_4.m3u8";
 
 @interface ViewController ()
 
@@ -36,7 +36,7 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
 @property (strong, nonatomic) UILabel *labelPeers;
 @property (strong, nonatomic) UILabel *labelVersion;
 @property (strong, nonatomic) UILabel *labelPeerId;
-@property (strong, nonatomic) UIButton *buttionReplay;
+@property (strong, nonatomic) UIButton *btnHlsVod;
 
 @end
 
@@ -49,7 +49,7 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
     self.playerVC = [[AVPlayerViewController alloc] init];
         
     //    self.urlString = @"https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8";
-        self.urlString = LIVE_URL;
+        self.urlString = HLS_LIVE_URL;
 //        self.urlString = VOD_URL;
         
 
@@ -182,7 +182,7 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
     btnReplay.backgroundColor = [UIColor greenColor];
     [btnReplay setTitle:@"Replay" forState:UIControlStateNormal];
     [btnView addSubview:btnReplay];
-    self.buttionReplay = btnReplay;
+    self.btnHlsVod = btnReplay;
     [btnReplay addTarget:self action:@selector(btnReplayClick:) forControlEvents:UIControlEventPrimaryActionTriggered];
     
     for (UIButton *btn in btnView.subviews) {

@@ -71,15 +71,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSDictionary *httpHeadersForMp4;
 @property(nonatomic, copy) NSDictionary *httpHeadersForFile;
 
-/** Whether to enable signal compression, which can reduce the bandwidth of signaling server. */
-@property(nonatomic, assign) BOOL signalCompressed;
-
 /** Required while using customized channelId(5 <= length <= 15), recommended to set it as the unique identifier of your organization. 如果使用自定义的channelId，则此字段必须设置，且长度必须大于4个字符并且小于16个字符，建议设置成你所在组织的唯一标识 */
 @property(nonatomic, copy) NSString *channelIdPrefix;
 
 @property(nonatomic, assign) BOOL trickleICE;
 
-@property(nonatomic, assign) BOOL isSharePlaylist;
+@property(nonatomic, assign) BOOL sharePlaylist;
 
 @property(nonatomic, assign) NSTimeInterval httpLoadTime;
 

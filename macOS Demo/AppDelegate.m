@@ -22,10 +22,10 @@
     // Insert code here to initialize your application
     SWCP2pConfig *config = [SWCP2pConfig defaultConfiguration];
     config.logLevel = SWCLogLevelDebug;
-    config.announce = @"http://tracker.p2pengine.net:7066/v1";
+//    config.announce = @"http://tracker.p2pengine.net:7066/v1";
 //    config.p2pEnabled = NO;
     config.localPortMp4 = -1;
-    [[SWCP2pEngine sharedInstance] startWithToken:@"U8qIyZDZg" andP2pConfig:config];
+    [[SWCP2pEngine sharedInstance] startWithToken:@"ZMuO5qHZg" andP2pConfig:config];
     
     
     [self.windowController showWindow:self];

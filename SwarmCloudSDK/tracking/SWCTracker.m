@@ -914,7 +914,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     // 接收到peer传来的信令
     if (![toPeerId isEqualToString:self.peerId]) {
         // 本节点是中转者
-        CBInfo(@"relay signal for %@", fromPeerId);
+        CBInfo(@"relay signal for %@", fromPeerId);        // TODO 验证
         SWCDataChannel *targetPeer = [_datachannelDic objectForKey:toPeerId];
         if (targetPeer) {
             if ([action isEqualToString:@"signal"]) {

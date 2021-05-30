@@ -21,7 +21,7 @@ static SegmentId segmengId = ^NSString * _Nonnull(NSString * _Nonnull streamId, 
     } else if ([segId hasPrefix:@"https://"]) {
         segId = [segId stringByReplacingOccurrencesOfString:@"https://" withString:@""];
     }
-    if (byteRange.start != NSNotFound) {
+    if (byteRange.start != SWCNotFound) {
         segId = [NSString stringWithFormat:@"%@|%@", segId, SWCRangeGetHeaderString(byteRange)];
     }
     return segId;
@@ -50,7 +50,7 @@ static SegmentId segmengId = ^NSString * _Nonnull(NSString * _Nonnull streamId, 
 
 - (instancetype)initWithBuffer:(NSData *)buf url:(NSString *)urlString sn:(NSNumber *)SN duration:(NSTimeInterval)duration streamId:(NSString *)streamId
 {
-    self = [super initWithBuffer:buf segId:segmengId(streamId, SN, urlString, SWCMakeRange(NSNotFound, NSNotFound)) url:urlString];
+    self = [super initWithBuffer:buf segId:segmengId(streamId, SN, urlString, SWCRangeInvaild()) url:urlString];
     if (self) {
         _SN = SN;
         _duration = duration;
@@ -59,7 +59,7 @@ static SegmentId segmengId = ^NSString * _Nonnull(NSString * _Nonnull streamId, 
 }
 
 - (instancetype)initWithBuffer:(NSData *)buf url:(NSString *)urlString sn:(NSNumber *)SN duration:(NSTimeInterval)duration byteRange:(SWCRange)range streamId:(NSString *)streamId {
-    self = [super initWithBuffer:buf segId:segmengId(streamId, SN, urlString, SWCMakeRange(NSNotFound, NSNotFound)) url:urlString byteRange:range];
+    self = [super initWithBuffer:buf segId:segmengId(streamId, SN, urlString, SWCRangeInvaild()) url:urlString byteRange:range];
     if (self) {
         _SN = SN;
         _duration = duration;
@@ -68,7 +68,7 @@ static SegmentId segmengId = ^NSString * _Nonnull(NSString * _Nonnull streamId, 
 }
 
 - (instancetype)initWithSN:(NSNumber *)SN url:(NSString *)urlString andDuration:(NSTimeInterval)duration streamId:(NSString *)streamId {
-    self = [super initWithSegId:segmengId(streamId, SN, urlString, SWCMakeRange(NSNotFound, NSNotFound)) url:urlString];
+    self = [super initWithSegId:segmengId(streamId, SN, urlString, SWCRangeInvaild()) url:urlString];
     if (self) {
         _SN = SN;
         _duration = duration;

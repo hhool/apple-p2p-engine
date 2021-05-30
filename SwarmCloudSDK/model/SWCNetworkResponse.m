@@ -10,30 +10,25 @@
 
 @implementation SWCNetworkResponse
 
-- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type responseUrl:(NSURL *)responseUrl statusCode:(NSInteger)code {
+- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type responseUrl:(NSURL *_Nullable)responseUrl statusCode:(NSInteger)code fileSize:(NSUInteger)size {
     self = [super init];
     if (self) {
         _data = data;
         _contentType = type;
         _responseUrl = responseUrl;
         _statusCode = code;
+        _fizeSize = size;
     }
     return self;
 }
 
-- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type responseUrl:(NSURL *)responseUrl
+- (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type responseUrl:(NSURL *_Nullable)responseUrl
 {
-    return [self initWithData:data contentType:type responseUrl:responseUrl statusCode:200];
+    return [self initWithData:data contentType:type responseUrl:responseUrl statusCode:200 fileSize:data.length];
 }
 
 - (instancetype)initWithData:(NSData *_Nullable)data contentType:(NSString *)type {
-    self = [super init];
-    if (self) {
-        _data = data;
-        _contentType = type;
-        _statusCode = 200;
-    }
-    return self;
+    return [self initWithData:data contentType:type responseUrl:nil statusCode:200 fileSize:data.length];
 }
 
 - (instancetype)initWithNoResponse

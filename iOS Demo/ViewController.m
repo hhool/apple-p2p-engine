@@ -13,13 +13,17 @@
 
 #define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
 
-NSString *LIVE_URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/playlist.m3u8";
-//NSString *LIVE_URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/chunklist_b591000.m3u8";
+//NSString *HLS_LIVE_URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/playlist.m3u8";
+NSString *HLS_LIVE_URL = @"https://wowza.peer5.com/live/smil:bbb_abr.smil/chunklist_b591000.m3u8";
 //NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294d47d73107641/cloudv-transfer/555555555po0q1sn5556526553738q1r_73ac26e878d047498fa906ef9e913036_0_4.m3u8";
 //NSString *VOD_URL = @"https://video.dious.cc/20200707/g5EIwDkS/index.m3u8";
-NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294d47d73107641/cloudv-transfer/555555555po0q1sn5556526553738q1r_73ac26e878d047498fa906ef9e913036_0_4.m3u8";
+NSString *HLS_VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294d47d73107641/cloudv-transfer/555555555po0q1sn5556526553738q1r_73ac26e878d047498fa906ef9e913036_0_4.m3u8";
 
-@interface ViewController ()
+NSString *MP4_URL_1 = @"https://huya-w20.huya.com/2027/357649831/1300/e0a4cd303b58bab74f809be7f2d09113.mp4";
+//NSString *HLS_VOD_URL = @"https://storage.googleapis.com/wvtemp/rkuroiwa/hls_single_segment/sintel_1080p_single_segment.m3u8";
+NSString *MP4_URL_2 = @"https://scdn.common.00cdn.com/p2p/cloud-1080p.mp4";
+
+@interface ViewController ()<SWCP2pEngineDelegate>
 
 @property (strong, nonatomic) AVPlayerViewController *playerVC;
 //@property (strong, nonatomic) PLPlayer *plPlayer;
@@ -39,10 +43,10 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
 @property (strong, nonatomic) UILabel *labelPeers;
 @property (strong, nonatomic) UILabel *labelVersion;
 @property (strong, nonatomic) UILabel *labelPeerId;
-@property (strong, nonatomic) UIButton *buttionReplay;
-@property (strong, nonatomic) UIButton *buttionSwitch;
-@property (strong, nonatomic) UIButton *buttionLive;
-@property (strong, nonatomic) UIButton *buttionVod;
+@property (strong, nonatomic) UIButton *btnHlsVod;
+@property (strong, nonatomic) UIButton *btnHlsLive;
+@property (strong, nonatomic) UIButton *btnMp4_2;
+@property (strong, nonatomic) UIButton *btnMp4_1;
 
 @end
 
@@ -53,65 +57,28 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
     // Do any additional setup after loading the view.
     
     self.playerVC = [[AVPlayerViewController alloc] init];
-    
-//    [SWCP2pEngine sharedInstance].segmentIdForHls = ^NSString * _Nonnull(NSString * _Nonnull streamId, NSNumber * _Nonnull sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
-//        return [NSString stringWithFormat:@"%@", sn];
-//    };
-        
-    self.urlString = LIVE_URL;
-//        self.urlString = VOD_URL;
-        
 
     //    self.urlString = [self.urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
     //    NSURL *originalUrl = [NSURL URLWithString:[self.urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]];
-        NSURL *originalUrl = [NSURL URLWithString:[self.urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+//        NSURL *originalUrl = [NSURL URLWithString:[self.urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         
-    //    [[self class] fpsStart];
-    //    [self checkRecursively];
+
         
-//        [SWCP2pEngine sharedInstance].delegate = self;     // 设置代理
-        
-//        NSLog(@"originalUrl %@", originalUrl);
-        NSURL *url = [[SWCP2pEngine sharedInstance] parseStreamURL:originalUrl];
-        NSLog(@"parsed url %@", url.absoluteString);
-        
-        // AVPlayer
-        AVPlayerItem *playerItem =[[AVPlayerItem alloc] initWithURL: url];
-        self.playerVC.player = [[AVPlayer alloc] initWithPlayerItem: playerItem];
-    //    self.playerVC.player = [[AVPlayer alloc] initWithURL:url];
-        self.playerVC.view.frame = CGRectMake(0, 40, SCREEN_WIDTH, 300);
-        [self.view addSubview:self.playerVC.view];
-        
-    //    self.playerVC.player.currentItem.preferredForwardBufferDuration = 10.0f;
-        
-        // PLPlayer
-        // 初始化 PLPlayerOption 对象
-    //    PLPlayerOption *option = [PLPlayerOption defaultOption];
-    //    self.plPlayer = [PLPlayer playerWithURL:url option:option];
-    //    [self.view addSubview:self.plPlayer.playerView];
-    //   self.plPlayer.playerView.frame = CGRectMake(0, 40, SCREEN_WIDTH, 300);
-    //    [self.plPlayer play];
-    //    self.plPlayer.delegate = self;
-        
-        // Vitamio
-    //    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, 300)];
-    ////    view.backgroundColor = [UIColor greenColor];
-    //    [self.view addSubview:view];
-    //    self.mMPayer = [VMediaPlayer sharedInstance];
-    //    BOOL flag = [self.mMPayer setupPlayerWithCarrierView:view withDelegate:self];
-    //    NSLog(@"flag %d", flag);
-    //    [self.mMPayer setDataSource:url header:nil];
-    //    [self.mMPayer prepareAsync];
-        
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMsg:) name:kP2pEngineDidReceiveStatistics object:nil];
-        
-        [self.playerVC.player play];
-        
-        [self showStatisticsView];
-        
-        [self showButtonView];
+    [SWCP2pEngine sharedInstance].delegate = self;     // 设置代理
+    
+
+    self.playerVC.view.frame = CGRectMake(0, 40, SCREEN_WIDTH, 300);
+    [self.view addSubview:self.playerVC.view];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMsg:) name:kP2pEngineDidReceiveStatistics object:nil];
+    
+    [self.playerVC.player play];
+    
+    [self showStatisticsView];
+    
+    [self showButtonView];
     
 }
 
@@ -211,33 +178,33 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
     
     CGFloat height = 40;
     CGFloat width = 160;
-    UIButton *btnReplay = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, width, height)];
-    btnReplay.backgroundColor = [UIColor greenColor];
-    [btnReplay setTitle:@"Replay" forState:UIControlStateNormal];
-    [btnView addSubview:btnReplay];
-    self.buttionReplay = btnReplay;
-    [btnReplay addTarget:self action:@selector(btnReplayClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *btnHlsVod = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, width, height)];
+    btnHlsVod.backgroundColor = [UIColor greenColor];
+    [btnHlsVod setTitle:@"HLS_VOD" forState:UIControlStateNormal];
+    [btnView addSubview:btnHlsVod];
+    self.btnHlsVod = btnHlsVod;
+    [btnHlsVod addTarget:self action:@selector(btnHlsVodClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *btnSwitch = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-width-20, 0, width, height)];
-    btnSwitch.backgroundColor = [UIColor purpleColor];
-    [btnSwitch setTitle:@"Switch" forState:UIControlStateNormal];
-    [btnView addSubview:btnSwitch];
-    self.buttionSwitch = btnSwitch;
-    [btnSwitch addTarget:self action:@selector(btnSwitchClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *btnHlsLive = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-width-20, 0, width, height)];
+    btnHlsLive.backgroundColor = [UIColor purpleColor];
+    [btnHlsLive setTitle:@"HLS_LIVE" forState:UIControlStateNormal];
+    [btnView addSubview:btnHlsLive];
+    self.btnHlsLive = btnHlsLive;
+    [btnHlsLive addTarget:self action:@selector(btnHlsLiveClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *btnVod = [[UIButton alloc] initWithFrame:CGRectMake(10, height+10, width, height)];
-    btnVod.backgroundColor = [UIColor cyanColor];
-    [btnVod setTitle:@"VOD" forState:UIControlStateNormal];
-    [btnView addSubview:btnVod];
-    self.buttionVod = btnVod;
-    [btnVod addTarget:self action:@selector(btnVodClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *btnMp4_1 = [[UIButton alloc] initWithFrame:CGRectMake(10, height+10, width, height)];
+    btnMp4_1.backgroundColor = [UIColor cyanColor];
+    [btnMp4_1 setTitle:@"MP4_1" forState:UIControlStateNormal];
+    [btnView addSubview:btnMp4_1];
+    self.btnMp4_1 = btnMp4_1;
+    [btnMp4_1 addTarget:self action:@selector(btnMp4_1Click:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *btnLive = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-width-20, height+10, width, height)];
-    btnLive.backgroundColor = [UIColor orangeColor];
-    [btnLive setTitle:@"Live" forState:UIControlStateNormal];
-    [btnView addSubview:btnLive];
-    self.buttionLive = btnLive;
-    [btnLive addTarget:self action:@selector(btnLiveClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *btnMp4_2 = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-width-20, height+10, width, height)];
+    btnMp4_2.backgroundColor = [UIColor orangeColor];
+    [btnMp4_2 setTitle:@"MP4_2" forState:UIControlStateNormal];
+    [btnView addSubview:btnMp4_2];
+    self.btnMp4_2 = btnMp4_2;
+    [btnMp4_2 addTarget:self action:@selector(btnMp4_2Click:) forControlEvents:UIControlEventTouchUpInside];
     
     for (UIButton *btn in btnView.subviews) {
         btn.layer.masksToBounds = YES;
@@ -245,47 +212,57 @@ NSString *VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b44888294
     }
 }
 
--(void)btnReplayClick:(UIButton *)button {
-    if (!self.urlString) return;
+-(void)btnHlsVodClick:(UIButton *)button {
+    [self startPlayWithUrl:[NSURL URLWithString:HLS_VOD_URL]];
+}
+
+-(void)btnHlsLiveClick:(UIButton *)button {
+    [self startPlayWithUrl:[NSURL URLWithString:HLS_LIVE_URL]];
+}
+
+-(void)btnMp4_1Click:(UIButton *)button {
+    [self startPlayWithUrl:[NSURL URLWithString:MP4_URL_1]];
+}
+
+-(void)btnMp4_2Click:(UIButton *)button {
+    [self startPlayWithUrl:[NSURL URLWithString:MP4_URL_2]];
+}
+
+- (void)startPlayWithUrl:(NSURL *)url {
+    //    [SWCP2pEngine sharedInstance].segmentIdForHls = ^NSString * _Nonnull(NSString * _Nonnull streamId, NSNumber * _Nonnull sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
+    //        return [NSString stringWithFormat:@"%@", sn];
+    //    };
     [self.playerVC.player pause];
-    NSURL *originalUrl = [NSURL URLWithString:self.urlString];
-    
-//    CBP2pConfig *config = [CBP2pConfig defaultConfiguration];
-//    config.wsSignalerAddr = @"wss://opensignal.gcvow.top";
-//    [CBP2pEngine sharedInstance].p2pConfig = config;
-    
-    NSURL *url = [[SWCP2pEngine sharedInstance] parseStreamURL:originalUrl];
+    NSURL *proxyUrl = [[SWCP2pEngine sharedInstance] parseStreamURL:url];
     self.playerVC.player = nil;
-    self.playerVC.player = [[AVPlayer alloc] initWithURL:url];
+    self.playerVC.player = [[AVPlayer alloc] initWithURL:proxyUrl];
     [self.playerVC.player play];
     
     [self clearData];
     [self updateStatistics];
 }
 
--(void)btnSwitchClick:(UIButton *)button {
-    if ([self.urlString isEqualToString:VOD_URL]) {
-        self.urlString = LIVE_URL;
-    } else {
-        self.urlString = VOD_URL;
-    }
-    [self btnReplayClick:nil];
-}
-
--(void)btnVodClick:(UIButton *)button {
-    self.urlString = VOD_URL;
-    [self btnReplayClick:nil];
-}
-
--(void)btnLiveClick:(UIButton *)button {
-    self.urlString = LIVE_URL;
-    [self btnReplayClick:nil];
-}
-
 - (void)clearData {
     self.totalHttpDownloaded = 0;
     self.totalP2pDownloaded = 0;
     self.totalP2pUploaded = 0;
+}
+
+#pragma mark - **************** CBP2pEngineDelegate
+
+-(NSTimeInterval)bufferedDuration {
+    NSTimeInterval currentTime = CMTimeGetSeconds([self.playerVC.player currentTime]);
+    NSTimeInterval bufferedDuration = 0;
+    for (NSValue *value in [[self.playerVC.player currentItem] loadedTimeRanges]) {
+        CMTimeRange timeRange = [value CMTimeRangeValue];
+        NSTimeInterval start = CMTimeGetSeconds(timeRange.start);
+        NSTimeInterval end = start + CMTimeGetSeconds(timeRange.duration);
+        if (currentTime >= start && currentTime <= end) {
+            bufferedDuration = end - currentTime;
+            break;
+        }
+    }
+    return bufferedDuration;
 }
 
 @end

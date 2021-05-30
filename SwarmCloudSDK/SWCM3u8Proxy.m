@@ -95,7 +95,7 @@ static SWCM3u8Proxy *_instance = nil;
         NSDictionary *headers = strongSelf->_config.httpHeadersForHls;
         SWCNetworkResponse *netResp;
         NSError *error;
-        if (strongSelf->_config.isSharePlaylist && strongSelf->_tracker) {
+        if (strongSelf->_config.sharePlaylist && strongSelf->_tracker) {
             NSString *netUrlString = [url.absoluteString componentsSeparatedByString:@"?"][0];
             SWCPlaylistInfo *playlist = [strongSelf requestPlaylistFromPeerWithUrl:netUrlString];
             if (!playlist) {
@@ -191,6 +191,10 @@ static SWCM3u8Proxy *_instance = nil;
         NSURL *url = [NSURL URLWithString:uri relativeToURL:strongSelf->_originalLocation];
         // 去掉查询参数
         NSString *segmentKey = [url.absoluteString componentsSeparatedByString:@"?"][0];
+        if (request.hasByteRange) {
+            CBDebug(@"setByteRangeFromNSRange location %@ length %@", @(request.byteRange.location), @(request.byteRange.length));
+            segmentKey = [segmentKey stringByAppendingFormat:@"|%@", SWCRangeGetHeaderStringFromNSRange(request.byteRange)];
+        }
         SWCHlsSegment *playlistSeg;
         if (strongSelf->_isLive) {
             playlistSeg = [strongSelf->_segmentMapLive objectForKey:segmentKey];
@@ -202,9 +206,8 @@ static SWCM3u8Proxy *_instance = nil;
             completionBlock([GCDWebServerResponse responseWithRedirect:url permanent:NO]);
             return;
         }
-        if (request.hasByteRange) {
-            [playlistSeg setByteRangeFromNSRange:request.byteRange];
-        }
+        CBDebug(@"segmentKey %@ playlistSeg segId %@", segmentKey, playlistSeg.segId);
+        
         NSDictionary *headers = strongSelf->_config.httpHeadersForHls;
         NSError *error;
         if (strongSelf.isConnected && strongSelf->_config.p2pEnabled) {
@@ -225,7 +228,7 @@ static SWCM3u8Proxy *_instance = nil;
             if (!strongSelf->_rangeTested) {
                 strongSelf->_rangeTested = true;
                 [SWCHlsSegment setDefaultContentType:resp.contentType];
-//                NSLog(@"setDefaultContentType %@", resp.contentType);
+                NSLog(@"setDefaultContentType %@", resp.contentType);
                 [strongSelf performRangeRequestWithUrl:url];
                 CBInfo(@"engine reset HlsPredictor");
                 [SWCHlsPredictor.sharedInstance reset];
@@ -435,7 +438,7 @@ static SWCM3u8Proxy *_instance = nil;
  *  This method is called after the server has successfully started.
  */
 - (void)webServerDidStart:(GCDWebServer*)server {
-    CBDebug(@"!-> webServerDidStart");
+    CBDebug(@"!-> webServerDidStart isRunning %@", @(_webServer.isRunning));
 }
 
 /**
@@ -448,7 +451,8 @@ static SWCM3u8Proxy *_instance = nil;
  *  corresponding last GCDWebServerConnection closed).
  */
 - (void)webServerDidConnect:(GCDWebServer*)server {
-    CBDebug(@"!-> webServerDidConnect");
+    CBDebug(@"!-> webServerDidConnect isRunning %@", @(_webServer.isRunning));
+    // 发起请求时调用
 }
 
 /**
@@ -462,14 +466,15 @@ static SWCM3u8Proxy *_instance = nil;
  *  and -webServerDidDisconnect:.
  */
 - (void)webServerDidDisconnect:(GCDWebServer*)server {
-    CBDebug(@"!-> webServerDidDisconnect");
+    CBDebug(@"!-> webServerDidDisconnect isRunning %@", @(_webServer.isRunning));
+    // 结束请求时调用
 }
 
 /**
  *  This method is called after the server has stopped.
  */
 - (void)webServerDidStop:(GCDWebServer*)server {
-    CBDebug(@"!-> webServerDidStop");
+    CBDebug(@"!-> webServerDidStop isRunning %@", @(_webServer.isRunning));
 }
 
 @end
