@@ -362,7 +362,6 @@
     CBWarn(@"datachannel download error %@ from %@", segId, peer.remotePeerId);
 }
 
-// TODO
 - (void)dataChannel:(SWCDataChannel *)peer didReceivePieceAbortWithReason:(NSString *)reason {
     CBWarn(@"peer %@ download aborted, reason %@", peer.remotePeerId, reason);
 }

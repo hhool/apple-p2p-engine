@@ -298,6 +298,18 @@
 		9492CD222643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */; };
 		9492CD232643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */; };
 		9492CD242643F75D00B61AD3 /* SWCMp4Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */; };
+		94C35EC82663E45100AE7D38 /* SWCWebServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C35EC62663E45100AE7D38 /* SWCWebServerConnection.h */; };
+		94C35EC92663E45100AE7D38 /* SWCWebServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C35EC62663E45100AE7D38 /* SWCWebServerConnection.h */; };
+		94C35ECA2663E45100AE7D38 /* SWCWebServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C35EC62663E45100AE7D38 /* SWCWebServerConnection.h */; };
+		94C35ECB2663E45100AE7D38 /* SWCWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C35EC72663E45100AE7D38 /* SWCWebServerConnection.m */; };
+		94C35ECC2663E45100AE7D38 /* SWCWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C35EC72663E45100AE7D38 /* SWCWebServerConnection.m */; };
+		94C35ECD2663E45100AE7D38 /* SWCWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C35EC72663E45100AE7D38 /* SWCWebServerConnection.m */; };
+		94C35ED02663EC8B00AE7D38 /* SWCMp4Scheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C35ECE2663EC8B00AE7D38 /* SWCMp4Scheduler.h */; };
+		94C35ED12663EC8B00AE7D38 /* SWCMp4Scheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C35ECE2663EC8B00AE7D38 /* SWCMp4Scheduler.h */; };
+		94C35ED22663EC8B00AE7D38 /* SWCMp4Scheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C35ECE2663EC8B00AE7D38 /* SWCMp4Scheduler.h */; };
+		94C35ED32663EC8B00AE7D38 /* SWCMp4Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C35ECF2663EC8B00AE7D38 /* SWCMp4Scheduler.m */; };
+		94C35ED42663EC8B00AE7D38 /* SWCMp4Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C35ECF2663EC8B00AE7D38 /* SWCMp4Scheduler.m */; };
+		94C35ED52663EC8B00AE7D38 /* SWCMp4Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C35ECF2663EC8B00AE7D38 /* SWCMp4Scheduler.m */; };
 		94E099712652A7CC00268FC5 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E099702652A7CC00268FC5 /* MainWindowController.m */; };
 		9BB7C9624F4673C2516F33FF /* libPods-iOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9461A112264C94C90090EF49 /* libPods-iOS Demo.a */; };
 		B96B0788F50AA597171B2CC2 /* libPods-macOS SwarmCloudSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AD80A7655A7875B6B641CD /* libPods-macOS SwarmCloudSDK.a */; };
@@ -475,6 +487,10 @@
 		9492CD162643F74300B61AD3 /* SWCM3u8Proxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCM3u8Proxy.m; sourceTree = "<group>"; };
 		9492CD1D2643F75D00B61AD3 /* SWCMp4Proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCMp4Proxy.h; sourceTree = "<group>"; };
 		9492CD1E2643F75D00B61AD3 /* SWCMp4Proxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCMp4Proxy.m; sourceTree = "<group>"; };
+		94C35EC62663E45100AE7D38 /* SWCWebServerConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCWebServerConnection.h; sourceTree = "<group>"; };
+		94C35EC72663E45100AE7D38 /* SWCWebServerConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCWebServerConnection.m; sourceTree = "<group>"; };
+		94C35ECE2663EC8B00AE7D38 /* SWCMp4Scheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCMp4Scheduler.h; sourceTree = "<group>"; };
+		94C35ECF2663EC8B00AE7D38 /* SWCMp4Scheduler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCMp4Scheduler.m; sourceTree = "<group>"; };
 		94E0996F2652A7CC00268FC5 /* MainWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
 		94E099702652A7CC00268FC5 /* MainWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
 		94EC2942264CFBEA00752F88 /* SwarmCloudSDK */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SwarmCloudSDK; sourceTree = "<group>"; };
@@ -549,6 +565,10 @@
 		9406C6A82657F22F00A457E8 /* mp4 */ = {
 			isa = PBXGroup;
 			children = (
+				94C35EC62663E45100AE7D38 /* SWCWebServerConnection.h */,
+				94C35EC72663E45100AE7D38 /* SWCWebServerConnection.m */,
+				94C35ECE2663EC8B00AE7D38 /* SWCMp4Scheduler.h */,
+				94C35ECF2663EC8B00AE7D38 /* SWCMp4Scheduler.m */,
 			);
 			path = mp4;
 			sourceTree = "<group>";
@@ -881,6 +901,7 @@
 				947BFC3E26429BF6001C7C99 /* StunChangeRequest.h in Headers */,
 				94746E5E2647C9D900245E7A /* SWCTracker.h in Headers */,
 				947BFC6226429BF6001C7C99 /* StunErrorCode.h in Headers */,
+				94C35ED02663EC8B00AE7D38 /* SWCMp4Scheduler.h in Headers */,
 				940C06A726468E6B00836F73 /* SWCHlsPredictor.h in Headers */,
 				9492CD1F2643F75D00B61AD3 /* SWCMp4Proxy.h in Headers */,
 				947BFC3B26429BF6001C7C99 /* StunClient.h in Headers */,
@@ -890,6 +911,7 @@
 				945A7308265903F700AC351A /* SWCHlsMasterPlaylist.h in Headers */,
 				947BFC4D26429BF6001C7C99 /* CBSocket.h in Headers */,
 				940C068E2646846900836F73 /* SWCSegment.h in Headers */,
+				94C35EC82663E45100AE7D38 /* SWCWebServerConnection.h in Headers */,
 				945A7300265903CD00AC351A /* SWCHlsPlaylist.h in Headers */,
 				947BFC4126429BF6001C7C99 /* StunResult.h in Headers */,
 				9492CD0F2643F40200B61AD3 /* SWCProxy.h in Headers */,
@@ -933,6 +955,7 @@
 				947BFC3F26429BF6001C7C99 /* StunChangeRequest.h in Headers */,
 				94746E5F2647C9D900245E7A /* SWCTracker.h in Headers */,
 				947BFC6326429BF6001C7C99 /* StunErrorCode.h in Headers */,
+				94C35ED12663EC8B00AE7D38 /* SWCMp4Scheduler.h in Headers */,
 				940C06A826468E6B00836F73 /* SWCHlsPredictor.h in Headers */,
 				9492CD202643F75D00B61AD3 /* SWCMp4Proxy.h in Headers */,
 				947BFC3C26429BF6001C7C99 /* StunClient.h in Headers */,
@@ -942,6 +965,7 @@
 				945A7309265903F700AC351A /* SWCHlsMasterPlaylist.h in Headers */,
 				947BFC4E26429BF6001C7C99 /* CBSocket.h in Headers */,
 				940C068F2646846900836F73 /* SWCSegment.h in Headers */,
+				94C35EC92663E45100AE7D38 /* SWCWebServerConnection.h in Headers */,
 				945A7301265903CD00AC351A /* SWCHlsPlaylist.h in Headers */,
 				947BFC4226429BF6001C7C99 /* StunResult.h in Headers */,
 				9492CD102643F40200B61AD3 /* SWCProxy.h in Headers */,
@@ -985,6 +1009,7 @@
 				947BFC4026429BF6001C7C99 /* StunChangeRequest.h in Headers */,
 				94746E602647C9D900245E7A /* SWCTracker.h in Headers */,
 				947BFC6426429BF6001C7C99 /* StunErrorCode.h in Headers */,
+				94C35ED22663EC8B00AE7D38 /* SWCMp4Scheduler.h in Headers */,
 				940C06A926468E6B00836F73 /* SWCHlsPredictor.h in Headers */,
 				9492CD212643F75D00B61AD3 /* SWCMp4Proxy.h in Headers */,
 				947BFC3D26429BF6001C7C99 /* StunClient.h in Headers */,
@@ -994,6 +1019,7 @@
 				945A730A265903F700AC351A /* SWCHlsMasterPlaylist.h in Headers */,
 				947BFC4F26429BF6001C7C99 /* CBSocket.h in Headers */,
 				940C06902646846900836F73 /* SWCSegment.h in Headers */,
+				94C35ECA2663E45100AE7D38 /* SWCWebServerConnection.h in Headers */,
 				945A7302265903CD00AC351A /* SWCHlsPlaylist.h in Headers */,
 				947BFC4326429BF6001C7C99 /* StunResult.h in Headers */,
 				9492CD112643F40200B61AD3 /* SWCProxy.h in Headers */,
@@ -1420,6 +1446,7 @@
 				945A73132659040E00AC351A /* SWCHlsMediaPlaylist.m in Sources */,
 				94746E512647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */,
 				947BFC5F26429BF6001C7C99 /* CBSocket.m in Sources */,
+				94C35ED32663EC8B00AE7D38 /* SWCMp4Scheduler.m in Sources */,
 				9464500D2649698A006EDBD7 /* SWCError.m in Sources */,
 				94746E492647C7B300245E7A /* SWCHlsScheduler.m in Sources */,
 				947BFC7326429C88001C7C99 /* CBLogger.m in Sources */,
@@ -1431,6 +1458,7 @@
 				940C06B22646905400836F73 /* SWCSignalClient.m in Sources */,
 				94746E412647C79000245E7A /* SWCScheduler.m in Sources */,
 				947BFC952642A2EA001C7C99 /* CBPeerChannel.m in Sources */,
+				94C35ECB2663E45100AE7D38 /* SWCWebServerConnection.m in Sources */,
 				947BFCA02642A410001C7C99 /* SWCUtils.m in Sources */,
 				947BFC5926429BF6001C7C99 /* StunErrorCode.m in Sources */,
 				9464500526496935006EDBD7 /* SWCByteRange.m in Sources */,
@@ -1471,6 +1499,7 @@
 				945A73142659040E00AC351A /* SWCHlsMediaPlaylist.m in Sources */,
 				94746E522647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */,
 				947BFC6026429BF6001C7C99 /* CBSocket.m in Sources */,
+				94C35ED42663EC8B00AE7D38 /* SWCMp4Scheduler.m in Sources */,
 				9464500E2649698A006EDBD7 /* SWCError.m in Sources */,
 				94746E4A2647C7B300245E7A /* SWCHlsScheduler.m in Sources */,
 				947BFC7426429C88001C7C99 /* CBLogger.m in Sources */,
@@ -1482,6 +1511,7 @@
 				940C06B32646905400836F73 /* SWCSignalClient.m in Sources */,
 				94746E422647C79000245E7A /* SWCScheduler.m in Sources */,
 				947BFC962642A2EA001C7C99 /* CBPeerChannel.m in Sources */,
+				94C35ECC2663E45100AE7D38 /* SWCWebServerConnection.m in Sources */,
 				947BFCA12642A410001C7C99 /* SWCUtils.m in Sources */,
 				947BFC5A26429BF6001C7C99 /* StunErrorCode.m in Sources */,
 				9464500626496935006EDBD7 /* SWCByteRange.m in Sources */,
@@ -1522,6 +1552,7 @@
 				945A73152659040E00AC351A /* SWCHlsMediaPlaylist.m in Sources */,
 				94746E532647C7CC00245E7A /* SWCHlsSnScheduler.m in Sources */,
 				947BFC6126429BF6001C7C99 /* CBSocket.m in Sources */,
+				94C35ED52663EC8B00AE7D38 /* SWCMp4Scheduler.m in Sources */,
 				9464500F2649698A006EDBD7 /* SWCError.m in Sources */,
 				94746E4B2647C7B300245E7A /* SWCHlsScheduler.m in Sources */,
 				947BFC7526429C88001C7C99 /* CBLogger.m in Sources */,
@@ -1533,6 +1564,7 @@
 				940C06B42646905400836F73 /* SWCSignalClient.m in Sources */,
 				94746E432647C79000245E7A /* SWCScheduler.m in Sources */,
 				947BFC972642A2EA001C7C99 /* CBPeerChannel.m in Sources */,
+				94C35ECD2663E45100AE7D38 /* SWCWebServerConnection.m in Sources */,
 				947BFCA22642A410001C7C99 /* SWCUtils.m in Sources */,
 				947BFC5B26429BF6001C7C99 /* StunErrorCode.m in Sources */,
 				9464500726496935006EDBD7 /* SWCByteRange.m in Sources */,

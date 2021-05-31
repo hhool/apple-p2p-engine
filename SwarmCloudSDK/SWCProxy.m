@@ -56,11 +56,14 @@ NSString *const LOCAL_IP = @"http://127.0.0.1";
 }
 
 - (void)stopP2p {
-    CBError(@"Not implemented");
+    if (_tracker) {
+        [_tracker stopP2p];
+    }
 }
 
 - (void)restartP2p {
-    CBError(@"Not implemented");
+    if (_tracker) [self stopP2p];
+    _tracker = nil;
 }
 
 - (NSString *)getMediaType {
@@ -68,11 +71,14 @@ NSString *const LOCAL_IP = @"http://127.0.0.1";
 }
 
 - (BOOL)isConnected {
-    SWCProxyThrowException
+    return _tracker && _tracker.connected;
 }
 
 - (NSString *)getPeerId {
-    SWCProxyThrowException
+    if (_tracker && _tracker.peerId) {
+        return _tracker.peerId;
+    }
+    return nil;
 }
 
 - (NSString *)getProxyUrl:(NSURL *)url withVideoId:(NSString *)videoId {

@@ -12,8 +12,9 @@
 #import "CBLogger.h"
 #import "GCDWebServerDataResponse.h"
 #import "GCDWebServerStreamedResponse.h"
-#import "GCDWebServerFileResponse.h"
 #import "SWCByteRange.h"
+#import "SWCWebServerConnection.h"
+#import "SWCTracker.h"
 
 static SWCMp4Proxy *_instance = nil;
 
@@ -61,7 +62,7 @@ static SWCMp4Proxy *_instance = nil;
     
     [_webServer addDefaultHandlerForMethod:@"GET" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerRequest * _Nonnull request) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        CBDebug(@"local server receive request %@", request);
+        CBDebug(@"local server receive request %@", request.path);
         NSString *uri = request.path;
         if (request.URL.query) {
             uri = [NSString stringWithFormat:@"%@?%@", uri, request.URL.query];
@@ -81,6 +82,14 @@ static SWCMp4Proxy *_instance = nil;
         if (strongSelf->_isFirstRequest) {
             CBDebug(@"mp4 first request");
             strongSelf->_isFirstRequest = NO;
+            if (!strongSelf->_tracker && strongSelf->_config.p2pEnabled) {
+                @try {
+                    [strongSelf initTrackerClientWithEndSN:0];       // TODO
+                } @catch (NSException *exception) {
+                    CBError(@"NSException caught, reason: %@", exception.reason);
+                    strongSelf->_config.p2pEnabled = NO;
+                }
+            }
         }
         
         resp = [GCDWebServerDataResponse responseWithData:netResp.data contentType:netResp.contentType];
@@ -89,7 +98,7 @@ static SWCMp4Proxy *_instance = nil;
 //        [resp setValue:@"video/mp4" forAdditionalHeader:@"Content-Type"];
         resp.contentLength = netResp.data.length;
         [resp setValue:[NSString stringWithFormat:@"bytes %lu-%lu/%lu", (unsigned long)request.byteRange.location, (unsigned long)(request.byteRange.location+request.byteRange.length-1), (unsigned long)netResp.fizeSize] forAdditionalHeader:@"Content-Range"];
-        CBDebug(@"local server resp %@", resp);
+        CBDebug(@"local server resp size %@", @(netResp.data.length));
         return resp;
     }];
     
@@ -149,18 +158,6 @@ static SWCMp4Proxy *_instance = nil;
 //        completionBlock(resp);
 //    }];
     
-    /*
-     kGCDWebServerHTTPStatusCode_OK = 200,
-     kGCDWebServerHTTPStatusCode_Created = 201,
-     kGCDWebServerHTTPStatusCode_Accepted = 202,
-     kGCDWebServerHTTPStatusCode_NonAuthoritativeInformation = 203,
-     kGCDWebServerHTTPStatusCode_NoContent = 204,
-     kGCDWebServerHTTPStatusCode_ResetContent = 205,
-     kGCDWebServerHTTPStatusCode_PartialContent = 206,
-     kGCDWebServerHTTPStatusCode_MultiStatus = 207,
-     kGCDWebServerHTTPStatusCode_AlreadyReported = 208
-     */
-    
 #if TARGET_OS_OSX
     [_webServer startWithPort:_currentPort bonjourName:nil];
 #else
@@ -168,6 +165,7 @@ static SWCMp4Proxy *_instance = nil;
         GCDWebServerOption_AutomaticallySuspendInBackground : @(NO),
         GCDWebServerOption_Port: @(_currentPort),
         GCDWebServerOption_ConnectedStateCoalescingInterval: @3.0,
+        GCDWebServerOption_ConnectionClass: [SWCWebServerConnection class],
     } error:error];
 #endif
     _currentPort = _webServer.port;
@@ -183,24 +181,74 @@ static SWCMp4Proxy *_instance = nil;
 
 - (void)stopP2p {
     CBInfo(@"mp4 proxy stop p2p");
+    [super stopP2p];
 }
 
 - (void)restartP2p {
     CBInfo(@"mp4 proxy restart p2p");
+    [super restartP2p];
     _isFirstRequest = YES;
+    
 }
 
 - (NSString *)getMediaType {
     return @"mp4";
 }
 
-- (BOOL)isConnected {
-    return NO;
-}
+- (void)initTrackerClientWithEndSN:(NSUInteger)sn {
+    if (_tracker) return;
+    CBInfo(@"Init tracker endSN %@", @(sn));
+    // 拼接channelId，并进行url编码和base64编码
+    NSString *firstPart;
+    NSString *channelIdPrefix = _config.channelIdPrefix;
+    if (![_videoId isEqualToString:_originalURL.absoluteString]) {
+        if (!channelIdPrefix) {
+            NSLog(@"P2P warning: channelIdPrefix is required while using customized channelId!");
+            return;
+        }
+        if (channelIdPrefix.length < 5) {
+            NSLog(@"P2P warning: channelIdPrefix length is too short!");
+            return;
+        } else if (channelIdPrefix.length > 15) {
+            NSLog(@"P2P warning: channelIdPrefix length is too long!");
+            return;
+        }
+        firstPart = [NSString stringWithFormat:@"%@%@", channelIdPrefix, _videoId];
+    } else {
+        NSString *host = _originalURL.host;
+        if (_originalURL.port) {
+            host = [NSString stringWithFormat:@"%@:%@", host, _originalURL.port];
+        }
+        firstPart = [NSString stringWithFormat:@"%@%@", host, [_originalURL.relativePath stringByDeletingPathExtension]];
+        if (channelIdPrefix) firstPart = [NSString stringWithFormat:@"%@%@", channelIdPrefix, firstPart];
+    }
+    NSString *channelStr;
+    if (_config.wsSignalerAddr) {
+        //    CBInfo(@"wsSignalerAddr %@", _p2pConfig.wsSignalerAddr);
+        NSURL *signalUrl = [NSURL URLWithString:_config.wsSignalerAddr];
+        NSString *secondPart = signalUrl.host;
+        if (signalUrl.port) {
+            secondPart = [NSString stringWithFormat:@"%@:%@", secondPart, signalUrl.port];
+        }
+        channelStr = [NSString stringWithFormat:@"%@|%@[%@]", firstPart, secondPart, SWCDataChannel.dcVersion];
+    } else {
+        channelStr = [NSString stringWithFormat:@"%@|[%@]", firstPart, SWCDataChannel.dcVersion];
+    }
 
-- (NSString *)getPeerId {
-    return nil;
+    CBInfo(@"channelStr %@", channelStr);
+    NSString *urlEncodedStr = [channelStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+    NSData *base64Data = [urlEncodedStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64EncodeString = [base64Data base64EncodedStringWithOptions:0];           //base64编码
+    CBInfo(@"channel id %@", base64EncodeString);
+    _tracker = [SWCTracker.alloc initWithToken:_token BaseUrl:_config.announce channel:base64EncodeString isLive:NO endSN:sn nat:self.natTypeString mediaType:SWCMediaTypeMp4 multiBitrate:NO andConfig:_config];
+    
+    // TODO
+    if ([self.delegate respondsToSelector:@selector(bufferedDuration)]) {
+        _tracker.scheduler.delegate = self;    // 设置代理
+    }
+    
+    CBInfo(@"tracker do channelRequest");
+    [_tracker channelRequest];
 }
-
 
 @end

@@ -34,7 +34,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+//    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
 }
 
 

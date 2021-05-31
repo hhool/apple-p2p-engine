@@ -298,15 +298,12 @@ static SWCM3u8Proxy *_instance = nil;
 
 - (void)stopP2p {
     CBInfo(@"m3u8 proxy stop p2p");
-    if (_tracker) {
-        [_tracker stopP2p];
-    }
+    [super stopP2p];
 }
 
 - (void)restartP2p {
     CBInfo(@"m3u8 proxy restart p2p");
-    if (_tracker) [self stopP2p];
-     _tracker = nil;
+    [super restartP2p];
     _rangeTested = NO;
     _isLive = NO;
     [_mediaListUrls removeAllObjects];
@@ -317,17 +314,6 @@ static SWCM3u8Proxy *_instance = nil;
 
 - (NSString *) getMediaType {
     return @"hls";
-}
-
-- (BOOL)isConnected {
-    return _tracker && _tracker.connected;
-}
-
-- (NSString *)getPeerId {
-    if (_tracker && _tracker.peerId) {
-        return _tracker.peerId;
-    }
-    return nil;
 }
 
 - (SWCPlaylistInfo *)requestPlaylistFromPeerWithUrl:(NSString *)urlString {
@@ -389,7 +375,6 @@ static SWCM3u8Proxy *_instance = nil;
     CBInfo(@"channel id %@", base64EncodeString);
     _tracker = [SWCTracker.alloc initWithToken:_token BaseUrl:_config.announce channel:base64EncodeString isLive:isLive endSN:sn nat:self.natTypeString mediaType:SWCMediaTypeHls multiBitrate:scheduledBySegId andConfig:_config];
     
-    // TODO
     if ([self.delegate respondsToSelector:@selector(bufferedDuration)]) {
         _tracker.scheduler.delegate = self;    // 设置代理
     }

@@ -144,10 +144,12 @@ static NSString * const SIGNAL_RECONNECT = @"SIGNAL_RECONNECT";
 - (void)sendRejectToRemotePeerId:(NSString*)_id reason:(NSString *)reason {
     
     NSDictionary *dict = @{@"action": @"signal", @"to_peer_id": _id};
-    NSString *jsonString = [SWCUtils convertToJSONData:dict];
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:dict];
     if (reason) {
-        [dict setValue:reason forKey:@"reason"];
+        [dictM setValue:reason forKey:@"reason"];
     }
+    NSString *jsonString = [SWCUtils convertToJSONData:dictM];
+    
 //    NSLog(@"socketSendRejected --------------- %@",jsonString);
     [self sendData:jsonString];
 }

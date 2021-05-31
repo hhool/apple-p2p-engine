@@ -7,6 +7,9 @@
 //
 
 #import "SWCSchedulerFactory.h"
+#import "SWCHlsSnScheduler.h"
+#import "SWCHlsIdScheduler.h"
+#import "SWCMp4Scheduler.h"
 
 @implementation SWCSchedulerFactory
 
@@ -20,9 +23,9 @@
             }
             break;
         case SWCMediaTypeMp4:
-            return nil;
+            return [SWCMp4Scheduler.alloc initWithIsLive:isLive endSN:endSN andConfig:config];
             break;
-      case SWCMediaTypeFile:
+        case SWCMediaTypeFile:
             return nil;
             break;
     }

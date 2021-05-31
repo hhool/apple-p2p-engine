@@ -40,6 +40,7 @@ const int MIN_CONNS = 3;                    // 最小连接数
 const NSUInteger MIN_PEER_SHARE_TIME = 30;         // 分享peers的最低加入时间间隔 秒
 const NSUInteger MAX_TRY_CONNS = 8;                // GET_PEERS后一次最多尝试连接的peer数量
 const NSUInteger MIN_PEERS_FOR_TRACKER = 3;        // 留给tracker调度的节点数量
+const NSUInteger IOS_MAX_PEERS_LIMIT = 11;
 
 static NSString *const TRACKER_HEARTBEAT = @"TRACKER_HEARTBEAT";
 static NSString *const TRACKER_GET_PEERS = @"TRACKER_GET_PEERS";
@@ -180,10 +181,24 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     
 //    _netType = @"4g";          // test
 //    CBInfo(@"announceHost %@ %@ %@", announceHost, _netType, _natType);
+    NSString *mediaTypeString;
+    switch (_mediaType) {
+        case SWCMediaTypeHls:
+            mediaTypeString = @"hls";
+            break;
+        case SWCMediaTypeMp4:
+            mediaTypeString = @"mp4";
+            break;
+        case SWCMediaTypeFile:
+            mediaTypeString = @"file";
+            break;
+        default:
+            break;
+    }
     NSDictionary *dict = @{
                            @"device": @"ios-native",
                            @"tag": tag,
-                           @"type": @"hls",
+                           @"type": mediaTypeString,
                            @"live": @(_isLive),
                            @"channel": _channel,
                            @"ts": _timestamp,
@@ -492,6 +507,10 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     if (_peersReceived.count == 0) return;
     CBInfo(@"try connect to %@ peers", @(_peersReceived.count));
     NSArray *copyArr = [NSArray arrayWithArray:_peersReceived];
+#if TARGET_OS_IOS
+    // 防止ios主线程卡死
+    if (copyArr.count > 6) copyArr = [copyArr subarrayWithRange:NSMakeRange(0, 6)];
+#endif
     for (SWCPeer *peer in copyArr) {
         NSString *peerId = peer.peerId;
         
@@ -501,11 +520,12 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
             break;
         }
         
-        // 不能超过12个，否则卡住 TODO 验证!
-//        if (_datachannelDic.count > 12) {
-//            break;
-//        }
-        
+#if TARGET_OS_IOS
+        // ios不能超过11个，否则卡住
+        if (_datachannelDic.count >= IOS_MAX_PEERS_LIMIT) {
+            break;
+        }
+#endif
         [self createDatachannelWithRemoteId:peerId isInitiator:YES intermediator:peer.intermediator];
 //        CBInfo(@"_datachannelDic setObject forKey %@ remain %@", peerId, @(_datachannelDic.count));
     }
@@ -691,6 +711,14 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
         }
         // 收到节点连接请求
         CBInfo(@"receive node %@ connection request", remoteId);
+#if TARGET_OS_IOS
+        // ios不能超过11个，否则卡住
+        if (_datachannelDic.count >= IOS_MAX_PEERS_LIMIT) {
+            // 拒绝对方连接请求
+            [_signaler sendRejectToRemotePeerId:remoteId reason:@"peers reach limit"];
+            return;
+        }
+#endif
         // 限制最大连接数
         if (self.scheduler && self.scheduler.peersNum >= _p2pConfig.maxPeerConnections) {
             NSArray<SWCDataChannel *> *candidates = [_scheduler getNonactivePeers];
@@ -914,7 +942,7 @@ static NSString *const DEFAULT_SIGNAL_ADDR = @"wss://signal.cdnbye.com";
     // 接收到peer传来的信令
     if (![toPeerId isEqualToString:self.peerId]) {
         // 本节点是中转者
-        CBInfo(@"relay signal for %@", fromPeerId);        // TODO 验证
+        CBInfo(@"relay signal for %@", fromPeerId);     
         SWCDataChannel *targetPeer = [_datachannelDic objectForKey:toPeerId];
         if (targetPeer) {
             if ([action isEqualToString:@"signal"]) {

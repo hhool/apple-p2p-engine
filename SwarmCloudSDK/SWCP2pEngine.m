@@ -22,7 +22,7 @@
 
 NSString *const VERSION = @"2.0.0";                 // SDK版本号
 
-const NSUInteger UDP_SEND_PORT = 50899;              // 发送udp包的端口                     // TODO 测试 0
+const NSUInteger UDP_SEND_PORT = 0;              // 发送udp包的端口                
 NSString *const kP2pEngineDidReceiveStatistics  = @"kP2pEngineDidReceiveStatistics";
 
 static NSString * const ENGINE_NAT_QUERY = @"ENGINE_NAT_QUERY";

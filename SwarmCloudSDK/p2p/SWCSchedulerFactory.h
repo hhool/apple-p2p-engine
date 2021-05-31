@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SWCScheduler.h"
 #import "SWCP2pConfig.h"
-#import "SWCHlsSnScheduler.h"
-#import "SWCHlsIdScheduler.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

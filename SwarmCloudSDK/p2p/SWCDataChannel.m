@@ -213,6 +213,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 - (void)close {
+    CBInfo(@"close peer %@", self.remotePeerId);
 //    [self sendMsgClose];
 //    CBInfo(@"test before cancelTimerWithName %@", _timerID);
     if (_uploading) [self sendMsgPieceAbortWithReason:@"peer is closing"];
@@ -473,22 +474,16 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 - (BOOL)sendMsgSignalToPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId data:(NSDictionary *_Nullable)data {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:@{
         @"event": DC_PEER_SIGNAL,
         @"action": @"signal",
         @"to_peer_id": toPeerId,
         @"from_peer_id": fromPeerId,
     }];
-//    NSDictionary *dict = @{
-//        @"event":DC_PEER_SIGNAL,
-//        @"action":@"signal",
-//        @"to_peer_id":toPeerId,
-//        @"from_peer_id": fromPeerId,
-//    };
     if (data) {
-        [dict setValue:data forKey:@"data"];
+        [dictM setValue:data forKey:@"data"];
     }
-    return [self->_simpleChannel sendJSONMessage:dict];
+    return [self->_simpleChannel sendJSONMessage:dictM];
 }
 
 - (BOOL)sendMsgSignalRejectToPeerId:(NSString *)toPeerId fromPeerId:(NSString *)fromPeerId reason:(NSString *)reason {
@@ -498,10 +493,11 @@ dispatch_async(dispatch_get_main_queue(), block);\
         @"to_peer_id":toPeerId,
         @"from_peer_id": fromPeerId,
     };
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:dict];
     if (reason) {
-        [dict setValue:reason forKey:@"reason"];
+        [dictM setValue:reason forKey:@"reason"];
     }
-    return [self->_simpleChannel sendJSONMessage:dict];
+    return [self->_simpleChannel sendJSONMessage:dictM];
 }
 
 - (void)sendMsgPlaylistWithUrl:(NSString *)url text:(NSString *)text {
@@ -848,7 +844,7 @@ didReceiveJSONMessage:(NSDictionary *)dict {
     }
     
     else if ([event isEqualToString:DC_PEER_SIGNAL]) {
-        CBDebug(@"Receive DC_PEER_SIGNAL %@", dict);
+//        CBDebug(@"Receive DC_PEER_SIGNAL %@", dict);
         NSString *action = (NSString *)dict[@"action"];
         NSString *toPeerId = (NSString *)dict[@"to_peer_id"];
         NSString *fromPeerId = (NSString *)dict[@"from_peer_id"];

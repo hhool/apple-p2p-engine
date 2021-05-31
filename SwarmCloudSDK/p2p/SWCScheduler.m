@@ -86,7 +86,6 @@ static NSString *const SCHEDULER_CHECK_CONNS = @"SCHEDULER_CHECK_CONNS";
     }];
 }
 
-// TODO
 - (void)clearDisconnectedPeers {
     // 清理连接断开的peer
     NSMutableArray *keys = [NSMutableArray array];
@@ -115,10 +114,10 @@ static NSString *const SCHEDULER_CHECK_CONNS = @"SCHEDULER_CHECK_CONNS";
 - (void)postPeersStatistics {
     NSMutableArray *peers = [NSMutableArray array];
     for (NSString *peerId in [_peerManager getPeerMap]) {
-        [peers addObject:peerId];
+        if (peerId) [peers addObject:peerId];
     }
     NSDictionary *message = @{@"peers": peers};
-    [[NSNotificationCenter defaultCenter] postNotificationName:kP2pEngineDidReceiveStatistics object:message];
+    if (message) [[NSNotificationCenter defaultCenter] postNotificationName:kP2pEngineDidReceiveStatistics object:message];
 }
 
 - (void)handshakePeer:(SWCDataChannel *)peer {

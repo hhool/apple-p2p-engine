@@ -49,8 +49,8 @@ NSString *HLS_VOD_URL = @"http://v.live.hndt.com/video/20200317/9411f6c1f11b4488
     self.playerVC = [[AVPlayerViewController alloc] init];
         
     //    self.urlString = @"https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8";
-        self.urlString = HLS_LIVE_URL;
-//        self.urlString = VOD_URL;
+//        self.urlString = HLS_LIVE_URL;
+        self.urlString = HLS_VOD_URL;
         
 
     //    self.urlString = [self.urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

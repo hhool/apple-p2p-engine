@@ -627,7 +627,6 @@ bool shouldWaitForNextSeg(bool isReceiver, bool isUploader) {
     }
 }
 
-// TODO
 - (void)dataChannel:(SWCDataChannel *)peer didReceivePieceAbortWithReason:(NSString *)reason {
     CBWarn(@"peer %@ download aborted, reason %@", peer.remotePeerId, reason);
 }

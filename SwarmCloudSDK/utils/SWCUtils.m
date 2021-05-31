@@ -222,7 +222,6 @@
             // 上报http流量
             NSUInteger size = data.length/1024;
             NSDictionary *message = @{@"httpDownloaded": @(size)};
-            // TODO
             [[NSNotificationCenter defaultCenter] postNotificationName:kP2pEngineDidReceiveStatistics object:message];
         } else {
             // 网络访问失败

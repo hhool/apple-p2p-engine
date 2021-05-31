@@ -62,7 +62,7 @@ static NSString *const ANNOUNCE = @"https://tracker.cdnbye.com/v1";
         
     self.logLevel = SWCLogLevelWarn;
     
-    self.maxPeerConnections = 12;
+    self.maxPeerConnections = 20;
     
     self.useHttpRange = YES;
     
