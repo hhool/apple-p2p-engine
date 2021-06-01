@@ -229,9 +229,9 @@ NSString *MP4_URL_2 = @"https://scdn.common.00cdn.com/p2p/cloud-1080p.mp4";
 }
 
 - (void)startPlayWithUrl:(NSURL *)url {
-    //    [SWCP2pEngine sharedInstance].segmentIdForHls = ^NSString * _Nonnull(NSString * _Nonnull streamId, NSNumber * _Nonnull sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
-    //        return [NSString stringWithFormat:@"%@", sn];
-    //    };
+//        [SWCP2pEngine sharedInstance].segmentIdForHls = ^NSString * _Nonnull(NSString * _Nonnull streamId, NSNumber * _Nonnull sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
+//            return [NSString stringWithFormat:@"%@", sn];
+//        };
     [self.playerVC.player pause];
     NSURL *proxyUrl = [[SWCP2pEngine sharedInstance] parseStreamURL:url];
     self.playerVC.player = nil;
