@@ -6,8 +6,10 @@
 //  Copyright © 2019 cdnbye. All rights reserved.
 //
 
+//#define DD_LEGACY_MACROS 0
+
 #import <Foundation/Foundation.h>
-#import "DDLog.h"
+#import "CocoaLumberjack.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

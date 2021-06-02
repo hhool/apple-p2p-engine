@@ -1,6 +1,6 @@
 **[English](README.md) | 简体中文**
 
-<h4 align="center">视频/直播P2P加速引擎，适用于iOS、tvOS和macOS</h4>
+<h4 align="center">Let your viewers become your unlimitedly scalable CDN.</h4>
 
 该插件的优势如下：
 - 可与CDNBye [Web端[P2P插件](https://github.com/cdnbye/hlsjs-p2p-engine)和安卓端[SDK](https://github.com/cdnbye/android-p2p-engine)互联互通
@@ -12,22 +12,6 @@
 - 通过有效的调度策略来保证用户的播放体验以及p2p分享率
 - Tracker服务器根据访问IP的ISP、地域和NAT类型等进行智能调度
 - 已将WebRTC无用模块裁减掉
-
-## 安装方法
-推荐通过 CocoaPods 集成，编辑 Podfile:
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-target 'TargetName' do
-# Uncomment the next line if you're using Swift
-# use_frameworks!
-pod 'SwarmCloudSDK', :git => 'https://github.com/swarm-cloud/apple-p2p-engine', :tag => '2.0.0'
-end
-```
-
-然后，运行如下的命令：
-```bash
-$ pod install
-```
 
 ## 使用方法
 参考 [文档](https://www.cdnbye.com/cn/views/ios/v2/usage.html)

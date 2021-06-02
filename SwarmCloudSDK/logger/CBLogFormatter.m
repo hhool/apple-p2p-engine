@@ -30,24 +30,25 @@
 @implementation CBLogFormatter
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage{
-    NSString *loglevel = @"[P2P Log]";
+    NSString *loglevel;
     switch (logMessage.flag){
-        case LOG_FLAG_ERROR:
+        case DDLogFlagError:
             loglevel = @"[P2P ERROR]-->";
             break;
-        case LOG_FLAG_WARN:
+        case DDLogFlagWarning:
             loglevel = @"[P2P WARN]-->";
             break;
-        case LOG_FLAG_INFO:
+        case DDLogFlagInfo:
             loglevel = @"[P2P INFO]-->";
             break;
-        case LOG_FLAG_DEBUG:
+        case DDLogFlagDebug:
             loglevel = @"[P2P DEBUG]-->";
             break;
-        case LOG_FLAG_VERBOSE:
+        case DDLogFlagVerbose:
             loglevel = @"[P2P VBOSE]-->";
             break;
         default:
+            loglevel = @"[P2P Log]-->";
             break;
     }
     NSString *resultString = [NSString stringWithFormat:@"%@ %@_line[%@]  %@", loglevel, logMessage->_function, @(logMessage->_line), logMessage->_message];

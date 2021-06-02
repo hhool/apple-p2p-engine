@@ -1,6 +1,6 @@
 **English | [简体中文](Readme_zh.md)**
 
-<h4 align="center">P2P Streaming Engine for iOS, tvOS and macOS</h4>
+<h4 align="center">Let your viewers become your unlimitedly scalable CDN.</h4>
 
 ## Features
 - Able to interconnect with CDNBye [hlsjs-p2p-engine](https://github.com/cdnbye/hlsjs-p2p-engine) and [android-p2p-engine](https://github.com/cdnbye/android-p2p-engine)
@@ -11,23 +11,6 @@
 - Efficient scheduling policies to enhance the performance of P2P streaming
 - Compatible with all CDNs, agnostic to DRM and video codecs. No service side changes required.
 - Use IP database to group up peers by ISP and regions
-
-## Installation with CocoaPods
-To integrate CDNByeSDK into your Xcode project using CocoaPods, specify it in your `Podfile`:
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-target 'TargetName' do
-# Uncomment the next line if you're using Swift
-# use_frameworks!
-pod 'SwarmCloudSDK', :git => 'https://github.com/swarm-cloud/apple-p2p-engine', :tag => '2.0.0'
-end
-```
-
-Then, run the following command:
-
-```bash
-$ pod install
-```
 
 ## Usage
 See [document](https://p2p.cdnbye.com/en/views/ios/v2/usage.html)

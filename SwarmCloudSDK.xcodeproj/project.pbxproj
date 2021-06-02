@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -101,6 +101,8 @@
 		9464500E2649698A006EDBD7 /* SWCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 946450092649698A006EDBD7 /* SWCError.m */; };
 		9464500F2649698A006EDBD7 /* SWCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 946450092649698A006EDBD7 /* SWCError.m */; };
 		94662151265A58C000F4B287 /* SwarmCloudSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BFBA42641AD74001C7C99 /* SwarmCloudSDK.framework */; };
+		946774302667901B00145DCB /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467742F2667901B00145DCB /* WebRTC.xcframework */; };
+		946774312667905200145DCB /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9467742F2667901B00145DCB /* WebRTC.xcframework */; };
 		94746E3E2647C79000245E7A /* SWCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E3C2647C79000245E7A /* SWCScheduler.h */; };
 		94746E3F2647C79000245E7A /* SWCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E3C2647C79000245E7A /* SWCScheduler.h */; };
 		94746E402647C79000245E7A /* SWCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 94746E3C2647C79000245E7A /* SWCScheduler.h */; };
@@ -391,6 +393,7 @@
 		9464500126496935006EDBD7 /* SWCByteRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCByteRange.m; sourceTree = "<group>"; };
 		946450082649698A006EDBD7 /* SWCError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCError.h; sourceTree = "<group>"; };
 		946450092649698A006EDBD7 /* SWCError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCError.m; sourceTree = "<group>"; };
+		9467742F2667901B00145DCB /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = vendors/WebRTC.xcframework; sourceTree = "<group>"; };
 		94746E3C2647C79000245E7A /* SWCScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCScheduler.h; sourceTree = "<group>"; };
 		94746E3D2647C79000245E7A /* SWCScheduler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCScheduler.m; sourceTree = "<group>"; };
 		94746E442647C7B300245E7A /* SWCHlsScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCHlsScheduler.h; sourceTree = "<group>"; };
@@ -512,6 +515,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				946774302667901B00145DCB /* WebRTC.xcframework in Frameworks */,
 				CB5F38A616635F783DB3C50D /* libPods-iOS SwarmCloudSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,6 +524,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				946774312667905200145DCB /* WebRTC.xcframework in Frameworks */,
 				8563094BE83C4C3D2DD5B733 /* libPods-tvOS SwarmCloudSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,6 +701,7 @@
 		947BFBEF2641B275001C7C99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9467742F2667901B00145DCB /* WebRTC.xcframework */,
 				94EC2942264CFBEA00752F88 /* SwarmCloudSDK */,
 				9461A114264C950F0090EF49 /* libCocoaAsyncSocket-iOS.a */,
 				9461A116264C950F0090EF49 /* libCocoaLumberjack-iOS.a */,
